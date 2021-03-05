@@ -3,6 +3,14 @@ import {axiosGet, axiosPost, axiosPostJson} from "@/views/netWork/axiosAll";
 import userPojo from "@/views/model/userPojo"
 
 /**
+ * 保存任务
+ * @param {参数} missionAllData 
+ */
+export function saveOneMissionAll(missionAllData){
+    let url = apiBook.customer.saveOneScript
+    return axiosPostJson(url,missionAllData)
+}
+/**
  * 登录
  * @param {用户名} userName 
  * @param {密码} userPassword 

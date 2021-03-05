@@ -8,7 +8,8 @@ export default {
   customer: {
     getMyScript : baseUrl + "server/customer/getMyOrders",
     getMyMissionHistorys : baseUrl + "server/customer/getMyMissionHistory" ,
-    getOneScript: baseUrl + "server/customer/getScript"    
+    getOneScript: baseUrl + "server/customer/getScript",
+    saveOneScript: baseUrl + "server/customer/saveMyScript"    
   },
   student:{
     getAbility: baseUrl + "student/getMyAbility",

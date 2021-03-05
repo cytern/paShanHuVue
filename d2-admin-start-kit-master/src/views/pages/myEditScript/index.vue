@@ -2,12 +2,13 @@
   <d2-container>
     <template slot="header">
       <el-button type="text" disabled>开发脚本</el-button>
-      <el-button>编辑</el-button> <el-button>新建</el-button>
+      <el-button @click="saveScript" type="success">保存</el-button>
+      <el-button @click="addNewMissionAll">新建</el-button>
     </template>
     <el-row>
       <el-col :span="24">
         <div class="grid-content bg-purple-dark">
-          <el-card class="box-card">
+          <el-card class="box-card" style="background: #f1fafa">
             <!-- 模板定义 第一卡片为脚本信息介绍卡片 -->
             <div slot="header" class="clearfix">
               <template v-for="(item, mindex) in missionDatas">
@@ -25,12 +26,19 @@
               class="box-card"
               v-for="(itemAcc, index) in missionData.missionDataList"
               :key="index"
+              style="background: #e8e8ff; margin-bottom: 100px"
             >
               <div slot="header" class="clearfix">
                 <!-- 此行  为爬虫一个回单任务列表 -->
                 <el-row class="missionTag">
+                  <el-col :span="1"
+                    ><el-tag type="info"
+                      >id: {{ itemAcc.jsoupMission.missionId }}</el-tag
+                    ></el-col
+                  >
+
                   <!-- 次序 -->
-                  <el-col :span="8">
+                  <el-col :span="7">
                     任务次序：<el-button type="primary" circle>{{
                       itemAcc.jsoupMissionOrder.moRank
                     }}</el-button>
@@ -48,6 +56,9 @@
                       type="warning"
                       icon="el-icon-plus"
                       circle
+                      @click="
+                        addLineMission(missionData.missionDataList, index)
+                      "
                     ></el-button>
                   </el-col>
                   <!-- 删除此行按钮 -->
@@ -56,6 +67,9 @@
                       type="danger"
                       icon="el-icon-minus"
                       circle
+                      @click="
+                        deleteLineMission(missionData.missionDataList, index)
+                      "
                     ></el-button>
                   </el-col>
                   <!-- 上移次序 -->
@@ -64,6 +78,9 @@
                       type="success"
                       icon="el-icon-top"
                       circle
+                      @click="
+                        upChangeLineMission(missionData.missionDataList, index)
+                      "
                     ></el-button>
                   </el-col>
                   <!-- 下移次序 -->
@@ -72,82 +89,13 @@
                       type="success"
                       icon="el-icon-bottom"
                       circle
+                      @click="
+                        downChangeLineMission(
+                          missionData.missionDataList,
+                          index
+                        )
+                      "
                     ></el-button>
-                  </el-col>
-                </el-row>
-                <!-- 分割线 -->
-                <el-divider></el-divider>
-                <el-row>
-                  <el-col :span="2" class="actionTag"> 参数列表： </el-col>
-                </el-row>
-                <el-row>
-                  <template v-for="(pragram, pIndex) in itemAcc.jsoupPragrams">
-                    <el-col :span="3" :key="pIndex">
-                      <el-popover trigger="hover" placement="top">
-                        <p>
-                          类型:
-                          {{
-                            pragram.pragramType == "int"
-                              ? "整数"
-                              : pragram.pragramType == "decimal"
-                              ? "小数"
-                              : pragram.pragramType == "string"
-                              ? "非数字"
-                              : pragram.pragramType == "date"
-                              ? "日期"
-                              : pragram.pragramType == "variable"
-                              ? "变量"
-                              : pragram.pragramType == "page"
-                              ? "页码"
-                              : "未定义"
-                          }}
-                        </p>
-                        <!-- 是否可能为随机数 -->
-                        <template
-                          v-if="
-                            pragram.pragramType == 'decimal' ||
-                            pragram.pragramType == 'int' ||
-                            pragram.pragramType == 'date'
-                          "
-                        >
-                          <p>
-                            是否随机: {{ pragram.isRamdom == 1 ? "是" : "否" }}
-                          </p>
-
-                          <!-- 是随机数则进行展示上下区间 -->
-                          <p v-if="pragram.isRamdom == 1">
-                            上下区间: {{ pragram.upNum }} --
-                            {{ pragram.downNum }}
-                          </p>
-                        </template>
-                        <!-- 随机数的值 -->
-                        <p>值： {{ pragram.pragramValue }}</p>
-                        <!-- 绑定的行动 -->
-                        <p>
-                          行动id:
-                          {{
-                            pragram.actionId == null
-                              ? "未绑定"
-                              : pragram.actionId
-                          }}
-                        </p>
-                        <div slot="reference" class="name-wrapper">
-                          <!-- 点击触发编辑页面 -->
-                          <el-tag
-                            @click="showPragramDetail(pragram, pIndex, index)"
-                            :type="pragram.actionId == null ? 'info' : ''"
-                          >
-                            {{ pragram.programContent }}</el-tag
-                          >
-                        </div>
-                      </el-popover>
-                    </el-col>
-                  </template>
-                  <!-- 最后添加一个增加参数的tag -->
-                  <el-col :span="4">
-                    <el-button @click="addPragram(index)" type="success"
-                      >增加参数</el-button
-                    >
                   </el-col>
                 </el-row>
               </div>
@@ -159,6 +107,7 @@
                     class="box-card"
                     v-for="(itemAction, aindex) in itemAcc.actionVos"
                     :key="aindex"
+                    style="background: #ddf3ff; margin-bottom: 20px"
                   >
                     <div slot="header" class="clearfix">
                       <!-- 头部标题 与order 一致 -->
@@ -181,6 +130,7 @@
                           <el-button
                             type="warning"
                             icon="el-icon-plus"
+                            @click="addLineAction(itemAcc.actionVos, aindex)"
                             circle
                           ></el-button>
                         </el-col>
@@ -189,6 +139,7 @@
                           <el-button
                             type="danger"
                             icon="el-icon-minus"
+                            @click="deleteLineAction(itemAcc.actionVos, aindex)"
                             circle
                           ></el-button>
                         </el-col>
@@ -198,6 +149,9 @@
                             type="success"
                             icon="el-icon-top"
                             circle
+                            @click="
+                              upChangeLineAction(itemAcc.actionVos, aindex)
+                            "
                           ></el-button>
                         </el-col>
                         <!-- 下移次序 -->
@@ -206,6 +160,9 @@
                             type="success"
                             icon="el-icon-bottom"
                             circle
+                            @click="
+                              downChangeLineAction(itemAcc.actionVos, aindex)
+                            "
                           ></el-button>
                         </el-col>
                       </el-row>
@@ -226,42 +183,60 @@
                       <el-form-item label="选取类型">
                         <el-select
                           v-model="itemAction.jsoupAction.actionEleType"
-                          placeholder="选取类型" 
+                          placeholder="选取类型"
                         >
                           <el-option
-                           v-for="(seleteTypeItem,sIndex) in actionSelectTypes"
-                          :key="sIndex"
+                            v-for="(
+                              seleteTypeItem, sIndex
+                            ) in actionSelectTypes"
+                            :key="sIndex"
                             :label="seleteTypeItem.name"
                             :value="seleteTypeItem.value"
                           ></el-option>
                         </el-select>
                       </el-form-item>
                       <!-- 选取类型下 为 选取字段的值 -->
-                        
+
                       <el-form-item label="选取凭据">
-                        <el-input :value="itemAction.jsoupAction.actionEleValue"></el-input>
+                        <el-input
+                          :value="itemAction.jsoupAction.actionEleValue"
+                        ></el-input>
                       </el-form-item>
 
                       <el-form-item label="执行类型">
                         <el-select
                           v-model="itemAction.jsoupAction.actionDoType"
-                          placeholder="执行类型" 
+                          placeholder="执行类型"
                         >
                           <el-option
-                           v-for="(doTypeItem,dIndex) in actionDoTypes"
-                          :key="dIndex"
+                            v-for="(doTypeItem, dIndex) in actionDoTypes"
+                            :key="dIndex"
                             :label="doTypeItem.name"
                             :value="doTypeItem.value"
                           ></el-option>
                         </el-select>
                       </el-form-item>
-                      <!-- 如果执行类型是输入类型 则要显示字段区块 不可操作  -->
-                      <template v-if="itemAction.jsoupAction.actionDoType == 'input' || itemAction.jsoupAction.actionDoType == 'goto'">
-                             <el-form-item label="参数值">
-                          <el-input :value="itemAction.jsoupPragram.pragramValue" disabled></el-input>
-                      </el-form-item>
+                      <!-- 如果执行类型是输入类型 则要显示字段区块 不可操作 但是点击触发编辑菜单  -->
+                      <template
+                        v-if="
+                          itemAction.jsoupAction.actionDoType == 'input' ||
+                          itemAction.jsoupAction.actionDoType == 'goto'
+                        "
+                      >
+                        <el-form-item
+                          :label="
+                            itemAction.jsoupPragram.programContent == null
+                              ? '未命名参数'
+                              : itemAction.jsoupPragram.programContent
+                          "
+                        >
+                          <!-- 点击后触发事件 显示修改参数tag -->
+                          <el-tag
+                            @click="showPragramDetail(itemAction, aIndex)"
+                            >{{ itemAction.jsoupPragram.pragramValue }}</el-tag
+                          >
+                        </el-form-item>
                       </template>
-
                     </el-form>
                   </el-card>
                 </el-col>
@@ -281,7 +256,7 @@ import leidatu from "../../echart-comment/leidatu";
 import leidatu2 from "../../echart-comment/leidatu2";
 import leidatu3 from "../../echart-comment/leidatu3";
 import pargramDialog from "../../dialog-comment/pragramDialog";
-import { getOneScript } from "../../netWork/apiMethod";
+import { getOneScript, saveOneMissionAll } from "../../netWork/apiMethod";
 import missionAllData from "../../model/missionAllPojo";
 import {
   pushMissionData,
@@ -290,8 +265,9 @@ import {
 } from "../../util/DataUtil";
 import Page from "../../system/login/page.vue";
 import PragramDialog from "../../dialog-comment/pragramDialog.vue";
-import actionDoType from "../../model/actionDoType"
-import actionSeleType from "../../model/actionSelectType"
+import actionDoType from "../../model/actionDoType";
+import actionSeleType from "../../model/actionSelectType";
+import { newMission, newMissionAll } from "../../model/missionAllPojo";
 export default {
   name: "studentConf",
   components: {
@@ -316,14 +292,14 @@ export default {
         programContent: null,
       },
       missionAllDataId: 0,
-      missionData: missionAllData,
-      missionDatas: [missionAllData],
+      missionData: newMissionAll(),
+      missionDatas: [newMissionAll()],
       tempIndex: null,
       tempPindex: null,
       selectIndex: null,
-      actionDoTypes : actionDoType,
-      actionSelectTypes : actionSeleType
-
+      actionDoTypes: actionDoType,
+      actionSelectTypes: actionSeleType,
+      aIndex: null,
     };
   },
   mounted() {
@@ -332,15 +308,259 @@ export default {
   },
   methods: {
     /**
+     * 联网保存脚本
+     */
+    saveScript() {
+      saveOneMissionAll(this.missionData).then((res) => {
+        if(res.code == "success"){
+            getOneScript(res.maId).then((res) => {
+          if (res.code == "error" || res.missionData == null) {
+            this.missionData = missionDatas[0];
+          } else {
+            this.missionData = res.missionData;
+            pushMissionData(this.missionData);
+            this.getIndex();
+          }
+        });
+        }
+      });
+    },
+    /**
+     * 增加一个全新的脚本集合
+     */
+    addNewMissionAll() {
+      this.missionDatas.push(newMissionAll());
+    },
+    /**
+     * 下降一个mission
+     */
+    downChangeLineMission(missionDataList, index) {
+      if (index == missionDataList.length - 1) {
+        this.$message({
+          message: "已经是最下层啦！",
+          type: "warning",
+        });
+      } else {
+        missionDataList[index].jsoupMissionOrder.moRank++;
+        missionDataList[index + 1].jsoupMissionOrder.moRank--;
+        pushMissionData(this.missionData);
+        this.getIndex();
+        let tempRank = 1;
+        for (let i = 0; i < missionDataList.length; i++) {
+          missionDataList[i].jsoupMissionOrder.moRank = tempRank;
+          tempRank++;
+        }
+      }
+    },
+
+    /**
+     * 上调一个mission
+     */
+    upChangeLineMission(missionDataList, index) {
+      if (index == 0) {
+        this.$message({
+          message: "已经是最上层啦！",
+          type: "warning",
+        });
+      } else {
+        missionDataList[index].jsoupMissionOrder.moRank--;
+        missionDataList[index - 1].jsoupMissionOrder.moRank++;
+        pushMissionData(this.missionData);
+        this.getIndex();
+        let tempRank = 1;
+        for (let i = 0; i < missionDataList.length; i++) {
+          missionDataList[i].jsoupMissionOrder.moRank = tempRank;
+          tempRank++;
+        }
+      }
+    },
+
+    /**
+     * 删除一个mission
+     */
+    deleteLineMission(missionDataList, index) {
+      if (missionDataList.length == 1) {
+        this.$message({
+          message: "这是最后一个啦，无法删除",
+          type: "warning",
+        });
+        return;
+      }
+      missionDataList.splice(index, 1);
+      pushMissionData(this.missionData);
+      this.getIndex();
+      //重新排序rank
+      let tempRank = 1;
+      for (let i = 0; i < missionDataList.length; i++) {
+        missionDataList[i].jsoupMissionOrder.moRank = tempRank;
+        tempRank++;
+      }
+    },
+
+    /**
+     * 增加一个全新的mission
+     */
+    addLineMission(missionDataList, index) {
+      let tempMission = newMission();
+
+      // 创造假的 mission id 最小负数
+
+      let tempId = -1;
+      for (let i = 0; i < missionDataList.length; i++) {
+        if (tempId >= missionDataList[i].jsoupMission.missionId) {
+          tempId--;
+        }
+      }
+      tempMission.jsoupMission.missionId = tempId;
+      //赋值下一层的 missionRank 并且下调之后的rank
+      tempMission.jsoupMissionOrder.moRank =
+        missionDataList[index].jsoupMissionOrder.moRank + 1;
+      for (let b = index + 1; b < missionDataList.length; b++) {
+        missionDataList[b].jsoupMissionOrder.moRank++;
+      }
+      //插入数据
+      missionDataList.splice(index + 1, 0, tempMission);
+      //重新排序
+      pushMissionData(this.missionData);
+      this.getIndex();
+    },
+
+    /**
+     * 向下移动rank
+     */
+    downChangeLineAction(actionVos, aindex) {
+      if (aindex == actionVos.length - 1) {
+        this.$message({
+          message: "已经是最下层啦！",
+          type: "warning",
+        });
+      } else {
+        let tempRank = actionVos[aindex + 1].actionOrder.rank;
+        actionVos[aindex + 1].actionOrder.rank =
+          actionVos[aindex].actionOrder.rank;
+        actionVos[aindex].actionOrder.rank = tempRank;
+        pushMissionData(this.missionData);
+        this.getIndex();
+      }
+    },
+
+    /**
+     * 上移动rank
+     */
+    upChangeLineAction(actionVos, aindex) {
+      if (aindex == 0) {
+        this.$message({
+          message: "已经是最上层啦！",
+          type: "warning",
+        });
+      } else {
+        let tempRank = actionVos[aindex - 1].actionOrder.rank;
+        actionVos[aindex - 1].actionOrder.rank =
+          actionVos[aindex].actionOrder.rank;
+        actionVos[aindex].actionOrder.rank = tempRank;
+        pushMissionData(this.missionData);
+        this.getIndex();
+        console.log(this.missionData);
+      }
+    },
+
+    /**
+     * 删除一个actionVo
+     */
+    deleteLineAction(actionVos, aindex) {
+      if (actionVos.length == 1) {
+        this.$message({
+          message: "这是最后一个啦，无法删除",
+          type: "warning",
+        });
+        return;
+      }
+      actionVos.splice(aindex, 1);
+      //重新对rank 进行排序
+      pushMissionData(this.missionData);
+      this.getIndex();
+      let tempRank = 1;
+      for (let i = 0; i < actionVos.length; i++) {
+        actionVos[i].actionOrder.rank = tempRank;
+        tempRank++;
+      }
+    },
+
+    /**
+     * 增加一个actionVo
+     */
+    addLineAction(actionVos, aindex) {
+      let tempActionVo = {
+        jsoupAction: {
+          actionId: null,
+          actionEleType: null,
+          actionDoType: null,
+          actionUrl: null,
+          missionId: null,
+          actionEleValue: null,
+          actionPreId: null,
+          actionAfterId: null,
+          actionName: null,
+          actionPragramId: null,
+          actionElePragramId: null,
+        },
+        actionOrder: {
+          actionOrderId: null,
+          actionId: null,
+          missionId: null,
+          missionAllId: null,
+          rank: null,
+        },
+        jsoupPragram: {
+          pragramId: null,
+          missionId: null,
+          actionId: null,
+          pragramType: null,
+          pragramAccuracy: null,
+          isRamdom: null,
+          upNum: null,
+          downNum: null,
+          pragramValue: null,
+          missionAllId: null,
+          programContent: null,
+        },
+      };
+      //设置合适的action rank
+      tempActionVo.actionOrder.rank = actionVos[aindex].actionOrder.rank + 1;
+      //给剩余actionVos 的 rank 依次+ 1
+      for (let i = aindex + 1; i < actionVos.length; i++) {
+        let con = actionVos[i];
+        con.actionOrder.rank++;
+      }
+      //设置合适的action id 为负数
+      let min = -1;
+      for (let b = 0; b < actionVos.length; b++) {
+        if (actionVos[b].jsoupAction.actionId <= min) {
+          min--;
+        }
+      }
+      //设置最小值为actionVo
+      tempActionVo.jsoupAction.actionId = min;
+      //设置合适的mission等其他参数
+      if (aindex == actionVos.length - 1) {
+        actionVos.push(tempActionVo);
+      } else {
+        actionVos.splice(aindex + 1, 0, tempActionVo);
+      }
+      pushMissionData(this.missionData);
+      this.getIndex();
+      let tempRank = 1;
+      for (let i = 0; i < actionVos.length; i++) {
+        actionVos[i].actionOrder.rank = tempRank;
+        tempRank++;
+      }
+    },
+
+    /**
      * 获取子组件的传值
      */
-    getResultData(pragram) {
+    getResultData() {
       //获取temp 任务数据
-      let tempMissionData = this.missionData;
-      let tempMissionList = tempMissionData.missionDataList;
-      let tempMission = tempMissionList[this.tempIndex];
-      let tempPragrams = tempMission.jsoupPragrams;
-      tempPragrams[this.tempPindex] = pragram;
       pushMissionData(this.missionData);
       this.getIndex();
     },
@@ -350,7 +570,7 @@ export default {
     selectMission(index) {
       this.$confirm("切换或者删除该脚本, 是否继续?", "提示", {
         confirmButtonText: "切换",
-        cancelButtonText: "删除",
+        cancelButtonText: "取消",
         type: "warning",
       })
         .then(() => {
@@ -358,21 +578,30 @@ export default {
           this.selectIndex = index;
         })
         .catch(() => {
-          this.deleteMissionDatasHow(index);
+         
         });
     },
 
     //初始化数据
     getOriginData() {
+      console.log("到这里了")
       if (this.$route.params.id) {
         //赋值 如果是跳转时带着id参数
         this.missionAllDataId = this.$route.params.id;
         this.getScript();
       } else {
-        this.missionData =
-          this.missionDatas == null || this.missionDatas == []
-            ? new missionAllData()
-            : this.missionDatas[0];
+        console.log("到这里了2222222")
+        if(this.missionDatas.length < 1){
+           console.log("到这里了ddddddd")
+           console.log(this.missionDatas)
+           this.missionData = newMissionAll()
+
+        }else{
+           console.log("到这里了3333333333")
+            console.log(this.missionDatas)
+            console.log(this.missionDatas.length)
+          this.missionData =this.missionDatas[0];
+        }
       }
     },
     //获取脚本
@@ -393,13 +622,9 @@ export default {
       this.missionData = getIndexOfMissionData([missionDto])[0];
     },
     //显示编辑参数的弹出框
-    showPragramDetail(pragram, pIndex, index) {
-      this.tempIndex = index;
-      this.tempPindex = pIndex;
-      this.$refs.pragramdialog.initData(
-        pragram,
-        this.missionData.missionDataList[index].actionList
-      );
+    showPragramDetail(actionVo, aIndex) {
+      this.aIndex = aIndex;
+      this.$refs.pragramdialog.initData(actionVo);
     },
 
     //删除  datas
