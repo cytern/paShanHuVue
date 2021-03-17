@@ -23,4 +23,8 @@ export default [
         name:"跳转",
         value:"goto",
     },
+    {
+        name:"切换窗口",
+        value:"switch",
+    },
 ]

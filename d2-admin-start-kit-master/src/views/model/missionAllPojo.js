@@ -5,13 +5,13 @@ export default    {
         moMissionId: null,
         moMissionAllId: null,
         moAddTime: null,
-        moRank: null
+        moRank: -1
       }
     ],
     missionDataList: [
       {
         jsoupMission: {
-          missionId: null,
+          missionId: -1,
           missionName: null,
           startActionId: null,
           noticeEmail: null,
@@ -21,11 +21,11 @@ export default    {
         },
         actionList: [
           {
-            actionId: null,
+            actionId: -1,
             actionEleType: null,
             actionDoType: null,
             actionUrl: null,
-            missionId: null,
+            missionId: -1,
             actionEleValue: null,
             actionPreId: null,
             actionAfterId: null,
@@ -37,11 +37,11 @@ export default    {
         actionVos: [
           {
             jsoupAction: {
-              actionId: null,
+              actionId: -1,
               actionEleType: null,
               actionDoType: null,
               actionUrl: null,
-              missionId: null,
+              missionId: -1,
               actionEleValue: null,
               actionPreId: null,
               actionAfterId: null,
@@ -51,15 +51,15 @@ export default    {
             },
             actionOrder: {
               actionOrderId: null,
-              actionId: null,
-              missionId: null,
+              actionId: -1,
+              missionId: -1,
               missionAllId: null,
-              rank: null
+              rank:  1
             },
             jsoupPragram: {
               pragramId: null,
-              missionId: null,
-              actionId: null,
+              missionId: -1,
+              actionId: -1,
               pragramType: null,
               pragramAccuracy: null,
               isRamdom: null,
@@ -76,13 +76,13 @@ export default    {
           moMissionId: null,
           moMissionAllId: null,
           moAddTime: null,
-          moRank: null
+          moRank: -1
         },
         jsoupPragrams: [
           {
             pragramId: null,
-            missionId: null,
-            actionId: null,
+            missionId: -1,
+            actionId: -1,
             pragramType: null,
             pragramAccuracy: null,
             isRamdom: null,
@@ -96,10 +96,10 @@ export default    {
         actionOrders: [
           {
             actionOrderId: null,
-            actionId: null,
-            missionId: null,
+            actionId: -1,
+            missionId: -1,
             missionAllId: null,
-            rank: null
+            rank:  1
           },
         ]
       }
@@ -123,7 +123,7 @@ export default    {
   export function newMission () {
     return     {
       jsoupMission: {
-        missionId: null,
+        missionId: -1,
         missionName: null,
         startActionId: null,
         noticeEmail: null,
@@ -133,11 +133,11 @@ export default    {
       },
       actionList: [
         {
-          actionId: null,
+          actionId: -1,
           actionEleType: null,
           actionDoType: null,
           actionUrl: null,
-          missionId: null,
+          missionId: -1,
           actionEleValue: null,
           actionPreId: null,
           actionAfterId: null,
@@ -149,11 +149,11 @@ export default    {
       actionVos: [
         {
           jsoupAction: {
-            actionId: null,
+            actionId: -1,
             actionEleType: null,
             actionDoType: null,
             actionUrl: null,
-            missionId: null,
+            missionId: -1,
             actionEleValue: null,
             actionPreId: null,
             actionAfterId: null,
@@ -163,15 +163,15 @@ export default    {
           },
           actionOrder: {
             actionOrderId: null,
-            actionId: null,
-            missionId: null,
+            actionId: -1,
+            missionId: -1,
             missionAllId: null,
-            rank: null
+            rank:  1
           },
           jsoupPragram: {
             pragramId: null,
-            missionId: null,
-            actionId: null,
+            missionId: -1,
+            actionId: -1,
             pragramType: null,
             pragramAccuracy: null,
             isRamdom: null,
@@ -188,13 +188,13 @@ export default    {
         moMissionId: null,
         moMissionAllId: null,
         moAddTime: null,
-        moRank: null
+        moRank: -1
       },
       jsoupPragrams: [
         {
           pragramId: null,
-          missionId: null,
-          actionId: null,
+          missionId: -1,
+          actionId: -1,
           pragramType: null,
           pragramAccuracy: null,
           isRamdom: null,
@@ -208,10 +208,10 @@ export default    {
       actionOrders: [
         {
           actionOrderId: null,
-          actionId: null,
-          missionId: null,
+          actionId: -1,
+          missionId: -1,
           missionAllId: null,
-          rank: null
+          rank:  1
         },
       ]
     }
@@ -242,11 +242,11 @@ export default    {
           },
           actionList: [
             {
-              actionId: null,
+              actionId: -1,
               actionEleType: null,
               actionDoType: null,
               actionUrl: null,
-              missionId: null,
+              missionId: -1,
               actionEleValue: null,
               actionPreId: null,
               actionAfterId: null,
@@ -262,7 +262,7 @@ export default    {
                 actionEleType: null,
                 actionDoType: null,
                 actionUrl: null,
-                missionId: null,
+                missionId: -1,
                 actionEleValue: null,
                 actionPreId: null,
                 actionAfterId: null,
@@ -272,15 +272,15 @@ export default    {
               },
               actionOrder: {
                 actionOrderId: null,
-                actionId: null,
-                missionId: null,
+                actionId: -1,
+                missionId: -1,
                 missionAllId: null,
                 rank: 1
               },
               jsoupPragram: {
                 pragramId: null,
-                missionId: null,
-                actionId: null,
+                missionId: -1,
+                actionId: -1,
                 pragramType: null,
                 pragramAccuracy: null,
                 isRamdom: null,
@@ -297,13 +297,13 @@ export default    {
             moMissionId: null,
             moMissionAllId: null,
             moAddTime: null,
-            moRank: null
+            moRank: -1
           },
           jsoupPragrams: [
             {
               pragramId: null,
-              missionId: null,
-              actionId: null,
+              missionId: -1,
+              actionId: -1,
               pragramType: null,
               pragramAccuracy: null,
               isRamdom: null,
@@ -317,10 +317,10 @@ export default    {
           actionOrders: [
             {
               actionOrderId: null,
-              actionId: null,
-              missionId: null,
+              actionId: -1,
+              missionId: -1,
               missionAllId: null,
-              rank: null
+              rank:  1
             },
           ]
         }

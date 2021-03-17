@@ -1,4 +1,7 @@
-const baseUrl = "http://localhost:2060/"
+
+const linuxUrl = "http://10.147.19.98:2060/"
+const windowsUrl = "http://localhost:2060/"
+const baseUrl = windowsUrl
 export default {
   everyOne:{
     login:  baseUrl + "server/everyone/login",
@@ -9,13 +12,11 @@ export default {
     getMyScript : baseUrl + "server/customer/getMyOrders",
     getMyMissionHistorys : baseUrl + "server/customer/getMyMissionHistory" ,
     getOneScript: baseUrl + "server/customer/getScript",
-    saveOneScript: baseUrl + "server/customer/saveMyScript"    
+    saveOneScript: baseUrl + "server/customer/saveMyScript",
+    sendExcutor: baseUrl + "server/customer/runJavaSoup",
+    
   },
-  student:{
-    getAbility: baseUrl + "student/getMyAbility",
-    getTitle: baseUrl + "student/getTiles",
-    editTitle: baseUrl + "student/updateTitle",
-    deleteTitle: baseUrl  +"student/deleteTitle/",
-    addTitle: baseUrl  + "student/addTitle"
+  other: {
+    downloadExcel: baseUrl + "server/other/downloadFile"    
   }
 }

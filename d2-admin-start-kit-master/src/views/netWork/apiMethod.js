@@ -3,6 +3,32 @@ import {axiosGet, axiosPost, axiosPostJson} from "@/views/netWork/axiosAll";
 import userPojo from "@/views/model/userPojo"
 
 /**
+ * 注册用户
+ */
+export function registerUser(userVo){
+        let url = apiBook.everyOne.register
+        return axiosPostJson(url,userVo)
+}
+
+
+/**
+ * 下载结果集
+ * @param {历史id} hisId 
+ */
+export function downloadExcel(hisId){
+      let url = apiBook.other.downloadExcel + "/" + hisId
+      window.open(url)
+}
+/**
+ * 发送执行任务
+ * @param {总任务id} maId 
+ * @returns 
+ */
+export function sendJsoupMission(maId){
+    let url = apiBook.customer.sendExcutor
+    return axiosPostJson(url+"/"+maId)
+}
+/**
  * 保存任务
  * @param {参数} missionAllData 
  */

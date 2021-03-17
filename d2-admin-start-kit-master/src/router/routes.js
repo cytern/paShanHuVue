@@ -90,7 +90,8 @@ const frameIn = [
         name: 'myEditScript',
         meta: {
           title: '开发脚本',
-          auth: true
+          auth: true,
+          cache: true,
         },
         component: _import('pages/myEditScript')
       },

@@ -7,23 +7,22 @@
     </div>
     <div
       class="page-login--layer page-login--layer-time"
-      flex="main:center cross:center">
-      {{time}}
+      flex="main:center cross:center"
+    >
+      {{ time }}
     </div>
     <div class="page-login--layer">
       <div
         class="page-login--content"
-        flex="dir:top main:justify cross:stretch box:justify">
-        <div class="page-login--content-header">
-          <p class="page-login--content-header-motto">
-            时间是一切财富中最宝贵的财富
-          </p>
-        </div>
+        flex="dir:top main:justify cross:stretch box:justify"
+      >
+        <div class="page-login--content-header"></div>
         <div
           class="page-login--content-main"
-          flex="dir:top main:center cross:center">
+          flex="dir:top main:center cross:center"
+        >
           <!-- logo -->
-          <img class="page-login--logo" src="./image/logo@2x.png">
+          <img class="page-login--logo" src="./image/logo.png" />
           <!-- form -->
           <div class="page-login--form">
             <el-card shadow="never">
@@ -32,12 +31,14 @@
                 label-position="top"
                 :rules="rules"
                 :model="formLogin"
-                size="default">
+                size="default"
+              >
                 <el-form-item prop="username">
                   <el-input
                     type="text"
                     v-model="formLogin.username"
-                    placeholder="用户名">
+                    placeholder="用户名"
+                  >
                     <i slot="prepend" class="fa fa-user-circle-o"></i>
                   </el-input>
                 </el-form-item>
@@ -45,38 +46,40 @@
                   <el-input
                     type="password"
                     v-model="formLogin.password"
-                    placeholder="密码">
+                    placeholder="密码"
+                  >
                     <i slot="prepend" class="fa fa-keyboard-o"></i>
                   </el-input>
+                </el-form-item>
+                <el-form-item>
+                  <el-row>
+                    <el-col :span="18">
+                      <el-button type="text">忘记密码</el-button>
+                    </el-col>
+
+                    <el-col :span="4">
+                      <el-button type="text" @click="dialogVisible =true">注册账号</el-button>
+                    </el-col>
+                  </el-row>
                 </el-form-item>
                 <el-button
                   size="default"
                   @click="loginMySelf"
                   type="primary"
-                  class="button-login">
+                  class="button-login"
+                >
                   登录
                 </el-button>
               </el-form>
             </el-card>
-
           </div>
         </div>
         <div class="page-login--content-footer">
-          <p class="page-login--content-footer-locales">
-            <a
-              v-for="language in $languages"
-              :key="language.value"
-              @click="onChangeLocale(language.value)">
-              {{ language.label }}
-            </a>
-          </p>
           <p class="page-login--content-footer-copyright">
             Copyright
-            <d2-icon name="copyright"/>
-            2018 D2 Projects 开源组织出品
-            <a href="https://github.com/FairyEver">
-              @FairyEver
-            </a>
+            <d2-icon name="copyright" />
+            爬山虎云脚本平台
+            <a href="https://github.com/cytern"> @Cytern </a>
           </p>
           <p class="page-login--content-footer-options">
             <a href="#">帮助</a>
@@ -86,125 +89,177 @@
         </div>
       </div>
     </div>
-    <el-dialog
-      title="快速选择用户"
-      :visible.sync="dialogVisible"
-      width="400px">
-      <el-row :gutter="10" style="margin: -20px 0px -10px 0px;">
-        <el-col v-for="(user, index) in users" :key="index" :span="8">
-          <div class="page-login--quick-user" @click="handleUserBtnClick(user)">
-            <d2-icon name="user-circle-o"/>
-            <span>{{user.name}}</span>
-          </div>
-        </el-col>
-      </el-row>
+    <el-dialog title="注册用户" :visible.sync="dialogVisible" width="400px">
+      <el-form ref="form" :model="userVo" label-width="80px">
+        <el-form-item label="登录名" >
+          <el-input v-model="userVo.jsoupUser.username" ></el-input>
+        </el-form-item>
+        <el-form-item label="密码">
+          <el-input type="password" v-model="userVo.jsoupUser.password" ></el-input>
+        </el-form-item>
+           <el-form-item label="确认密码">
+          <el-input type="password" v-model="tempPassword" ></el-input>
+        </el-form-item>
+        <el-form-item label="昵称">
+          <el-input v-model="userVo.jsoupUserDetail.userNickName" ></el-input>
+        </el-form-item>
+          <el-form-item label="简介">
+          <el-input v-model="userVo.jsoupUserDetail.userDes" ></el-input>
+        </el-form-item>
+         <el-form-item label="邮箱">
+          <el-input v-model="userVo.jsoupUserDetail.userEmail" ></el-input>
+        </el-form-item>
+         <el-form-item label="电话号码" prop="phone">
+          <el-input v-model="userVo.jsoupUserDetail.userPhone" ></el-input>
+        </el-form-item>
+        <el-tag type="danger" v-if="tempMsg">{{tempMsg}} </el-tag>
+        <el-form-item prop="phone">
+            <el-row>
+                    <el-col :span="18">
+          <el-button type="primary" @click="sendForRegister">注册</el-button>
+                    </el-col>
+                    <el-col :span="4">
+          <el-button type="warning" @click="closeDio">取消</el-button>
+                    </el-col>
+            </el-row>
+        </el-form-item>
+      </el-form>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import dayjs from 'dayjs'
-import { mapActions } from 'vuex'
-import localeMixin from '@/locales/mixin.js'
-import {everyOneLogin} from "../../netWork/apiMethod";
+import dayjs from "dayjs";
+import { mapActions } from "vuex";
+import localeMixin from "@/locales/mixin.js";
+import { everyOneLogin,registerUser } from "../../netWork/apiMethod";
+import { userPojo } from "../../model/userPojo";
+import {newRules}  from "../../model/rules"
+import {notEmpty, password} from "../../model/validator"
 export default {
-  mixins: [
-    localeMixin
-  ],
-  data () {
+  mixins: [localeMixin],
+  data() {
     return {
+      userVo:new userPojo(),
+      tempPassword:null,
       timeInterval: null,
-      time: dayjs().format('HH:mm:ss'),
+      tempMsg: null,
+      time: dayjs().format("HH:mm:ss"),
       // 快速选择用户
       dialogVisible: false,
-      users: [
-      ],
+      users: [],
       // 表单
       formLogin: {
-        username: 'admin',
-        password: 'admin',
-        code: 'v9am'
+        username: null,
+        password: null,
+        code: "v9am",
       },
+      formRules:new newRules(),
       // 表单校验
       rules: {
         username: [
           {
             required: true,
-            message: '请输入用户名',
-            trigger: 'blur'
-          }
+            message: "请输入用户名",
+            trigger: "blur",
+          },
         ],
         password: [
           {
             required: true,
-            message: '请输入密码',
-            trigger: 'blur'
-          }
+            message: "请输入密码",
+            trigger: "blur",
+          },
         ],
-        code: [
-          {
-            required: true,
-            message: '请输入验证码',
-            trigger: 'blur'
-          }
-        ]
-      }
-    }
+         name: [
+          { validator: notEmpty, trigger: 'blur' }
+      ],
+       password: [
+        { validator: password, trigger: 'blur' }
+      ],
+      },
+    };
   },
-  mounted () {
+  mounted() {
     this.timeInterval = setInterval(() => {
-      this.refreshTime()
-    }, 1000)
+      this.refreshTime();
+    }, 1000);
   },
-  beforeDestroy () {
-    clearInterval(this.timeInterval)
+  beforeDestroy() {
+    clearInterval(this.timeInterval);
   },
   methods: {
-    ...mapActions('d2admin/account', [
-      'login'
-    ]),
-    refreshTime () {
-      this.time = dayjs().format('HH:mm:ss')
+    //准备注册前服务
+    sendForRegister() {
+    //判断两次密码是否相等
+    if(this.tempPassword != this.userVo.jsoupUser.password){
+            this.tempMsg = "两次密码不相等!请确认后重新输入"
+    }else{
+      this.tempMsg = null
+       registerUser(this.userVo).then(res => {
+         if(res.code == "error"){
+           this.tempMsg = res.msg
+
+         }else{
+           this.tempMsg = null
+           this.dialogVisible = false
+           this.$message("注册成功,邮件已发送至邮箱，请尽快完成验证")
+         }
+       })
+    }
+    },
+      /**
+       * 关闭窗口
+       */
+     closeDio(){
+        this.userVo = new userPojo();
+        this.dialogVisible = false
+     },
+    ...mapActions("d2admin/account", ["login"]),
+    refreshTime() {
+      this.time = dayjs().format("HH:mm:ss");
     },
     /**
      * @description 接收选择一个用户快速登录的事件
      * @param {Object} user 用户信息
      */
-    handleUserBtnClick (user) {
-      this.formLogin.username = user.username
-      this.formLogin.password = user.password
-      this.submit()
+    handleUserBtnClick(user) {
+      this.formLogin.username = user.username;
+      this.formLogin.password = user.password;
+      this.submit();
     },
     /**
      * @description 提交表单
      */
-    loginMySelf(){
-      everyOneLogin(this.formLogin.username,this.formLogin.password).then(res =>{
-           if(res.code == "error") {
-         this.$message.error(res.msg)
-       }else{
-            this.$store.state.code = res.token
-          this.$store.state.type = res.role
-          localStorage.setItem('token',this.$store.state.code)
-          localStorage.setItem('type',this.$store.state.type)
+    loginMySelf() {
+      everyOneLogin(this.formLogin.username, this.formLogin.password).then(
+        (res) => {
+          if (res.code == "error") {
+            this.$message.error(res.msg);
+          } else {
+            this.$store.state.code = res.token;
+            this.$store.state.type = res.role;
+            localStorage.setItem("token", this.$store.state.code);
+            localStorage.setItem("type", this.$store.state.type);
 
-          this.submit()
-       }
-        if (res.token){
-          this.$store.state.code = res.token
-          this.$store.state.type = res.role
-          localStorage.setItem('token',this.$store.state.code)
-          localStorage.setItem('type',this.$store.state.type)
+            this.submit();
+          }
+          if (res.token) {
+            this.$store.state.code = res.token;
+            this.$store.state.type = res.role;
+            localStorage.setItem("token", this.$store.state.code);
+            localStorage.setItem("type", this.$store.state.type);
 
-          this.submit()
-        }else {
-          console.log(res.token)
-          this.$message.error(res.error)
+            this.submit();
+          } else {
+            console.log(res.token);
+            this.$message.error(res.error);
+          }
         }
-      })
+      );
     },
     // 提交登录信息
-    submit () {
+    submit() {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
           // 登录
@@ -212,26 +267,25 @@ export default {
           // 具体需要传递的数据请自行修改代码
           this.login({
             username: "admin",
-            password: "admin"
-          })
-            .then(() => {
-              // 重定向对象不存在则返回顶层路径
-              this.$router.replace(this.$route.query.redirect || '/')
-            })
+            password: "admin",
+          }).then(() => {
+            // 重定向对象不存在则返回顶层路径
+            this.$router.replace(this.$route.query.redirect || "/");
+          });
         } else {
           // 登录表单校验失败
-          this.$message.error('表单校验失败，请检查')
+          this.$message.error("表单校验失败，请检查");
         }
-      })
-    }
-  }
-}
+      });
+    },
+  },
+};
 </script>
 
 <style lang="scss">
 .page-login {
   @extend %unable-select;
-  $backgroundColor: #F0F2F5;
+  $backgroundColor: #f0f2f5;
   // ---
   background-color: $backgroundColor;
   height: 100%;
@@ -345,7 +399,7 @@ export default {
       color: $color-text-normal;
       a {
         color: $color-text-normal;
-        margin: 0 .5em;
+        margin: 0 0.5em;
         &:hover {
           color: $color-text-main;
         }
@@ -391,16 +445,16 @@ export default {
       list-style: none;
       width: 20px;
       height: 20px;
-      background: #FFF;
+      background: #fff;
       animation: animate 25s linear infinite;
       bottom: -200px;
       @keyframes animate {
-        0%{
+        0% {
           transform: translateY(0) rotate(0deg);
           opacity: 1;
           border-radius: 0;
         }
-        100%{
+        100% {
           transform: translateY(-1000px) rotate(720deg);
           opacity: 0;
           border-radius: 50%;

@@ -98,7 +98,7 @@
         <el-button
           size="mini"
           type="success"
-          @click="handleEdit(scope.$index, scope.row)">下载结果集</el-button>
+          @click="getFile(scope.$index, scope.row)">下载结果集</el-button>
         </template>
 
           <template v-if="scope.row.missionState == '1'">
@@ -116,6 +116,7 @@
   layout="prev, pager, next"
   :total="pageNum"
   :current-page = "index"
+  @current-change="reflashPage"
   >
 </el-pagination>
   </d2-container>
@@ -125,7 +126,7 @@
 import leidatu from "../../echart-comment/leidatu";
 import leidatu2 from "../../echart-comment/leidatu2";
 import leidatu3 from "../../echart-comment/leidatu3";
-import { getMyMissionHistorys} from "../../netWork/apiMethod";
+import { getMyMissionHistorys,downloadExcel} from "../../netWork/apiMethod";
 import missionHistory from "../../model/missionHistoryPojo"
 export default {
   name: "studentCharts",
@@ -146,6 +147,21 @@ export default {
     this.getOriginData();
   },
   methods: {
+    /**
+     * 下载文件
+     */
+     getFile(index,item){
+       let id = item.missionAllHistoryId
+      downloadExcel(id)
+     },
+
+    /**
+     * 更新页面
+     */
+    reflashPage(currentPage){
+      this.index = currentPage
+      this.getMyHistory()
+    },
      /**
       * 获取我的历史
       */

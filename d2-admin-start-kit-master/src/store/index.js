@@ -16,6 +16,7 @@ export default new Vuex.Store({
     typeId: 1001,
     userId: 1001,
     missionDatas: [],
+    maId: null,
   },
   getters: {
     getCode (state) {

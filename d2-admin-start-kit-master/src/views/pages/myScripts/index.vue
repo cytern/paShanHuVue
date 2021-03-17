@@ -48,12 +48,12 @@
         <el-button
           size="mini"
           type="success"
-          @click="handleEdit(scope.$index, scope.row)">执行</el-button>
+          @click="sendRun(scope.$index, scope.row)">执行</el-button>
           <template v-if="scope.row.isOwner == 1">
                <el-button
           size="mini"
           type="warning"
-          @click="handleDelete(scope.$index, scope.row)">编辑</el-button>
+          @click="sendEdit(scope.$index, scope.row)">编辑</el-button>
           </template>
      
       </template>
@@ -74,7 +74,7 @@
 import leidatu from "../../echart-comment/leidatu";
 import leidatu2 from "../../echart-comment/leidatu2";
 import leidatu3 from "../../echart-comment/leidatu3";
-import {  getAllScript} from "../../netWork/apiMethod";
+import {  getAllScript,sendJsoupMission} from "../../netWork/apiMethod";
 import missionAllData from "../../model/missionAllPojo"
 export default {
   name: "studentCharts",
@@ -95,6 +95,33 @@ export default {
     this.getOriginData();
   },
   methods: {
+    /**
+     * 修改脚本
+     */
+    sendEdit(index,item){
+       let id = item.jsoupMissionAll.maId
+       this.$store.state.maId = id
+       this.$router.push({
+          path: `/myEditScript`
+       })
+    },
+    /**
+     * 发送脚本
+     */
+    sendRun(index,item){
+         let maId = item.jsoupMissionAll.maId
+          this.$notify({
+          title: '提示',
+          message: '发送执行成功，请耐心等待',
+          duration: 0
+        });
+         sendJsoupMission(maId).then(res => {
+           if(res.code == "success"){
+             this.$message("执行完毕")
+           }
+         })
+
+    },
      /**
       * 获取我的脚本
       */

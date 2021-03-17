@@ -19,4 +19,8 @@ export default [
         name:"xpath",
         value:"xpath"
     },
+    {
+        name:"css",
+        value:"css"
+    }
 ]

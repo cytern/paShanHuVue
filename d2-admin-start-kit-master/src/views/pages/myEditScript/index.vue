@@ -24,7 +24,7 @@
             <!-- 此card 定义一个任务清单 如果进行复制等操作 就会使用这个card的操作 -->
             <el-card
               class="box-card"
-              v-for="(itemAcc, index) in missionData.missionDataList"
+              v-for="(itemAcc, index) in this.missionData.missionDataList"
               :key="index"
               style="background: #e8e8ff; margin-bottom: 100px"
             >
@@ -46,7 +46,7 @@
                   <!-- 回单任务 名 -->
                   <el-col :span="12">
                     <el-input
-                      :value="itemAcc.jsoupMission.missionName"
+                      v-model="itemAcc.jsoupMission.missionName"
                       style="width: 50%"
                     ></el-input>
                   </el-col>
@@ -121,7 +121,7 @@
                         <!-- 回单任务 名 -->
                         <el-col :span="12">
                           <el-input
-                            :value="itemAction.jsoupAction.actionName"
+                            v-model="itemAction.jsoupAction.actionName"
                             style="width: 50%"
                           ></el-input>
                         </el-col>
@@ -199,7 +199,7 @@
 
                       <el-form-item label="选取凭据">
                         <el-input
-                          :value="itemAction.jsoupAction.actionEleValue"
+                          v-model="itemAction.jsoupAction.actionEleValue"
                         ></el-input>
                       </el-form-item>
 
@@ -220,7 +220,8 @@
                       <template
                         v-if="
                           itemAction.jsoupAction.actionDoType == 'input' ||
-                          itemAction.jsoupAction.actionDoType == 'goto'
+                          itemAction.jsoupAction.actionDoType == 'goto' ||
+                           itemAction.jsoupAction.actionDoType == 'output'
                         "
                       >
                         <el-form-item
@@ -292,14 +293,15 @@ export default {
         programContent: null,
       },
       missionAllDataId: 0,
-      missionData: newMissionAll(),
-      missionDatas: [newMissionAll()],
+      missionData: null,
+      missionDatas: [],
       tempIndex: null,
       tempPindex: null,
       selectIndex: null,
       actionDoTypes: actionDoType,
       actionSelectTypes: actionSeleType,
       aIndex: null,
+      datalist:null
     };
   },
   mounted() {
@@ -584,35 +586,23 @@ export default {
 
     //初始化数据
     getOriginData() {
-      console.log("到这里了")
-      if (this.$route.params.id) {
+      if (this.$store.state.maId) {
         //赋值 如果是跳转时带着id参数
-        this.missionAllDataId = this.$route.params.id;
+        this.missionAllDataId = this.$store.state.maId;
         this.getScript();
       } else {
-        console.log("到这里了2222222")
-        if(this.missionDatas.length < 1){
-           console.log("到这里了ddddddd")
-           console.log(this.missionDatas)
-           this.missionData = newMissionAll()
-
-        }else{
-           console.log("到这里了3333333333")
-            console.log(this.missionDatas)
-            console.log(this.missionDatas.length)
-          this.missionData =this.missionDatas[0];
-        }
+       this.missionData = newMission();
       }
+       pushMissionData(this.missionData);
+            this.getIndex();
     },
     //获取脚本
     getScript() {
       getOneScript(this.missionAllDataId).then((res) => {
         if (res.code == "error" || res.missionData == null) {
-          this.missionData = missionDatas[0];
+          this.missionData = newMission();
         } else {
           this.missionData = res.missionData;
-          pushMissionData(this.missionData);
-          this.getIndex();
         }
       });
     },
