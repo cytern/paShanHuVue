@@ -54,11 +54,15 @@
                 <el-form-item>
                   <el-row>
                     <el-col :span="18">
-                      <el-button type="text">忘记密码</el-button>
+                      <el-button type="text" @click="sendFogetPassword"
+                        >忘记密码</el-button
+                      >
                     </el-col>
 
                     <el-col :span="4">
-                      <el-button type="text" @click="dialogVisible =true">注册账号</el-button>
+                      <el-button type="text" @click="dialogVisible = true"
+                        >注册账号</el-button
+                      >
                     </el-col>
                   </el-row>
                 </el-form-item>
@@ -91,37 +95,76 @@
     </div>
     <el-dialog title="注册用户" :visible.sync="dialogVisible" width="400px">
       <el-form ref="form" :model="userVo" label-width="80px">
-        <el-form-item label="登录名" >
-          <el-input v-model="userVo.jsoupUser.username" ></el-input>
+        <el-form-item label="登录名">
+          <el-input v-model="userVo.jsoupUser.username"></el-input>
         </el-form-item>
         <el-form-item label="密码">
-          <el-input type="password" v-model="userVo.jsoupUser.password" ></el-input>
+          <el-input
+            type="password"
+            v-model="userVo.jsoupUser.password"
+          ></el-input>
         </el-form-item>
-           <el-form-item label="确认密码">
-          <el-input type="password" v-model="tempPassword" ></el-input>
+        <el-form-item label="确认密码">
+          <el-input type="password" v-model="tempPassword"></el-input>
         </el-form-item>
         <el-form-item label="昵称">
-          <el-input v-model="userVo.jsoupUserDetail.userNickName" ></el-input>
+          <el-input v-model="userVo.jsoupUserDetail.userNickName"></el-input>
         </el-form-item>
-          <el-form-item label="简介">
-          <el-input v-model="userVo.jsoupUserDetail.userDes" ></el-input>
+        <el-form-item label="简介">
+          <el-input v-model="userVo.jsoupUserDetail.userDes"></el-input>
         </el-form-item>
-         <el-form-item label="邮箱">
-          <el-input v-model="userVo.jsoupUserDetail.userEmail" ></el-input>
+        <el-form-item label="邮箱">
+          <el-input v-model="userVo.jsoupUserDetail.userEmail"></el-input>
         </el-form-item>
-         <el-form-item label="电话号码" prop="phone">
-          <el-input v-model="userVo.jsoupUserDetail.userPhone" ></el-input>
+        <el-form-item label="电话号码" prop="phone">
+          <el-input v-model="userVo.jsoupUserDetail.userPhone"></el-input>
         </el-form-item>
-        <el-tag type="danger" v-if="tempMsg">{{tempMsg}} </el-tag>
+        <el-tag type="danger" v-if="tempMsg">{{ tempMsg }} </el-tag>
         <el-form-item prop="phone">
-            <el-row>
-                    <el-col :span="18">
-          <el-button type="primary" @click="sendForRegister">注册</el-button>
-                    </el-col>
-                    <el-col :span="4">
-          <el-button type="warning" @click="closeDio">取消</el-button>
-                    </el-col>
-            </el-row>
+          <el-row>
+            <el-col :span="18">
+              <el-button type="primary" @click="sendForRegister"
+                >注册</el-button
+              >
+            </el-col>
+            <el-col :span="4">
+              <el-button type="warning" @click="closeDio">取消</el-button>
+            </el-col>
+          </el-row>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
+
+    <!-- 忘记密码对话框 -->
+    <el-dialog title="忘记密码" :visible.sync="forgetPass" width="400px">
+      <el-form ref="form" :model="userVo" label-width="80px">
+        <el-form-item label="登录名">
+          <el-input disabled v-model="userVo.jsoupUser.username"></el-input>
+        </el-form-item>
+        <el-form-item label="密码">
+          <el-input
+            type="password"
+            v-model="userVo.jsoupUser.password"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="确认密码">
+          <el-input type="password" v-model="tempPassword"></el-input>
+        </el-form-item>
+        <el-form-item label="验证码">
+          <el-input v-model="userVo.jsoupUser.userToken"></el-input>
+        </el-form-item>
+        <el-tag type="danger" v-if="tempMsg">{{ tempMsg }} </el-tag>
+        <el-form-item prop="phone">
+          <el-row>
+            <el-col :span="18">
+              <el-button type="primary" @click="sendForResetPassword"
+                >重设密码</el-button
+              >
+            </el-col>
+            <el-col :span="4">
+              <el-button type="warning" @click="closeDio">取消</el-button>
+            </el-col>
+          </el-row>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -132,16 +175,22 @@
 import dayjs from "dayjs";
 import { mapActions } from "vuex";
 import localeMixin from "@/locales/mixin.js";
-import { everyOneLogin,registerUser } from "../../netWork/apiMethod";
-import { userPojo } from "../../model/userPojo";
-import {newRules}  from "../../model/rules"
-import {notEmpty, password} from "../../model/validator"
+import {
+  everyOneLogin,
+  registerUser,
+  forgetPassword,
+  resetPassword,
+} from "../../netWork/apiMethod";
+import { userPojo, jsoupUser } from "../../model/userPojo";
+import { newRules } from "../../model/rules";
+import { notEmpty, password } from "../../model/validator";
 export default {
   mixins: [localeMixin],
   data() {
     return {
-      userVo:new userPojo(),
-      tempPassword:null,
+      userVo: new userPojo(),
+      forgetPass: false,
+      tempPassword: null,
       timeInterval: null,
       tempMsg: null,
       time: dayjs().format("HH:mm:ss"),
@@ -154,7 +203,7 @@ export default {
         password: null,
         code: "v9am",
       },
-      formRules:new newRules(),
+      formRules: new newRules(),
       // 表单校验
       rules: {
         username: [
@@ -171,12 +220,8 @@ export default {
             trigger: "blur",
           },
         ],
-         name: [
-          { validator: notEmpty, trigger: 'blur' }
-      ],
-       password: [
-        { validator: password, trigger: 'blur' }
-      ],
+        name: [{ validator: notEmpty, trigger: "blur" }],
+        password: [{ validator: password, trigger: "blur" }],
       },
     };
   },
@@ -189,32 +234,88 @@ export default {
     clearInterval(this.timeInterval);
   },
   methods: {
+    /**
+     * 发送重设密码网络请求
+     */
+    sendForResetPassword() {
+      //确定两次密码相同
+      if (this.tempPassword != this.userVo.jsoupUser.password) {
+        this.tempMsg = "两次密码不相等!请确认后重新输入";
+      } else {
+        resetPassword(
+          this.userVo.jsoupUser.username,
+          this.userVo.jsoupUser.password,
+          this.userVo.jsoupUser.userToken
+        )((res) => {
+          if (res.code == "success") {
+            this.tempMsg = null;
+            this.$message(res.msg);
+            this.forgetPass = false;
+          } else {
+            this.$message({
+              message: res.msg,
+              type: "warning",
+            });
+            this.tempMsg = res.msg
+          }
+        });
+      }
+    },
+    /**
+     * 忘记密码发送
+     */
+    sendFogetPassword() {
+      //判断是否输入账号
+      if (this.formLogin.username == null || this.formLogin.username == "") {
+        this.$message({
+          message: "账号为空",
+          type: "warning",
+        });
+      } else {
+        //发送网络请求 发送邮箱验证码
+        forgetPassword(this.formLogin.username).then((res) => {
+          if (res.code == "success") {
+            this.userVo = new userPojo();
+            this.userVo.jsoupUser.username = this.formLogin.username;
+            this.forgetPass = true;
+           
+          } else {
+            this.$message({
+              message: res.msg,
+              type: "warning",
+            });
+          }
+        });
+      }
+    },
+
     //准备注册前服务
     sendForRegister() {
-    //判断两次密码是否相等
-    if(this.tempPassword != this.userVo.jsoupUser.password){
-            this.tempMsg = "两次密码不相等!请确认后重新输入"
-    }else{
-      this.tempMsg = null
-       registerUser(this.userVo).then(res => {
-         if(res.code == "error"){
-           this.tempMsg = res.msg
-
-         }else{
-           this.tempMsg = null
-           this.dialogVisible = false
-           this.$message("注册成功,邮件已发送至邮箱，请尽快完成验证")
-         }
-       })
-    }
+      //判断两次密码是否相等
+      if (this.tempPassword != this.userVo.jsoupUser.password) {
+        this.tempMsg = "两次密码不相等!请确认后重新输入";
+      } else {
+        this.tempMsg = null;
+        registerUser(this.userVo).then((res) => {
+          if (res.code == "error") {
+            this.tempMsg = res.msg;
+          } else {
+            this.tempMsg = null;
+            this.dialogVisible = false;
+            this.$message("注册成功,邮件已发送至邮箱，请尽快完成验证");
+          }
+        });
+      }
     },
-      /**
-       * 关闭窗口
-       */
-     closeDio(){
-        this.userVo = new userPojo();
-        this.dialogVisible = false
-     },
+    /**
+     * 关闭窗口
+     */
+    closeDio() {
+      this.userVo = new userPojo();
+      this.tempMsg = null
+      this.dialogVisible = false;
+      this.forgetPass = false
+    },
     ...mapActions("d2admin/account", ["login"]),
     refreshTime() {
       this.time = dayjs().format("HH:mm:ss");

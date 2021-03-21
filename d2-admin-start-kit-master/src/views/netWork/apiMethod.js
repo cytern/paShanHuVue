@@ -1,7 +1,31 @@
 import apiBook from "@/views/netWork/apiBook";
 import {axiosGet, axiosPost, axiosPostJson} from "@/views/netWork/axiosAll";
-import userPojo from "@/views/model/userPojo"
+import {userPojo,jsoupUser} from "@/views/model/userPojo"
 
+
+/**
+ * 重设密码
+ * @param {用户名} username 
+ * @param {密码} password 
+ * @param {验证码} code 
+ */
+export function resetPassword (username,password,code){
+    let url = apiBook.everyOne.resetPassword
+    let user = new jsoupUser();
+    user.username = username
+    user.password = password
+    user.userToken = code
+    return axiosPostJson(url,user)
+}
+/**
+ * 忘记密码
+ * @param {忘记密码} userVo 
+ * @returns 
+ */
+export function forgetPassword(username){
+   let url = apiBook.everyOne.forgetPassword + "/" + username
+   return axiosPostJson(url)
+}
 /**
  * 注册用户
  */
@@ -43,7 +67,7 @@ export function saveOneMissionAll(missionAllData){
  */
 export function everyOneLogin(userName,userPassword) {
    let url = apiBook.everyOne.login
-   let userVo = userPojo; 
+   let userVo =new userPojo(); 
    userVo.jsoupUser.username = userName;
    userVo.jsoupUser.password = userPassword;
    return  axiosPostJson(url,userVo)

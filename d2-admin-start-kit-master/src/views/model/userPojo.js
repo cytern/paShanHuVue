@@ -232,3 +232,16 @@ export function userPojo(){
 }
 return userPojo;
 }
+
+
+export function jsoupUser () {
+    let user = {
+        userId: null,
+        username: null,
+        password: null,
+        createTime: null,
+        userToken: null,
+        serialVersionUID: null
+    }
+    return user;
+}

@@ -5,7 +5,10 @@ const baseUrl = windowsUrl
 export default {
   everyOne:{
     login:  baseUrl + "server/everyone/login",
-    register: baseUrl + "server/everyone/register"
+    register: baseUrl + "server/everyone/register",
+    forgetPassword: baseUrl + "server/everyone/forgetPassword",
+    resetPassword: baseUrl + "server/everyone/resetPassword"
+    
 
   },
   customer: {
