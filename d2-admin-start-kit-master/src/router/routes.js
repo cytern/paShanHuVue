@@ -68,6 +68,15 @@ const frameIn = [
         component: _import('pages/myScripts')
       },
       {
+        path: 'scriptShop',
+        name: 'scriptShop',
+        meta: {
+          title: '脚本市场',
+          auth: true
+        },
+        component: _import('pages/scriptShop')
+      },
+      {
         path: 'studentCharts',
         name: 'studentCharts',
         meta: {

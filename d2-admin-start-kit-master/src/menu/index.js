@@ -22,32 +22,19 @@ export const menuHeader = supplementPath([
 
 export const menuAside = supplementPath([
   { path: '/index', title: '首页', icon: 'home' },
-  {
-    title: '个人',
-    icon: 'user',
-    children: [
+
       { path: '/studentConf', title: '我的信息',icon: 'user-o' },
       { path: '/myScript', title: '我的脚本',icon: 'podcast' },
-      { path: '/myReason', title: '我的结果',icon: 'ravelry' }
-    ]
-  },
-  {
-    title: '市场',
-    icon: 'user',
-    children: [
-      { path: '/studentConf', title: '脚本市场',icon: 'user-o' },
+      { path: '/myReason', title: '我的结果',icon: 'ravelry' },
+
+      { path: '/scriptShop', title: '脚本市场',icon: 'user-o' },
       { path: '/studentCharts', title: '论坛信息',icon: 'podcast' },
-      { path: '/notice', title: '公告信息',icon: 'ravelry' }
-    ]
-  },
-  {
-    title: '开发',
-    icon: 'user',
-    children: [
+      { path: '/notice', title: '公告信息',icon: 'ravelry' },
+
       { path: '/myEditScript', title: '开发脚本',icon: 'user-o' },
       { path: '/studentCharts', title: '编写教程',icon: 'podcast' },
-      { path: '/notice', title: '开发帮助',icon: 'ravelry' }
-    ]
-  }
+      { path: '/notice', title: '开发帮助',icon: 'ravelry' },
+
+  
   
 ])

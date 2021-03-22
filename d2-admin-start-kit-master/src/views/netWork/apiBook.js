@@ -18,7 +18,9 @@ export default {
     saveOneScript: baseUrl + "server/customer/saveMyScript",
     sendExcutor: baseUrl + "server/customer/runJavaSoup",
     getUserInfo: baseUrl + "server/customer/getUserInfo",
-    setMaState: baseUrl + "server/customer/setMissionAllState"
+    setMaState: baseUrl + "server/customer/setMissionAllState",
+    getSalesMa: baseUrl + "server/customer/getSalesMa",
+    getSalesMh: baseUrl + "server/customer/getSalesMh",
   },
   other: {
     downloadExcel: baseUrl + "server/other/downloadFile"    

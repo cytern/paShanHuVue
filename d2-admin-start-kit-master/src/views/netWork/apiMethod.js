@@ -106,6 +106,27 @@ export function everyOneLogin(userName,userPassword) {
    return  axiosPostJson(url,userVo)
 
 }
+/**
+ * 获取能购买的脚本列表
+ * @param {页容量}} pageSize 
+ * @param {页码} index 
+ * @returns 
+ */
+export function getSalesMa (pageSize,index) {
+  let url = apiBook.customer.getSalesMa
+  return axiosGet(subPageHelpUrl(url,pageSize,index))
+}
+
+/**
+ * 获取能购买的结果集列表
+ * @param {页容量}} pageSize 
+ * @param {页码} index 
+ * @returns 
+ */
+ export function getSalesMh (pageSize,index) {
+  let url = apiBook.customer.getSalesMh
+  return axiosGet(subPageHelpUrl(url,pageSize,index))
+}
 
 /**
  * 获取个人脚本

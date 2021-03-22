@@ -326,20 +326,24 @@ export default    {
           ]
         }
       ],
-      jsoupMissionAll: {
-        maId: -1,
-        maName: '未命名脚本',
-        maTip: null,
-        malStartUrl: null,
-        maSuccessFileName: null,
-        maUserId: null,
-        maNoticeEmail: null,
-        userId: null,
-        maState: null
-      },
+      jsoupMissionAll: new newJsoupMissionAll(),
       isOwner: null,
       isSuccess: null
     }
   }
   
+ export function newJsoupMissionAll  () {
+    let ma = {
+      maId: -1,
+      maName: '未命名脚本',
+      maTip: null,
+      malStartUrl: null,
+      maSuccessFileName: null,
+      maUserId: null,
+      maNoticeEmail: null,
+      userId: null,
+      maState: null
+    }
+    return ma
+  }
   
