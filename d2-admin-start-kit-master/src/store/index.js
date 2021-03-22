@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import { userPojo } from "../views/model/userPojo";
 import d2admin from './modules/d2admin'
 
 Vue.use(Vuex)
@@ -17,6 +17,7 @@ export default new Vuex.Store({
     userId: 1001,
     missionDatas: [],
     maId: null,
+    userVo: null
   },
   getters: {
     getCode (state) {

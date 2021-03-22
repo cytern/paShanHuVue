@@ -180,6 +180,7 @@ import {
   registerUser,
   forgetPassword,
   resetPassword,
+  getUserInfo
 } from "../../netWork/apiMethod";
 import { userPojo, jsoupUser } from "../../model/userPojo";
 import { newRules } from "../../model/rules";
@@ -220,8 +221,6 @@ export default {
             trigger: "blur",
           },
         ],
-        name: [{ validator: notEmpty, trigger: "blur" }],
-        password: [{ validator: password, trigger: "blur" }],
       },
     };
   },
@@ -346,12 +345,14 @@ export default {
             this.submit();
           }
           if (res.token) {
+            //登录成功 
             this.$store.state.code = res.token;
             this.$store.state.type = res.role;
             localStorage.setItem("token", this.$store.state.code);
             localStorage.setItem("type", this.$store.state.type);
-
-            this.submit();
+            if(getUserInfo()){
+               this.submit();
+            }
           } else {
             console.log(res.token);
             this.$message.error(res.error);

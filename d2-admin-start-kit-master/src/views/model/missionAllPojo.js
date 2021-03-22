@@ -112,7 +112,8 @@ export default    {
       maSuccessFileName: null,
       maUserId: null,
       maNoticeEmail: null,
-      userId: null
+      userId: null,
+      maState: null
     },
     isOwner: null
   }
@@ -333,9 +334,11 @@ export default    {
         maSuccessFileName: null,
         maUserId: null,
         maNoticeEmail: null,
-        userId: null
+        userId: null,
+        maState: null
       },
-      isOwner: null
+      isOwner: null,
+      isSuccess: null
     }
   }
   

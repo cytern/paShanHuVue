@@ -31,12 +31,19 @@
 import D2Badge from './components/d2-badge'
 import D2Help from './components/d2-help'
 import D2PageCover from './components/d2-page-cover'
+import {
+  getUserInfo
+} from "../../netWork/apiMethod";
 export default {
   components: {
     D2Badge,
     D2Help,
     D2PageCover
-  }
+  },
+   mounted() {
+   getUserInfo()
+  },
+  
 }
 </script>
 
