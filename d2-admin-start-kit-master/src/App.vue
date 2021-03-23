@@ -21,6 +21,7 @@ export default {
     this.$store.state.typeId = localStorage.getItem('typeId')
     this.$store.state.type = localStorage.getItem('type')
     this.$store.state.userId = localStorage.getItem('userId')
+    this.$store.state.userVo = JSON.parse(window.localStorage.getItem('userVo'))
     this.$store.state.missionDatas = JSON.parse(window.localStorage.getItem('missionData')) == null? []: JSON.parse(window.localStorage.getItem('missionData')) 
   },
   methods: {

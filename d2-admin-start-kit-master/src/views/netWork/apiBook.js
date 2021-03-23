@@ -21,6 +21,9 @@ export default {
     setMaState: baseUrl + "server/customer/setMissionAllState",
     getSalesMa: baseUrl + "server/customer/getSalesMa",
     getSalesMh: baseUrl + "server/customer/getSalesMh",
+    setMhState: baseUrl + "server/customer/setMhState",
+    buyMa: baseUrl + "server/customer/buy"
+
   },
   other: {
     downloadExcel: baseUrl + "server/other/downloadFile"    

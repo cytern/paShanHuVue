@@ -8,7 +8,7 @@
      border
     style="width: 100%">
     <el-table-column
-      label="脚本名称"
+      label="数据名称"
       width="180">
       <template slot-scope="scope">
         <i class="el-icon-cpu"></i>
@@ -16,7 +16,7 @@
       </template>
     </el-table-column>
     <el-table-column
-      label="脚本详细"
+      label="数据详细"
       width="180">
       <template slot-scope="scope">
         <el-popover trigger="hover" placement="top">
@@ -82,7 +82,7 @@ import leidatu3 from "../../echart-comment/leidatu3";
 import { getSalesMh} from "../../netWork/apiMethod";
 import {newMah} from "../../model/missionHistoryPojo"
 export default {
-  name: "studentCharts",
+  name: "resShop",
   components: {
     leidatu,
     leidatu2,
@@ -117,7 +117,7 @@ export default {
     },
      getMyHistory () {
       getSalesMh(this.pageSize,this.index).then(res => {
-             this.missionHistorys = res.missionHistory,
+             this.missionHistorys = res.mhList,
             this.pageNum = res.pageNum
       })
      },

@@ -7,9 +7,7 @@
       <el-table-column label="脚本名称" width="180">
         <template slot-scope="scope">
           <i class="el-icon-cpu"></i>
-          <span style="margin-left: 10px">{{
-            scope.row.maName
-          }}</span>
+          <span style="margin-left: 10px">{{ scope.row.maName }}</span>
         </template>
       </el-table-column>
       <el-table-column label="脚本详细" width="180">
@@ -17,9 +15,7 @@
           <el-popover trigger="hover" placement="top">
             <p>用途: {{ scope.row.maTip }}</p>
             <div slot="reference" class="name-wrapper">
-              <el-tag size="medium">{{
-                scope.row.maTip
-              }}</el-tag>
+              <el-tag size="medium">{{ scope.row.maTip }}</el-tag>
             </div>
           </el-popover>
         </template>
@@ -27,9 +23,7 @@
       <el-table-column label="起始地址" width="360">
         <template slot-scope="scope">
           <i class="el-icon-position"></i>
-          <span style="margin-left: 10px">{{
-            scope.row.malStartUrl
-          }}</span>
+          <span style="margin-left: 10px">{{ scope.row.malStartUrl }}</span>
         </template>
       </el-table-column>
       <el-table-column label="结果集名称" width="250">
@@ -42,10 +36,7 @@
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button
-            size="mini"
-            type="success"
-            @click="sendBuy(scope.$index, scope.row)"
+          <el-button size="mini" type="success" @click="sendBuy(scope.row)"
             >购买</el-button
           >
         </template>
@@ -66,8 +57,8 @@
 import leidatu from "../../echart-comment/leidatu";
 import leidatu2 from "../../echart-comment/leidatu2";
 import leidatu3 from "../../echart-comment/leidatu3";
-import { getSalesMa} from "../../netWork/apiMethod";
-import {newJsoupMissionAll} from "../../model/missionAllPojo";
+import { getSalesMa, buyMa } from "../../netWork/apiMethod";
+import { newJsoupMissionAll } from "../../model/missionAllPojo";
 export default {
   name: "scriptShop",
   components: {
@@ -77,16 +68,46 @@ export default {
   },
   data() {
     return {
-      missionDatas: [newJsoupMissionAll()],
+      missionDatas: [new newJsoupMissionAll()],
       pageSize: 10,
       index: 1,
       pageNum: 0,
+      userId: this.$store.state.userVo.jsoupUser.userId,
     };
   },
   mounted() {
     this.getOriginData();
   },
   methods: {
+    /**
+     * 购买脚本
+     */
+    sendBuy(jsMa) {
+      this.$confirm("是否购买?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+          //判断是否是自己的脚本
+          if (jsMa.userId == this.userId) {
+            this.$message({
+              type: "warning",
+              message: "不能购买自己的脚本",
+            });
+          } else {
+            buyMa(jsMa.maId).then((res) => {
+              if (res.code == "success") {
+                this.$message({
+                  type: "success",
+                  message: res.msg,
+                });
+              }
+            });
+          }
+        })
+        .catch(() => {});
+    },
 
     /**
      * 获取我的脚本

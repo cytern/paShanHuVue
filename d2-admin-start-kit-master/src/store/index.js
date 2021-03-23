@@ -13,8 +13,8 @@ export default new Vuex.Store({
     code: null,
     name: '',
     type: '',
-    typeId: 1001,
-    userId: 1001,
+    typeId: null,
+    userId: null,
     missionDatas: [],
     maId: null,
     userVo: null

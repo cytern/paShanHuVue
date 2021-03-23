@@ -77,6 +77,15 @@ const frameIn = [
         component: _import('pages/scriptShop')
       },
       {
+        path: 'resShop',
+        name: 'resShop',
+        meta: {
+          title: '数据市场',
+          auth: true
+        },
+        component: _import('pages/resShop')
+      },
+      {
         path: 'studentCharts',
         name: 'studentCharts',
         meta: {

@@ -28,12 +28,12 @@ export const menuAside = supplementPath([
       { path: '/myReason', title: '我的结果',icon: 'ravelry' },
 
       { path: '/scriptShop', title: '脚本市场',icon: 'user-o' },
-      { path: '/studentCharts', title: '论坛信息',icon: 'podcast' },
+      { path: '/resShop', title: '数据市场',icon: 'podcast' },
       { path: '/notice', title: '公告信息',icon: 'ravelry' },
 
       { path: '/myEditScript', title: '开发脚本',icon: 'user-o' },
       { path: '/studentCharts', title: '编写教程',icon: 'podcast' },
-      { path: '/notice', title: '开发帮助',icon: 'ravelry' },
+      // { path: '/notice', title: '开发帮助',icon: 'ravelry' },
 
   
   

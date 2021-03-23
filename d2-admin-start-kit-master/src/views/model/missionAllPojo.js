@@ -342,7 +342,9 @@ export default    {
       maUserId: null,
       maNoticeEmail: null,
       userId: null,
-      maState: null
+      maState: null,
+      maPrice: null,
+      createTime: null
     }
     return ma
   }

@@ -9,8 +9,7 @@ export default {
     finishTime: null,
     missionAllName: null,
     missionAllDis: null
-  }
-
+  };
   export function newMah() {
     let mah = {
       missionAllHistoryId: null,
@@ -26,4 +25,5 @@ export default {
       onSale: null,
       salePrice: null,
     }
+    return mah;
   }

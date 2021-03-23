@@ -5,9 +5,24 @@ import store from '@/store/index'
 import {Notification} from 'element-ui'
 
 
+/**
+ * 购买一个脚本
+ */
+export function buyMa (maId) {
+  let url = apiBook.customer.buyMa + "/" + maId
+  return axiosPostJson(url)
 
+}
 
-
+/**
+ * 设置结果集市场化数据
+ * @param {结果集}} mh 
+ * @returns 
+ */
+export function setMhState (mh) {
+  let url = apiBook.customer.setMhState
+  return axiosPostJson(url,mh)
+}
 /**
  * 设置总任务状态
  * @param {总任务}} missionAll 
@@ -26,6 +41,7 @@ export function getUserInfo(){
        axiosPostJson(url).then(res => {
       if(res.code == "success"){
         store.state.userVo = res.userVo
+        window.localStorage.setItem('userVo',JSON.stringify(res.userVo))
           return true;
       }else{
         //提示获取失败

@@ -1,12 +1,5 @@
 export default {
-    jsoupUser: {
-        userId: null,
-        username: null,
-        password: null,
-        createTime: null,
-        userToken: null,
-        serialVersionUID: null
-    },
+    jsoupUser:jsoupUser(),
     jsoupUserDetail: {
         userDetailId: null,
         userRealName: null,
@@ -117,14 +110,7 @@ export default {
  */
 export function userPojo(){
  let userPojo = {
-    jsoupUser: {
-        userId: null,
-        username: null,
-        password: null,
-        createTime: null,
-        userToken: null,
-        serialVersionUID: null
-    },
+    jsoupUser:jsoupUser(),
     jsoupUserDetail: {
         userDetailId: null,
         userRealName: null,
