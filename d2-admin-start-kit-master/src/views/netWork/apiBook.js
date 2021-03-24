@@ -22,7 +22,9 @@ export default {
     getSalesMa: baseUrl + "server/customer/getSalesMa",
     getSalesMh: baseUrl + "server/customer/getSalesMh",
     setMhState: baseUrl + "server/customer/setMhState",
-    buyMa: baseUrl + "server/customer/buy"
+    buyMa: baseUrl + "server/customer/buyMa",
+    buyMh: baseUrl + "server/customer/buyMh"
+
 
   },
   other: {

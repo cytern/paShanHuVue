@@ -60,7 +60,7 @@
         <el-button
           size="mini"
           type="success"
-          @click="getFile(scope.$index, scope.row)">购买</el-button>
+          @click="sendBuy(scope.row)">购买</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -79,7 +79,7 @@
 import leidatu from "../../echart-comment/leidatu";
 import leidatu2 from "../../echart-comment/leidatu2";
 import leidatu3 from "../../echart-comment/leidatu3";
-import { getSalesMh} from "../../netWork/apiMethod";
+import { buyMh, getSalesMh} from "../../netWork/apiMethod";
 import {newMah} from "../../model/missionHistoryPojo"
 export default {
   name: "resShop",
@@ -100,6 +100,29 @@ export default {
     this.getOriginData();
   },
   methods: {
+        /**
+     * 购买脚本
+     */
+    sendBuy(jsMh) {
+      this.$confirm("是否购买?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
+      })
+        .then(() => {
+            buyMh(jsMh.missionAllHistoryId).then((res) => {
+              if (res.code == "success") {
+                this.$message({
+                  type: "success",
+                  message: res.msg,
+                });
+              }
+            });
+          
+        })
+        .catch(() => {});
+    },
+
     /**
      * 下载文件
      */

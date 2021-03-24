@@ -4,7 +4,16 @@ import {userPojo,jsoupUser} from "@/views/model/userPojo"
 import store from '@/store/index'
 import {Notification} from 'element-ui'
 
+/**
+ * 购买一个结果集
+ * @param {结果集id}} mhId 
+ * @returns 提示消息
+ */
+export function buyMh (mhId) {
+  let url = apiBook.customer.buyMh + "/" + mhId
+  return axiosPostJson(url)
 
+}
 /**
  * 购买一个脚本
  */
