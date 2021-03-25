@@ -3,45 +3,42 @@
     <template slot="header">
       <el-button type="text" disabled>脚本市场</el-button>
     </template>
-    <el-table :data="missionDatas" border style="width: 100%">
-      <el-table-column label="脚本名称" width="180">
-        <template slot-scope="scope">
-          <i class="el-icon-cpu"></i>
-          <span style="margin-left: 10px">{{ scope.row.maName }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="脚本详细" width="180">
-        <template slot-scope="scope">
-          <el-popover trigger="hover" placement="top">
-            <p>用途: {{ scope.row.maTip }}</p>
-            <div slot="reference" class="name-wrapper">
-              <el-tag size="medium">{{ scope.row.maTip }}</el-tag>
-            </div>
-          </el-popover>
-        </template>
-      </el-table-column>
-      <el-table-column label="起始地址" width="360">
-        <template slot-scope="scope">
-          <i class="el-icon-position"></i>
-          <span style="margin-left: 10px">{{ scope.row.malStartUrl }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="结果集名称" width="250">
-        <template slot-scope="scope">
-          <i class="el-icon-chat-line-square"></i>
-          <span style="margin-left: 10px">{{
-            scope.row.maSuccessFileName
-          }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="操作">
-        <template slot-scope="scope">
-          <el-button size="mini" type="success" @click="sendBuy(scope.row)"
+     <!-- 卡片式改写 -->
+    <template v-for="(item,index) in missionDatas">
+      <el-card class="box-card" :key="index" style="width:30%;display:inline-block;margin-right:3%;margin-bottom:3%">
+        <div slot="header" class="clearfix">
+          <!-- TODO 点击查看详情  -作者信息、详细评价 -->
+          <el-button type="text">{{item.maName}}</el-button>
+           <el-button v-if="item.userId == 0"  style="float: right; padding: 3px 0" type="success" @click="sendBuy(scope.row)"
             >购买</el-button
           >
-        </template>
-      </el-table-column>
-    </el-table>
+           <el-button v-else disabled  style="float: right; padding: 3px 0" type="warning" @click="sendBuy(scope.row)"
+            >{{item.userId == 1?"提供者":"已持有"}}</el-button
+          >
+        </div>
+        <!-- 用途 -->
+        <el-popover trigger="hover" placement="top">
+            <p>{{ item.maTip }}</p>
+            <div slot="reference" class="name-wrapper" style="margin-bottom:2%">
+              用途:&nbsp;<el-tag size="medium">{{ item.maTip }}</el-tag>
+            </div>
+          </el-popover>
+        <!-- 爬取日期 -->
+            <div  class="name-wrapper" style="margin-bottom:2%">
+              创建日期:&nbsp;<el-tag size="medium">{{ item.createTime }}</el-tag>
+            </div>
+         <!-- 售价 -->
+              <div  class="name-wrapper" style="margin-bottom:2%">
+              售价:&nbsp;<el-tag size="medium">{{ item.maPrice }}</el-tag>
+            </div>
+            <!-- TODO  评分-->
+            <div  class="name-wrapper" style="margin-bottom:2%">
+              评分:&nbsp;<el-tag size="medium">{{ item.maState }}</el-tag>
+            </div>
+
+      </el-card>
+    </template>
+  
     <!-- 分页组件 目前是简单分页 -->
     <el-pagination
       background
@@ -89,13 +86,6 @@ export default {
         type: "warning",
       })
         .then(() => {
-          //判断是否是自己的脚本
-          if (jsMa.userId == this.userId) {
-            this.$message({
-              type: "warning",
-              message: "不能购买自己的脚本",
-            });
-          } else {
             buyMa(jsMa.maId).then((res) => {
               if (res.code == "success") {
                 this.$message({
@@ -104,7 +94,7 @@ export default {
                 });
               }
             });
-          }
+          
         })
         .catch(() => {});
     },

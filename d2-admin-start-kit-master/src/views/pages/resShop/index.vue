@@ -3,75 +3,51 @@
     <template slot="header">
       <el-button type="text" disabled>结果集市场</el-button>
     </template>
-     <el-table
-    :data="missionHistorys"
-     border
-    style="width: 100%">
-    <el-table-column
-      label="数据名称"
-      width="180">
-      <template slot-scope="scope">
-        <i class="el-icon-cpu"></i>
-        <span style="margin-left: 10px">{{ scope.row.missionAllName }}</span>
-      </template>
-    </el-table-column>
-    <el-table-column
-      label="数据详细"
-      width="180">
-      <template slot-scope="scope">
+    <!-- 卡片式改写 -->
+    <template v-for="(item,index) in missionHistorys">
+      <el-card class="box-card" :key="index" style="width:30%;display:inline-block;margin-right:3%;margin-bottom:3%">
+        <div slot="header" class="clearfix">
+          <!-- TODO 点击查看详情  -作者信息、详细评价 -->
+          <el-button type="text">{{item.missionAllName}}</el-button>
+           <el-button v-if="item.userId == 0"  style="float: right; padding: 3px 0" type="success" @click="sendBuy(scope.row)"
+            >购买</el-button
+          >
+           <el-button v-else disabled  style="float: right; padding: 3px 0" type="warning" @click="sendBuy(scope.row)"
+            >{{item.userId == 1?"提供者":"已持有"}}</el-button
+          >
+        </div>
+        <!-- 用途 -->
         <el-popover trigger="hover" placement="top">
-          <p>用途: {{ scope.row.missionAllDis }}</p>
-          <div slot="reference" class="name-wrapper">
-            <el-tag size="medium">{{ scope.row.missionAllDis}}</el-tag>
-          </div>
-        </el-popover>
-      </template>
-    </el-table-column>
-     <el-table-column
-      label="发送时间"
-      width="180">
-      <template slot-scope="scope">
-      
-        <span style="margin-left: 10px">{{ scope.row.sentTime }}</span>
-      </template>
-    </el-table-column>
-      <el-table-column
-      label="结束时间"
-      width="180">
-      <template slot-scope="scope">
-      
-        <span style="margin-left: 10px">{{ scope.row.finishTime == null ? "未完成": scope.row.finishTime}}</span>
-      </template>
-    </el-table-column>
-      <el-table-column
-      label="价格"
-      width="180">
-      <template slot-scope="scope">
-        <span style="margin-left: 10px">
-            {{scope.row.salePrice}}
-          </span>
-      </template>
-    </el-table-column>
-    <el-table-column label="操作">
-      <template slot-scope="scope">
+            <p>{{ item.missionAllDis }}</p>
+            <div slot="reference" class="name-wrapper" style="margin-bottom:2%">
+              用途:&nbsp;<el-tag size="medium">{{ item.missionAllDis }}</el-tag>
+            </div>
+          </el-popover>
+        <!-- 爬取日期 -->
+            <div  class="name-wrapper" style="margin-bottom:2%">
+              爬取日期:&nbsp;<el-tag size="medium">{{ item.finishTime }}</el-tag>
+            </div>
+         <!-- 售价 -->
+              <div  class="name-wrapper" style="margin-bottom:2%">
+              售价:&nbsp;<el-tag size="medium">{{ item.salePrice }}</el-tag>
+            </div>
+            <!-- TODO  评分-->
+            <div  class="name-wrapper" style="margin-bottom:2%">
+              评分:&nbsp;<el-tag size="medium">{{ item.onSale }}</el-tag>
+            </div>
 
-        <!-- 根据状态结果 展示下载结果集 和 取消任务两个按钮 -->
-     
-        <el-button
-          size="mini"
-          type="success"
-          @click="sendBuy(scope.row)">购买</el-button>
-      </template>
-    </el-table-column>
-  </el-table>
+      </el-card>
+    </template>
+
+  
     <el-pagination
-  background
-  layout="prev, pager, next"
-  :total="pageNum"
-  :current-page = "index"
-  @current-change="reflashPage"
-  >
-</el-pagination>
+      background
+      layout="prev, pager, next"
+      :total="pageNum"
+      :current-page="index"
+      @current-change="reflashPage"
+    >
+    </el-pagination>
   </d2-container>
 </template>
 
@@ -79,8 +55,8 @@
 import leidatu from "../../echart-comment/leidatu";
 import leidatu2 from "../../echart-comment/leidatu2";
 import leidatu3 from "../../echart-comment/leidatu3";
-import { buyMh, getSalesMh} from "../../netWork/apiMethod";
-import {newMah} from "../../model/missionHistoryPojo"
+import { buyMh, getSalesMh } from "../../netWork/apiMethod";
+import { newMah } from "../../model/missionHistoryPojo";
 export default {
   name: "resShop",
   components: {
@@ -91,16 +67,16 @@ export default {
   data() {
     return {
       missionHistorys: [new newMah()],
-        pageSize : 10,
+      pageSize: 10,
       index: 1,
       pageNum: 0,
-    }
+    };
   },
   mounted() {
     this.getOriginData();
   },
   methods: {
-        /**
+    /**
      * 购买脚本
      */
     sendBuy(jsMh) {
@@ -110,15 +86,14 @@ export default {
         type: "warning",
       })
         .then(() => {
-            buyMh(jsMh.missionAllHistoryId).then((res) => {
-              if (res.code == "success") {
-                this.$message({
-                  type: "success",
-                  message: res.msg,
-                });
-              }
-            });
-          
+          buyMh(jsMh.missionAllHistoryId).then((res) => {
+            if (res.code == "success") {
+              this.$message({
+                type: "success",
+                message: res.msg,
+              });
+            }
+          });
         })
         .catch(() => {});
     },
@@ -126,27 +101,26 @@ export default {
     /**
      * 下载文件
      */
-     getFile(index,item){
-       let id = item.missionAllHistoryId
-      downloadExcel(id)
-     },
+    getFile(index, item) {
+      let id = item.missionAllHistoryId;
+      downloadExcel(id);
+    },
 
     /**
      * 更新页面
      */
-    reflashPage(currentPage){
-      this.index = currentPage
-      this.getMyHistory()
+    reflashPage(currentPage) {
+      this.index = currentPage;
+      this.getMyHistory();
     },
-     getMyHistory () {
-      getSalesMh(this.pageSize,this.index).then(res => {
-             this.missionHistorys = res.mhList,
-            this.pageNum = res.pageNum
-      })
-     },
-  
+    getMyHistory() {
+      getSalesMh(this.pageSize, this.index).then((res) => {
+        (this.missionHistorys = res.mhList), (this.pageNum = res.pageNum);
+      });
+    },
+
     getOriginData() {
-     this.getMyHistory()
+      this.getMyHistory();
     },
   },
 };

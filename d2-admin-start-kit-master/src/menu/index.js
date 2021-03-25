@@ -22,17 +22,34 @@ export const menuHeader = supplementPath([
 
 export const menuAside = supplementPath([
   { path: '/index', title: '首页', icon: 'home' },
-
-      { path: '/studentConf', title: '我的信息',icon: 'user-o' },
-      { path: '/myScript', title: '我的脚本',icon: 'podcast' },
-      { path: '/myReason', title: '我的结果',icon: 'ravelry' },
-
-      { path: '/scriptShop', title: '脚本市场',icon: 'user-o' },
-      { path: '/resShop', title: '数据市场',icon: 'podcast' },
-      { path: '/notice', title: '公告信息',icon: 'ravelry' },
-
-      { path: '/myEditScript', title: '开发脚本',icon: 'user-o' },
+      {
+        title: '商城',
+        icon: 'window-restore',
+        children: [
+          { path: '/scriptShop', title: '脚本市场',icon: 'user-o' },
+          { path: '/resShop', title: '数据市场',icon: 'podcast' },
+        ]
+      },
+      {
+        title: '我的',
+        icon: 'window-restore',
+        children: [
+          { path: '/studentConf', title: '我的信息',icon: 'user-o' },
+          { path: '/myScript', title: '我的脚本',icon: 'podcast' },
+          { path: '/myReason', title: '我的结果',icon: 'ravelry' },
+        ]
+      },
+      {
+        title: '开发',
+        icon: 'window-restore',
+        children: [
+          { path: '/myEditScript', title: '开发脚本',icon: 'user-o' },
       { path: '/studentCharts', title: '编写教程',icon: 'podcast' },
+        ]
+      },
+     
+     
+    
       // { path: '/notice', title: '开发帮助',icon: 'ravelry' },
 
   
