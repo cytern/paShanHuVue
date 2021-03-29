@@ -1,19 +1,9 @@
 <template>
   <d2-container>
     <template slot="header">
-      <el-button type="text" disabled>脚本市场</el-button>
-    </template>
-     <!-- 卡片式改写 -->
-       <template v-for="(item, index) in missionDatas">
-      <el-card
+      <el-button type="text" disabled>商品详情</el-button>
+        <el-card
         class="box-card"
-        :key="index"
-        style="
-          width: 45%;
-          display: inline-block;
-          margin-right: 3%;
-          margin-bottom: 3%;
-        "
       >
         <el-row :gutter="20">
           <!-- 这一格为图标 -->
@@ -25,7 +15,7 @@
             <el-row :getter="60" style="margin-bottom: 26px">
               <el-col :span="12">
                 <span style="font-size: 16px; font-weight: 600">{{
-                  item.maName
+                  goodDetail.name
                 }}</span>
               </el-col>
               <el-col :span="12"></el-col>
@@ -33,15 +23,15 @@
             <!-- 第二行是第一对字段 -->
             <el-row :getter="60" style="margin-bottom: 16px">
               <el-col :span="12">
-                <span >用途:&nbsp;&nbsp;</span
+                <span >类别:&nbsp;&nbsp;</span
                 ><span  class="idlike" style="color: rgba(34, 28, 28, 0.555)">{{
-                  item.maTip
+                   goodDetail.type == 1?'脚本':'数据'
                 }}</span>
               </el-col>
               <el-col :span="12">
                 <span>类型:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)">{{
-                  item.isAuto == "1" ? "官方" : "自制"
+                  goodDetail.isAuto == "1" ? "官方" : "自制"
                 }}</span>
               </el-col>
             </el-row>
@@ -50,7 +40,7 @@
               <el-col :span="12">
                 <span>评分:&nbsp;&nbsp;</span
                 ><el-rate
-                  :value="item.saleRate == null ? 0 : item.maRate"
+                  :value="goodDetail.rate == null ? 0 : item.saleRate"
                   disabled
                   text-color="#ff9900"
                   style="display: inline-block"
@@ -60,7 +50,7 @@
               <el-col :span="12">
                 <span>创建者:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)">{{
-                  item.userName
+                 goodDetail.userName
                 }}</span>
               </el-col>
             </el-row>
@@ -69,13 +59,13 @@
               <el-col :span="12">
                 <span>销量:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)">{{
-                  item.maSaleNum
+                  goodDetail.saleNum
                 }}</span>
               </el-col>
               <el-col :span="12">
                 <span>上架时间:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)">{{
-                  item.createTime
+                  goodDetail.time
                 }}</span>
               </el-col>
             </el-row>
@@ -84,7 +74,7 @@
               <el-col :span="24">
                 <span>标签:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)"
-                  ><el-tag v-for="(tp, adex) in item.tips" :key="adex">{{
+                  ><el-tag v-for="(tp, adex) in goodDetail.tips" :key="adex">{{
                     tp
                   }}</el-tag></span
                 >
@@ -92,116 +82,70 @@
             </el-row>
             <el-row :getter="60" style="margin-bottom: 16px">
               <el-col :span="24">
-                <el-button v-if="item.userId==0"
+                <el-button
+                v-if="goodDetail.userId==0"
                   type="success"
                   style="width: 100%"
-                  @click="sendBuy(item)"
-                  >购买 ( {{item.maPrice}}代币 )</el-button
+                  @click="sendBuy(goodDetail)"
+                  >购买 ( {{goodDetail.salePrice}}代币 )</el-button
                 >
-                <el-button style="width: 100%" v-else-if="item.userId==2" disabled type="warning">已在库中</el-button>
-                <el-button style="width: 100%" v-else-if="item.userId==1" disabled type="warning">我提供的</el-button>
+                    <el-button style="width: 100%" v-else-if="goodDetail.userId==2" disabled type="warning">已在库中</el-button>
+                <el-button style="width: 100%" v-else-if="goodDetail.userId==1" disabled type="warning">我提供的</el-button>
               </el-col>
             </el-row>
           </el-col>
         </el-row>
+        <el-divider><i class="el-icon-loading"></i></el-divider>
+         <el-row style="margin-bottom:100px">
+             <el-col :span="4"><el-button style="width:100%" type="primary">功能详细</el-button></el-col>
+             <el-col :span="20"><div style="display:inline-block;width:100%;backgroud-color:red" class="grid-content bg-purple-dark"></div></el-col>
+         </el-row>
+
       </el-card>
     </template>
-  
-  
-    <!-- 分页组件 目前是简单分页 -->
-    <el-pagination
-      background
-      layout="prev, pager, next"
-      :total="pageNum"
-      :current-page="index"
-    >
-    </el-pagination>
   </d2-container>
 </template>
 
 <script>
-import leidatu from "../../echart-comment/leidatu";
-import leidatu2 from "../../echart-comment/leidatu2";
-import leidatu3 from "../../echart-comment/leidatu3";
-import { getSalesMa, buyMa } from "../../netWork/apiMethod";
-import { newJsoupMissionAll } from "../../model/missionAllPojo";
+import { getOneScript, saveOneMissionAll } from "../../netWork/apiMethod";
+import {goodDetail} from "../../model/detailPojo"
+import { newMission, newMissionAll } from "../../model/missionAllPojo";
 export default {
-  name: "scriptShop",
+  name: "myGoodDetail",
   components: {
-    leidatu,
-    leidatu2,
-    leidatu3,
+ 
   },
   data() {
     return {
-      missionDatas: [new newJsoupMissionAll()],
-      pageSize: 10,
-      index: 1,
-      pageNum: 0,
-      userId: this.$store.state.userVo.jsoupUser.userId,
+      goodDetail: new goodDetail()
     };
   },
   mounted() {
-    this.getOriginData();
+
   },
   methods: {
-    /**
-     * 购买脚本
-     */
-    sendBuy(jsMa) {
-      this.$confirm("是否购买?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning",
-      })
-        .then(() => {
-            buyMa(jsMa.maId).then((res) => {
-              if (res.code == "success") {
-                this.$message({
-                  type: "success",
-                  message: res.msg,
-                });
-              }
-            });
-          
-        })
-        .catch(() => {});
-    },
-
-    /**
-     * 获取我的脚本
-     */
-    getMyScript() {
-      getSalesMa(this.pageSize, this.index).then((res) => {
-        this.missionDatas = res.maList;
-        this.pageNum = res.pageNum;
-      });
-    },
-    getOriginData() {
-      this.getMyScript();
-    },
+ 
   },
 };
 </script>
-<style>
-.idlike {
 
-    width:100%;  /*根据个人需要自定义宽度*/
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+<style>
+.missionTag {
+  margin-bottom: 10px;
 }
-.divCard1 {
+.actionTag {
+  margin-bottom: 4px;
+}
+.divCard {
   margin-top: 10px;
-  background-color: rgba(0, 255, 250, 0.26);
+  background-color: rgba(150, 255, 28, 0.26);
 }
 .conf {
   border: 5px solid;
   border-radius: 10%;
   border-image: linear-gradient(to right, #ff831c, #0ceebb) 20 20;
   background: rgba(255, 255, 255, 0.3)
-    url("../../../../public/userFor/listBack.png") no-repeat;
-  background-size: cover;
+    url("../../../../public/userFor/listBack.png");
 }
 .touxiang {
   height: 200px;

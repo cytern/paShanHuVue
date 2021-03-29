@@ -344,8 +344,22 @@ export default    {
       userId: null,
       maState: null,
       maPrice: null,
-      createTime: null
+      createTime: null ,
+      maRate: null,
+      maSaleNum: null,
+      tips: null,
+      userName: null,
+      isAuto: null,
+      maUrl: null
     }
     return ma
+  }
+
+  export function formateMaData(ma) {
+    let tips = ma.tips
+    let arry = new Array()
+    arry = tips.split(";");
+    ma.tips = arry
+    return ma;
   }
   

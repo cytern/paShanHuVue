@@ -45,6 +45,7 @@ export const menuAside = supplementPath([
         children: [
           { path: '/myEditScript', title: '开发脚本',icon: 'user-o' },
       { path: '/studentCharts', title: '编写教程',icon: 'podcast' },
+      { path: '/goodDetail', title: '商品详情',icon: 'podcast' },
         ]
       },
      

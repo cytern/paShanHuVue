@@ -3,43 +3,111 @@
     <template slot="header">
       <el-button type="text" disabled>结果集市场</el-button>
     </template>
-    <!-- 卡片式改写 -->
-    <template v-for="(item,index) in missionHistorys">
-      <el-card class="box-card" :key="index" style="width:30%;display:inline-block;margin-right:3%;margin-bottom:3%">
-        <div slot="header" class="clearfix">
-          <!-- TODO 点击查看详情  -作者信息、详细评价 -->
-          <el-button type="text">{{item.missionAllName}}</el-button>
-           <el-button v-if="item.userId == 0"  style="float: right; padding: 3px 0" type="success" @click="sendBuy(scope.row)"
-            >购买</el-button
-          >
-           <el-button v-else disabled  style="float: right; padding: 3px 0" type="warning" @click="sendBuy(scope.row)"
-            >{{item.userId == 1?"提供者":"已持有"}}</el-button
-          >
-        </div>
-        <!-- 用途 -->
-        <el-popover trigger="hover" placement="top">
-            <p>{{ item.missionAllDis }}</p>
-            <div slot="reference" class="name-wrapper" style="margin-bottom:2%">
-              用途:&nbsp;<el-tag size="medium">{{ item.missionAllDis }}</el-tag>
-            </div>
-          </el-popover>
-        <!-- 爬取日期 -->
-            <div  class="name-wrapper" style="margin-bottom:2%">
-              爬取日期:&nbsp;<el-tag size="medium">{{ item.finishTime }}</el-tag>
-            </div>
-         <!-- 售价 -->
-              <div  class="name-wrapper" style="margin-bottom:2%">
-              售价:&nbsp;<el-tag size="medium">{{ item.salePrice }}</el-tag>
-            </div>
-            <!-- TODO  评分-->
-            <div  class="name-wrapper" style="margin-bottom:2%">
-              评分:&nbsp;<el-tag size="medium">{{ item.onSale }}</el-tag>
-            </div>
-
+    <!-- 新式改写卡片 仿照3dm样式 -->
+    <template v-for="(item, index) in missionHistorys">
+      <el-card
+        class="box-card"
+        :key="index"
+        style="
+          width: 45%;
+          display: inline-block;
+          margin-right: 3%;
+          margin-bottom: 3%;
+        "
+      >
+        <el-row :gutter="20">
+          <!-- 这一格为图标 -->
+          <el-col :span="7">
+            <i class="el-icon-s-ticket"></i>
+          </el-col>
+          <el-col :span="17">
+            <!-- 第一行是标题  用两块的第一块表示名称-->
+            <el-row :getter="60" style="margin-bottom: 26px">
+              <el-col :span="12">
+                <span style="font-size: 16px; font-weight: 600">{{
+                  item.missionAllName
+                }}</span>
+              </el-col>
+              <el-col :span="12"></el-col>
+            </el-row>
+            <!-- 第二行是第一对字段 -->
+            <el-row :getter="60" style="margin-bottom: 16px">
+              <el-col :span="12">
+                <span >用途:&nbsp;&nbsp;</span
+                ><span  class="idlike" style="color: rgba(34, 28, 28, 0.555)">{{
+                  item.missionAllDis
+                }}</span>
+              </el-col>
+              <el-col :span="12">
+                <span>类型:&nbsp;&nbsp;</span
+                ><span style="color: rgba(34, 28, 28, 0.555)">{{
+                  item.isAoto == "1" ? "官方" : "自制"
+                }}</span>
+              </el-col>
+            </el-row>
+            <!-- 下一个字段 -->
+            <el-row :getter="60" style="margin-bottom: 16px">
+              <el-col :span="12">
+                <span>评分:&nbsp;&nbsp;</span
+                ><el-rate
+                  :value="item.saleRate == null ? 0 : item.saleRate"
+                  disabled
+                  text-color="#ff9900"
+                  style="display: inline-block"
+                >
+                </el-rate>
+              </el-col>
+              <el-col :span="12">
+                <span>创建者:&nbsp;&nbsp;</span
+                ><span style="color: rgba(34, 28, 28, 0.555)">{{
+                  item.userName
+                }}</span>
+              </el-col>
+            </el-row>
+            <!-- 下一个字段 -->
+            <el-row :getter="60" style="margin-bottom: 16px">
+              <el-col :span="12">
+                <span>销量:&nbsp;&nbsp;</span
+                ><span style="color: rgba(34, 28, 28, 0.555)">{{
+                  item.saleNum
+                }}</span>
+              </el-col>
+              <el-col :span="12">
+                <span>上架时间:&nbsp;&nbsp;</span
+                ><span style="color: rgba(34, 28, 28, 0.555)">{{
+                  item.finishTime
+                }}</span>
+              </el-col>
+            </el-row>
+            <!-- 下一段 -->
+            <el-row :getter="60" style="margin-bottom: 16px">
+              <el-col :span="24">
+                <span>标签:&nbsp;&nbsp;</span
+                ><span style="color: rgba(34, 28, 28, 0.555)"
+                  ><el-tag v-for="(tp, adex) in item.tips" :key="adex">{{
+                    tp
+                  }}</el-tag></span
+                >
+              </el-col>
+            </el-row>
+            <el-row :getter="60" style="margin-bottom: 16px">
+              <el-col :span="24">
+                <el-button
+                v-if="item.userId==0"
+                  type="success"
+                  style="width: 100%"
+                  @click="sendBuy(item)"
+                  >购买 ( {{item.salePrice}}代币 )</el-button
+                >
+                    <el-button style="width: 100%" v-else-if="item.userId==2" disabled type="warning">已在库中</el-button>
+                <el-button style="width: 100%" v-else-if="item.userId==1" disabled type="warning">我提供的</el-button>
+              </el-col>
+            </el-row>
+          </el-col>
+        </el-row>
       </el-card>
     </template>
 
-  
     <el-pagination
       background
       layout="prev, pager, next"
@@ -126,6 +194,13 @@ export default {
 };
 </script>
 <style>
+.idlike {
+
+    width:100%;  /*根据个人需要自定义宽度*/
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 .divCard1 {
   margin-top: 10px;
   background-color: rgba(0, 255, 250, 0.26);
@@ -154,7 +229,7 @@ export default {
   border: 5px solid;
   border-radius: 10%;
   border-image: linear-gradient(to left, #ff831c, #0ceebb) 20 20;
-  background: rgba(255, 255, 255, 0.3)
+  background: rgba(34, 28, 28, 0.555)
     url("../../../../public/userFor/xuexiaobeijing.png");
 }
 .conf-key {

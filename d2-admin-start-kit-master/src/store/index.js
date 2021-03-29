@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { userPojo } from "../views/model/userPojo";
+import {goodDetail,maToDetail,mhToDetail} from "../views/model/detailPojo"
 import d2admin from './modules/d2admin'
 
 Vue.use(Vuex)
@@ -17,7 +18,8 @@ export default new Vuex.Store({
     userId: null,
     missionDatas: [],
     maId: null,
-    userVo: null
+    userVo: null,
+    goodDetail: new goodDetail()
   },
   getters: {
     getCode (state) {

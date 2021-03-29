@@ -68,6 +68,15 @@ const frameIn = [
         component: _import('pages/myScripts')
       },
       {
+        path: 'goodDetail',
+        name: 'goodDetail',
+        meta: {
+          title: '商品详细',
+          auth: true
+        },
+        component: _import('pages/myGoodDetail')
+      },
+      {
         path: 'scriptShop',
         name: 'scriptShop',
         meta: {
