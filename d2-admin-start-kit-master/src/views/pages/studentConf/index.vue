@@ -11,7 +11,7 @@
   import leidatu from "../../echart-comment/leidatu";
   import leidatu2 from "../../echart-comment/leidatu2";
   import leidatu3 from "../../echart-comment/leidatu3";
-  import {getAbility} from "../../netWork/apiMethod";
+  import {} from "../../netWork/apiMethod";
 export default {
   name: 'studentConf',
   components:{
@@ -20,50 +20,7 @@ export default {
     leidatu3
   },
   data(){
-    return{
-      dataZoom:[
-        {
-          type: 'slider',
-          start: 0,
-          end: 100
-        }
-      ],
-      toolbox:{
-        feature: {
-          magicType: {type: ['line', 'bar']},
-          saveAsImage: {}
-        }
-      },
-      showPro: false,
-      chartsData: {},
-      classChart: {},
-      gradeChart: {},
-      chooseNick:true,
-      studentConf:{
-        studentName: null,
-        studentUrl: null,
-        studentNickName: null,
-        studentNickUrl: null,
-        studentHonor: null,
-        studentConf: null,
-        studentDesignation: null,
-        classId: null,
-        cTime: null,
-        uTime: null,
-        sstudentId: null
-      },
-      classConf:{
-        classNoName: null,
-        classNickName: null,
-        classUrl: null,
-        classWatchword: null,
-        classConf: null,
-        classHonor: null,
-        classDesignation: null,
-        sclassId: null,
-      }
-
-    }
+    return{ }
 
   },
   mounted() {
@@ -71,30 +28,7 @@ export default {
     vm.$nextTick(()=> {})
     this.getOriginData()
   },
-  methods:{
-    changeNick(){
-      this.chooseNick = !this.chooseNick
-    },
-    changeData(){
-      this.chartsData = this.gradeChart
-      this.showPro = true
-    },
-    backData() {
-      this.chartsData = this.classChart
-      this.showPro = false
-    },
-    getOriginData(){
-      getAbility(this.$store.state.typeId).then(res =>{
-            this.studentConf = res.student
-            this.classConf = res.class
-        this.chartsData = res.classGradeChart
-        this.classChart = res.classGradeChart
-        this.gradeChart = res.GradeGradeChart
-      }).catch(error => {
-        console.log(error)
-      })
-    }
-  }
+  methods:{ }
 
 }
 </script>

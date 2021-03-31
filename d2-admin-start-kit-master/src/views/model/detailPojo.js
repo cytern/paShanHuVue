@@ -6,7 +6,7 @@ export function goodDetail(){
     let ad = {
         id:null,
         name:null,
-        des: null,
+        des: "大师大管家省略号发客户端老客户了的哈沙鲁克汗发布看看开大上看不到多吃点卡莎是不打开包括对巴萨看不出看吧禁端口坝办事处间羟胺比较快不开的CSABC看吧大师大管家省略号发客户端老客户了的哈沙鲁克汗发布看看开大上看不到多吃点卡莎是不打开包括对巴萨看不出看吧禁端口坝办事处间羟胺比较快不开的CSABC看吧大师大管家省略号发客户端老客户了的哈沙鲁克汗发布看看开大上看不到多吃点卡莎是不打开包括对巴萨看不出看吧禁端口坝办事处间羟胺比较快不开的CSABC看吧大师大管家省略号发客户端老客户了的哈沙鲁克汗发布看看开大上看不到多吃点卡莎是不打开包括对巴萨看不出看吧禁端口坝办事处间羟胺比较快不开的CSABC看吧大师大管家省略号发客户端老客户了的哈沙鲁克汗发布看看开大上看不到多吃点卡莎是不打开包括对巴萨看不出看吧禁端口坝办事处间羟胺比较快不开的CSABC看吧",
         time: null,
         price: null,
         rate: null,
@@ -16,8 +16,8 @@ export function goodDetail(){
         url: null,
         price: null ,
         saleNum: null,
-        type: null,
-        userId: null
+        type: null,    //是脚本 1还是数据 2 
+        userId: 1
     }
     return ad;
 }

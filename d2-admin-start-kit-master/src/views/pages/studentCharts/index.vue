@@ -16,7 +16,7 @@
   import leidatu from "../../echart-comment/leidatu";
   import leidatu2 from "../../echart-comment/leidatu2";
   import leidatu3 from "../../echart-comment/leidatu3";
-  import {getAbility} from "../../netWork/apiMethod";
+  import {} from "../../netWork/apiMethod";
 export default {
   name: 'studentCharts',
   components:{
@@ -25,107 +25,14 @@ export default {
     leidatu3
   },
   data () {
-    return{
-      dataZoom:[
-        {
-          type: 'slider',
-          start: 0,
-          end: 100
-        }
-      ],
-      toolbox:{
-        feature: {
-          magicType: {type: ['line', 'bar']},
-          saveAsImage: {}
-        }
-      },
-      chooseNick:true,
-      showPro: false,
-      chartsData: {},
-      classChart: {},
-      gradeChart: {},
-      studentConf:{
-        studentName: null,
-        studentUrl: null,
-        studentNickName: null,
-        studentNickUrl: null,
-        studentHonor: null,
-        studentConf: null,
-        studentDesignation: null,
-        classId: null,
-        cTime: null,
-        uTime: null,
-        sstudentId: null
-      },
-      classConf:{
-        classNoName: null,
-        classNickName: null,
-        classUrl: null,
-        classWatchword: null,
-        classConf: null,
-        classHonor: null,
-        classDesignation: null,
-        sclassId: null,
-      },
-      veBarData: {},
-      gradeLineData: {
-        artThreeData: {},
-        mainThreeData: {},
-        scienceThreeData: {},
-        totalThreeData: {},
-      },
-      classLineData: {
-        artThreeData: {},
-        mainThreeData: {},
-        scienceThreeData: {},
-        totalThreeData: {},
-      },
-      userLineData:{
-        artThreeData: {},
-        mainThreeData: {},
-        scienceThreeData: {},
-        totalThreeData: {},
-      },
-      notice: "转化为年级权重"
-
-
-    }
+    return{ }
 
 
   },
   mounted() {
     this.getOriginData()
   },
-  methods: {
-    changeNick(){
-       this.chooseNick = !this.chooseNick
-    },
-    changeDataToGrade(){
-      if (this.notice == "转化为年级权重"){
-        this.notice = "转化为班级权重"
-        this.userLineData = this.gradeLineData
-      }else {
-        this.notice = "转化为年级权重"
-        this.userLineData = this.classLineData
-      }
-
-    },
-    getOriginData(){
-      getAbility(this.$store.state.typeId).then(res =>{
-        this.studentConf = res.student
-        this.classConf = res.class
-        this.chartsData = res.classGradeChart
-        this.classChart = res.classGradeChart
-        this.gradeChart = res.GradeGradeChart
-        this.veBarData = res.veBarData
-        this.userLineData = res.classLineData
-        this.classLineData = res.classLineData
-        this.gradeLineData = res.gradeLineData
-      }).catch(error => {
-        console.log(error)
-      })
-    }
-  }
+  methods: { }
 
 }
 </script>

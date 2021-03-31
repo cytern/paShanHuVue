@@ -6,7 +6,7 @@
     <!-- 新式改写卡片 仿照3dm样式 -->
     <template v-for="(item, index) in missionHistorys">
       <el-card
-        class="box-card"
+        class="box-card cardBackgroud"
         :key="index"
         style="
           width: 45%;
@@ -194,6 +194,17 @@ export default {
 };
 </script>
 <style>
+.cardBackgroud {
+ background: url("../../../../public/userFor/cardBackground.png");
+}
+/* .cardBackgroud ::before{
+ background: url("../../../../public/userFor/cardBackground.png");
+   opacity: 0.5;
+   position:absolute;
+   z-index:-1;
+   
+
+} */
 .idlike {
 
     width:100%;  /*根据个人需要自定义宽度*/

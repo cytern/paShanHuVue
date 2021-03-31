@@ -6,7 +6,7 @@
      <!-- 卡片式改写 -->
        <template v-for="(item, index) in missionDatas">
       <el-card
-        class="box-card"
+        class="box-card cardBackgroud"
         :key="index"
         style="
           width: 45%;
