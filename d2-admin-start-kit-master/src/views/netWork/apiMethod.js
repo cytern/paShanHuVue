@@ -4,6 +4,19 @@ import {userPojo,jsoupUser} from "@/views/model/userPojo"
 import store from '@/store/index'
 import {Notification} from 'element-ui'
 
+
+
+/**
+ * 
+ * @param {*} pageSize 
+ * @param {*} index 
+ * @param {*} id 
+ * @param {*} type 
+ */
+export function getDetailComment (pageSize,index,id,type) {
+  
+
+}
 /**
  * 购买一个结果集
  * @param {结果集id}} mhId 

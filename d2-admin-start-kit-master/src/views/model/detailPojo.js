@@ -6,7 +6,7 @@ export function goodDetail(){
     let ad = {
         id:null,
         name:null,
-        des: "大师大管家省略号发客户端老客户了的哈沙鲁克汗发布看看开大上看不到多吃点卡莎是不打开包括对巴萨看不出看吧禁端口坝办事处间羟胺比较快不开的CSABC看吧大师大管家省略号发客户端老客户了的哈沙鲁克汗发布看看开大上看不到多吃点卡莎是不打开包括对巴萨看不出看吧禁端口坝办事处间羟胺比较快不开的CSABC看吧大师大管家省略号发客户端老客户了的哈沙鲁克汗发布看看开大上看不到多吃点卡莎是不打开包括对巴萨看不出看吧禁端口坝办事处间羟胺比较快不开的CSABC看吧大师大管家省略号发客户端老客户了的哈沙鲁克汗发布看看开大上看不到多吃点卡莎是不打开包括对巴萨看不出看吧禁端口坝办事处间羟胺比较快不开的CSABC看吧大师大管家省略号发客户端老客户了的哈沙鲁克汗发布看看开大上看不到多吃点卡莎是不打开包括对巴萨看不出看吧禁端口坝办事处间羟胺比较快不开的CSABC看吧",
+        des: null,
         time: null,
         price: null,
         rate: null,
@@ -14,7 +14,6 @@ export function goodDetail(){
         userName: null,
         isAuto: null,
         url: null,
-        price: null ,
         saleNum: null,
         type: null,    //是脚本 1还是数据 2 
         userId: 1
@@ -38,7 +37,6 @@ export function maToDetail(temp) {
     acc.userName = temp.userName
     acc.isAuto = temp.isAuto
     acc.url = temp.maUrl
-    acc.price = temp.maPrice
     acc.saleNum = temp.maSaleNum
     acc.type = 1
     acc.userId = temp.userId
@@ -61,7 +59,6 @@ export function mhToDetail (temp) {
     acc.userName = temp.userName
     acc.isAuto = temp.isAoto
     acc.url = temp.hsUrl
-    acc.price = temp.salePrice
     acc.saleNum = temp.saleNum
     acc.userId = temp.userId
     acc.type = 2

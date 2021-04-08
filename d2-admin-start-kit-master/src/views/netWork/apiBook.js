@@ -1,7 +1,7 @@
 
-const linuxUrl = "http://10.147.19.98:2060/"
+const linuxUrl = "http://62.234.29.109:2060/"
 const windowsUrl = "http://localhost:2060/"
-const baseUrl = windowsUrl
+const baseUrl = linuxUrl
 export default {
   everyOne:{
     login:  baseUrl + "server/everyone/login",
@@ -23,7 +23,10 @@ export default {
     getSalesMh: baseUrl + "server/customer/getSalesMh",
     setMhState: baseUrl + "server/customer/setMhState",
     buyMa: baseUrl + "server/customer/buyMa",
-    buyMh: baseUrl + "server/customer/buyMh"
+    buyMh: baseUrl + "server/customer/buyMh",
+    getDetailComment:baseUrl + "server/customer/getGoodDetailComment",
+    getDetailUser: baseUrl + "server/customer/getGoodDetailUsaer",
+    
 
 
   },
