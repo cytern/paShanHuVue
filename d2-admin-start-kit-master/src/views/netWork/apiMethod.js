@@ -5,7 +5,16 @@ import store from '@/store/index'
 import {Notification} from 'element-ui'
 
 
-
+/**
+ * 获取作品的用户信息
+ * @param id
+ * @param type
+ * @returns {*}
+ */
+export function getDetailUser (id,type) {
+  let url = apiBook.customer.getDetailUser + "/" + id + "/"  + type
+  return axiosGet(url)
+}
 /**
  * 获取评论列表
  * @param {*} pageSize  页面大小
@@ -19,7 +28,7 @@ export function getDetailComment (pageSize,index,id,type) {
 }
 /**
  * 购买一个结果集
- * @param {结果集id}} mhId 
+ * @param {结果集id}} mhId
  * @returns 提示消息
  */
 export function buyMh (mhId) {
@@ -38,8 +47,8 @@ export function buyMa (maId) {
 
 /**
  * 设置结果集市场化数据
- * @param {结果集}} mh 
- * @returns 
+ * @param {结果集}} mh
+ * @returns
  */
 export function setMhState (mh) {
   let url = apiBook.customer.setMhState
@@ -47,8 +56,8 @@ export function setMhState (mh) {
 }
 /**
  * 设置总任务状态
- * @param {总任务}} missionAll 
- * @returns 
+ * @param {总任务}} missionAll
+ * @returns
  */
 export function setMissionAllState(missionAll){
   let url = apiBook.customer.setMaState
@@ -76,9 +85,9 @@ export function getUserInfo(){
 }
 /**
  * 重设密码
- * @param {用户名} username 
- * @param {密码} password 
- * @param {验证码} code 
+ * @param {用户名} username
+ * @param {密码} password
+ * @param {验证码} code
  */
 export function resetPassword (username,password,code){
     let url = apiBook.everyOne.resetPassword
@@ -90,8 +99,8 @@ export function resetPassword (username,password,code){
 }
 /**
  * 忘记密码
- * @param {忘记密码} userVo 
- * @returns 
+ * @param {忘记密码} userVo
+ * @returns
  */
 export function forgetPassword(username){
    let url = apiBook.everyOne.forgetPassword + "/" + username
@@ -108,7 +117,7 @@ export function registerUser(userVo){
 
 /**
  * 下载结果集
- * @param {历史id} hisId 
+ * @param {历史id} hisId
  */
 export function downloadExcel(hisId){
       let url = apiBook.other.downloadExcel + "/" + hisId
@@ -116,8 +125,8 @@ export function downloadExcel(hisId){
 }
 /**
  * 发送执行任务
- * @param {总任务id} maId 
- * @returns 
+ * @param {总任务id} maId
+ * @returns
  */
 export function sendJsoupMission(maId){
     let url = apiBook.customer.sendExcutor
@@ -125,7 +134,7 @@ export function sendJsoupMission(maId){
 }
 /**
  * 保存任务
- * @param {参数} missionAllData 
+ * @param {参数} missionAllData
  */
 export function saveOneMissionAll(missionAllData){
     let url = apiBook.customer.saveOneScript
@@ -133,12 +142,12 @@ export function saveOneMissionAll(missionAllData){
 }
 /**
  * 登录
- * @param {用户名} userName 
- * @param {密码} userPassword 
+ * @param {用户名} userName
+ * @param {密码} userPassword
  */
 export function everyOneLogin(userName,userPassword) {
    let url = apiBook.everyOne.login
-   let userVo =new userPojo(); 
+   let userVo =new userPojo();
    userVo.jsoupUser.username = userName;
    userVo.jsoupUser.password = userPassword;
    return  axiosPostJson(url,userVo)
@@ -146,9 +155,9 @@ export function everyOneLogin(userName,userPassword) {
 }
 /**
  * 获取能购买的脚本列表
- * @param {页容量}} pageSize 
- * @param {页码} index 
- * @returns 
+ * @param {页容量}} pageSize
+ * @param {页码} index
+ * @returns
  */
 export function getSalesMa (pageSize,index) {
   let url = apiBook.customer.getSalesMa
@@ -157,9 +166,9 @@ export function getSalesMa (pageSize,index) {
 
 /**
  * 获取能购买的结果集列表
- * @param {页容量}} pageSize 
- * @param {页码} index 
- * @returns 
+ * @param {页容量}} pageSize
+ * @param {页码} index
+ * @returns
  */
  export function getSalesMh (pageSize,index) {
   let url = apiBook.customer.getSalesMh
@@ -175,8 +184,8 @@ export function getAllScript (pageSize,index) {
 }
 /**
  * 获取个人执行历史
- * @param {页面大小} pageSize 
- * @param {页面序号} index 
+ * @param {页面大小} pageSize
+ * @param {页面序号} index
  */
 export function getMyMissionHistorys(pageSize,index) {
   let url = apiBook.customer.getMyMissionHistorys
@@ -185,7 +194,7 @@ export function getMyMissionHistorys(pageSize,index) {
 
 /**
  * 获取一个脚本
- * @param {脚本id} missionAllId 
+ * @param {脚本id} missionAllId
  */
 export function getOneScript (missionAllId){
   let url = apiBook.customer.getOneScript
@@ -194,9 +203,9 @@ export function getOneScript (missionAllId){
 
 /**
  * 分页公共方法 拼接url
- * @param {原始url} url 
- * @param {页面大小} pageSize 
- * @param {页面序号} index 
+ * @param {原始url} url
+ * @param {页面大小} pageSize
+ * @param {页面序号} index
  */
 function subPageHelpUrl (url,pageSize,index) {
   let newUrl = url + "/" + pageSize + "/" + index

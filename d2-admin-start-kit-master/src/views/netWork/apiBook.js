@@ -8,7 +8,7 @@ export default {
     register: baseUrl + "server/everyone/register",
     forgetPassword: baseUrl + "server/everyone/forgetPassword",
     resetPassword: baseUrl + "server/everyone/resetPassword"
-    
+
 
   },
   customer: {
@@ -26,11 +26,11 @@ export default {
     buyMh: baseUrl + "server/customer/buyMh",
     getDetailComment:baseUrl + "server/customer/getGoodDetailComment",
     getDetailUser: baseUrl + "server/customer/getGoodDetailUsaer",
-    
+
 
 
   },
   other: {
-    downloadExcel: baseUrl + "server/other/downloadFile"    
+    downloadExcel: baseUrl + "server/other/downloadFile"
   }
 }
