@@ -7,15 +7,15 @@ import {Notification} from 'element-ui'
 
 
 /**
- * 
- * @param {*} pageSize 
- * @param {*} index 
- * @param {*} id 
- * @param {*} type 
+ * 获取评论列表
+ * @param {*} pageSize  页面大小
+ * @param {*} index     页码
+ * @param {*} id        id
+ * @param {*} type      是否是脚本或者数据集
  */
 export function getDetailComment (pageSize,index,id,type) {
-  
-
+    let url = apiBook.customer.getDetailComment + "/" + id + "/" + type + "/" + pageSize + "/" +index
+    return axiosPostJson(url)
 }
 /**
  * 购买一个结果集

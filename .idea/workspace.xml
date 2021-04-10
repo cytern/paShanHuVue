@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="84defb8f-3548-49d1-aa90-9df766068b41" name="Default Changelist" comment="" />
+    <list default="true" id="84defb8f-3548-49d1-aa90-9df766068b41" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/.env.development" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/.env.development" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/netWork/apiMethod.js" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/netWork/apiMethod.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/vue.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/vue.config.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,15 +23,20 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1dCEOQsuiRWehY69M84HMpPv6Il" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/d2-admin-start-kit-master/public/userFor" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -55,6 +66,7 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -71,40 +83,22 @@
       <workItem from="1592879361162" duration="840000" />
       <workItem from="1593572528593" duration="7354000" />
       <workItem from="1593667986959" duration="36324000" />
+      <workItem from="1617891100879" duration="177000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
-  <component name="WindowStateProjectService">
-    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591922674985">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1591922674985" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1593583740314">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1593583740314" />
-    <state width="757" height="210" key="GridCell.Tab.0.bottom" timestamp="1593747496321">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="757" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1593747496321" />
-    <state width="757" height="210" key="GridCell.Tab.0.center" timestamp="1593747496321">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="757" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1593747496321" />
-    <state width="757" height="210" key="GridCell.Tab.0.left" timestamp="1593747496320">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="757" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1593747496320" />
-    <state width="757" height="210" key="GridCell.Tab.0.right" timestamp="1593747496321">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="757" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1593747496321" />
-    <state x="377" y="112" width="782" height="600" key="find.popup" timestamp="1593764823473">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="377" y="112" width="782" height="600" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1593764823473" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
