@@ -1,16 +1,6 @@
 export default {
     jsoupUser:jsoupUser(),
-    jsoupUserDetail: {
-        userDetailId: null,
-        userRealName: null,
-        userNickName: null,
-        userImageUrl: null,
-        userDes: null,
-        userId: null,
-        userEmail: null,
-        userPhone: null,
-        serialVersionUID: null
-    },
+    jsoupUserDetail: new JsoupUserDetail(),
     jsoupUserAssets: {
         userAssetsId: null,
         userId: null,
@@ -61,7 +51,7 @@ export default {
                         actionElePragramId: null,
                         serialVersionUID: null
                     }
-                }], 
+                }],
                 jsoupMissionOrder: {
                     missionOrderId: null,
                     moMissionId: null,
@@ -86,7 +76,7 @@ export default {
                         serialVersionUID: null
                     }
                 ],
-             
+
             }
 
 
@@ -111,17 +101,7 @@ export default {
 export function userPojo(){
  let userPojo = {
     jsoupUser:jsoupUser(),
-    jsoupUserDetail: {
-        userDetailId: null,
-        userRealName: null,
-        userNickName: null,
-        userImageUrl: null,
-        userDes: null,
-        userId: null,
-        userEmail: null,
-        userPhone: null,
-        serialVersionUID: null
-    },
+    jsoupUserDetail: new JsoupUserDetail(),
     jsoupUserAssets: {
         userAssetsId: null,
         userId: null,
@@ -172,7 +152,7 @@ export function userPojo(){
                         actionElePragramId: null,
                         serialVersionUID: null
                     }
-                }], 
+                }],
                 jsoupMissionOrder: {
                     missionOrderId: null,
                     moMissionId: null,
@@ -197,7 +177,7 @@ export function userPojo(){
                         serialVersionUID: null
                     }
                 ],
-             
+
             }
 
 
@@ -230,4 +210,23 @@ export function jsoupUser () {
         serialVersionUID: null
     }
     return user;
+}
+
+
+export  function JsoupUserDetail () {
+  let userDetail ={
+    userDetailId: null,
+    userRealName: null,
+    userNickName: null,
+    userImageUrl: null,
+    userDes: null,
+    userId: null,
+    userEmail: null,
+    userPhone: null,
+    userSalenum: null,
+    userGoodrate: null,
+    userLever: null,
+    serialVersionUID: null
+  }
+  return userDetail;
 }

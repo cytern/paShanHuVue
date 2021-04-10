@@ -5,49 +5,50 @@
     </template>
     <!-- 新式改写卡片 仿照3dm样式 -->
     <template v-for="(item, index) in missionHistorys">
-      <el-card
-        class="box-card cardBackgroud"
-        :key="index"
-        style="
+      <template v-if="index%2===0">
+        <el-card
+          class="box-card cardBackgroud1"
+          :key="index"
+          style="
           width: 45%;
           display: inline-block;
           margin-right: 3%;
           margin-bottom: 3%;
         "
-      >
-        <el-row :gutter="20">
-          <!-- 这一格为图标 -->
-          <el-col :span="7">
-            <i class="el-icon-s-ticket"></i>
-          </el-col>
-          <el-col :span="17">
-            <!-- 第一行是标题  用两块的第一块表示名称-->
-            <el-row :getter="60" style="margin-bottom: 26px">
-              <el-col :span="12">
+        >
+          <el-row :gutter="20">
+            <!-- 这一格为图标 -->
+            <el-col :span="7">
+              <i class="el-icon-s-ticket"></i>
+            </el-col>
+            <el-col :span="17">
+              <!-- 第一行是标题  用两块的第一块表示名称-->
+              <el-row :getter="60" style="margin-bottom: 26px">
+                <el-col :span="12">
                 <span style="font-size: 16px; font-weight: 600">{{
-                  item.missionAllName
-                }}</span>
-              </el-col>
-              <el-col :span="12"></el-col>
-            </el-row>
-            <!-- 第二行是第一对字段 -->
-            <el-row :getter="60" style="margin-bottom: 16px">
-              <el-col :span="12">
+                    item.missionAllName
+                  }}</span>
+                </el-col>
+                <el-col :span="12"></el-col>
+              </el-row>
+              <!-- 第二行是第一对字段 -->
+              <el-row :getter="60" style="margin-bottom: 16px">
+                <el-col :span="12">
                 <span >用途:&nbsp;&nbsp;</span
                 ><span  class="idlike" style="color: rgba(34, 28, 28, 0.555)">{{
-                  item.missionAllDis
-                }}</span>
-              </el-col>
-              <el-col :span="12">
+                    item.missionAllDis
+                  }}</span>
+                </el-col>
+                <el-col :span="12">
                 <span>类型:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)">{{
-                  item.isAoto == "1" ? "官方" : "自制"
-                }}</span>
-              </el-col>
-            </el-row>
-            <!-- 下一个字段 -->
-            <el-row :getter="60" style="margin-bottom: 16px">
-              <el-col :span="12">
+                    item.isAoto == "1" ? "官方" : "自制"
+                  }}</span>
+                </el-col>
+              </el-row>
+              <!-- 下一个字段 -->
+              <el-row :getter="60" style="margin-bottom: 16px">
+                <el-col :span="12">
                 <span>评分:&nbsp;&nbsp;</span
                 ><el-rate
                   :value="item.saleRate == null ? 0 : item.saleRate"
@@ -56,56 +57,160 @@
                   style="display: inline-block"
                 >
                 </el-rate>
-              </el-col>
-              <el-col :span="12">
+                </el-col>
+                <el-col :span="12">
                 <span>创建者:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)">{{
-                  item.userName
-                }}</span>
-              </el-col>
-            </el-row>
-            <!-- 下一个字段 -->
-            <el-row :getter="60" style="margin-bottom: 16px">
-              <el-col :span="12">
+                    item.userName
+                  }}</span>
+                </el-col>
+              </el-row>
+              <!-- 下一个字段 -->
+              <el-row :getter="60" style="margin-bottom: 16px">
+                <el-col :span="12">
                 <span>销量:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)">{{
-                  item.saleNum
-                }}</span>
-              </el-col>
-              <el-col :span="12">
+                    item.saleNum
+                  }}</span>
+                </el-col>
+                <el-col :span="12">
                 <span>上架时间:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)">{{
-                  item.finishTime
-                }}</span>
-              </el-col>
-            </el-row>
-            <!-- 下一段 -->
-            <el-row :getter="60" style="margin-bottom: 16px">
-              <el-col :span="24">
+                    item.finishTime
+                  }}</span>
+                </el-col>
+              </el-row>
+              <!-- 下一段 -->
+              <el-row :getter="60" style="margin-bottom: 16px">
+                <el-col :span="24">
                 <span>标签:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)"
-                  ><el-tag v-for="(tp, adex) in item.tips" :key="adex">{{
+                ><el-tag v-for="(tp, adex) in item.tips" :key="adex">{{
                     tp
                   }}</el-tag></span
                 >
-              </el-col>
-            </el-row>
-            <el-row :getter="60" style="margin-bottom: 16px">
-              <el-col :span="24">
-                <el-button
-                v-if="item.userId==0"
-                  type="success"
-                  style="width: 100%"
-                  @click="sendBuy(item)"
+                </el-col>
+              </el-row>
+              <el-row :getter="60" style="margin-bottom: 16px">
+                <el-col :span="24">
+                  <el-button
+                    v-if="item.userId==0"
+                    type="success"
+                    style="width: 100%"
+                    @click="sendBuy(item)"
                   >购买 ( {{item.salePrice}}代币 )</el-button
+                  >
+                  <el-button style="width: 100%" v-else-if="item.userId==2" disabled type="warning">已在库中</el-button>
+                  <el-button style="width: 100%" v-else-if="item.userId==1" disabled type="warning">我提供的</el-button>
+                </el-col>
+              </el-row>
+            </el-col>
+          </el-row>
+        </el-card>
+      </template>
+      <template v-else>
+        <el-card
+          class="box-card cardBackgroud2"
+          :key="index"
+          style="
+          width: 45%;
+          display: inline-block;
+          margin-right: 3%;
+          margin-bottom: 3%;
+        "
+        >
+          <el-row :gutter="20">
+            <!-- 这一格为图标 -->
+            <el-col :span="7">
+              <i class="el-icon-s-ticket"></i>
+            </el-col>
+            <el-col :span="17">
+              <!-- 第一行是标题  用两块的第一块表示名称-->
+              <el-row :getter="60" style="margin-bottom: 26px">
+                <el-col :span="12">
+                <span style="font-size: 16px; font-weight: 600">{{
+                    item.missionAllName
+                  }}</span>
+                </el-col>
+                <el-col :span="12"></el-col>
+              </el-row>
+              <!-- 第二行是第一对字段 -->
+              <el-row :getter="60" style="margin-bottom: 16px">
+                <el-col :span="12">
+                <span >用途:&nbsp;&nbsp;</span
+                ><span  class="idlike" style="color: rgba(34, 28, 28, 0.555)">{{
+                    item.missionAllDis
+                  }}</span>
+                </el-col>
+                <el-col :span="12">
+                <span>类型:&nbsp;&nbsp;</span
+                ><span style="color: rgba(34, 28, 28, 0.555)">{{
+                    item.isAoto == "1" ? "官方" : "自制"
+                  }}</span>
+                </el-col>
+              </el-row>
+              <!-- 下一个字段 -->
+              <el-row :getter="60" style="margin-bottom: 16px">
+                <el-col :span="12">
+                <span>评分:&nbsp;&nbsp;</span
+                ><el-rate
+                  :value="item.saleRate == null ? 0 : item.saleRate"
+                  disabled
+                  text-color="#ff9900"
+                  style="display: inline-block"
                 >
-                    <el-button style="width: 100%" v-else-if="item.userId==2" disabled type="warning">已在库中</el-button>
-                <el-button style="width: 100%" v-else-if="item.userId==1" disabled type="warning">我提供的</el-button>
-              </el-col>
-            </el-row>
-          </el-col>
-        </el-row>
-      </el-card>
+                </el-rate>
+                </el-col>
+                <el-col :span="12">
+                <span>创建者:&nbsp;&nbsp;</span
+                ><span style="color: rgba(34, 28, 28, 0.555)">{{
+                    item.userName
+                  }}</span>
+                </el-col>
+              </el-row>
+              <!-- 下一个字段 -->
+              <el-row :getter="60" style="margin-bottom: 16px">
+                <el-col :span="12">
+                <span>销量:&nbsp;&nbsp;</span
+                ><span style="color: rgba(34, 28, 28, 0.555)">{{
+                    item.saleNum
+                  }}</span>
+                </el-col>
+                <el-col :span="12">
+                <span>上架时间:&nbsp;&nbsp;</span
+                ><span style="color: rgba(34, 28, 28, 0.555)">{{
+                    item.finishTime
+                  }}</span>
+                </el-col>
+              </el-row>
+              <!-- 下一段 -->
+              <el-row :getter="60" style="margin-bottom: 16px">
+                <el-col :span="24">
+                <span>标签:&nbsp;&nbsp;</span
+                ><span style="color: rgba(34, 28, 28, 0.555)"
+                ><el-tag v-for="(tp, adex) in item.tips" :key="adex">{{
+                    tp
+                  }}</el-tag></span
+                >
+                </el-col>
+              </el-row>
+              <el-row :getter="60" style="margin-bottom: 16px">
+                <el-col :span="24">
+                  <el-button
+                    v-if="item.userId==0"
+                    type="success"
+                    style="width: 100%"
+                    @click="sendBuy(item)"
+                  >购买 ( {{item.salePrice}}代币 )</el-button
+                  >
+                  <el-button style="width: 100%" v-else-if="item.userId==2" disabled type="warning">已在库中</el-button>
+                  <el-button style="width: 100%" v-else-if="item.userId==1" disabled type="warning">我提供的</el-button>
+                </el-col>
+              </el-row>
+            </el-col>
+          </el-row>
+        </el-card>
+      </template>
     </template>
 
     <el-pagination
@@ -194,7 +299,10 @@ export default {
 };
 </script>
 <style>
-.cardBackgroud {
+.cardBackgroud2 {
+  background: url("../../../../public/userFor/cardBackground1.png");
+}
+.cardBackgroud1 {
  background: url("../../../../public/userFor/cardBackground.png");
 }
 /* .cardBackgroud ::before{
@@ -202,7 +310,7 @@ export default {
    opacity: 0.5;
    position:absolute;
    z-index:-1;
-   
+
 
 } */
 .idlike {
