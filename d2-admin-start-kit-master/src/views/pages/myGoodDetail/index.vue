@@ -87,7 +87,7 @@
                 style="width: 50%"
                 type="success"
                 @click="sendBuy(tempGoodDetail)"
-              >购买 ( {{ tempGoodDetail.salePrice }}代币 )
+              >购买 ( {{ tempGoodDetail.price }}代币 )
               </el-button
               >
               <el-button
@@ -208,8 +208,10 @@
         >
       </el-row>
 <!--      评价 需要循环评价列表  底部打分割线-->
+
      <template name="评价例子模型" style="margin-top: 10px" v-for="(item,index) in comments">
 <!--       划分左右两块-->
+       <div v-if="item.commentDes !=null && item.userId != null">
        <el-row style="margin-bottom: 10px" :key="index">
 <!--         左边块为头像等部分 暂时如此设计-->
          <el-col :span="4"
@@ -258,9 +260,12 @@
          </el-col
          >
        </el-row>
+       </div>
        <el-divider><i class="el-icon-mobile-phone"></i></el-divider>
      </template>
-      <el-pagination
+
+
+       <el-pagination
         background
         layout="prev, pager, next"
         :total="pageNum"

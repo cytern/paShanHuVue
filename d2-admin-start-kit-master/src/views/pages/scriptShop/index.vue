@@ -6,7 +6,10 @@
      <!-- 卡片式改写 -->
        <template v-for="(item, index) in missionDatas">
       <el-card
-        class="box-card cardBackgroud"
+        :class="index%4===0?'box-card cardBackground1':
+                  index%3===0?'box-card cardBackground2':
+                  index%2===0?'box-card cardBackground3':
+                   'box-card cardBackground4'"
         :key="index"
         style="
           width: 45%;
@@ -24,9 +27,12 @@
             <!-- 第一行是标题  用两块的第一块表示名称-->
             <el-row :getter="60" style="margin-bottom: 26px">
               <el-col :span="12">
-                <span style="font-size: 16px; font-weight: 600">{{
-                  item.maName
-                }}</span>
+                <el-button type="text" @click="goToMaDetail(item)">
+                   <span style="font-size: 16px; font-weight: 600">{{
+                       item.maName
+                     }}</span>
+                </el-button>
+
               </el-col>
               <el-col :span="12"></el-col>
             </el-row>
@@ -106,8 +112,8 @@
         </el-row>
       </el-card>
     </template>
-  
-  
+
+
     <!-- 分页组件 目前是简单分页 -->
     <el-pagination
       background
@@ -125,6 +131,8 @@ import leidatu2 from "../../echart-comment/leidatu2";
 import leidatu3 from "../../echart-comment/leidatu3";
 import { getSalesMa, buyMa } from "../../netWork/apiMethod";
 import { newJsoupMissionAll } from "../../model/missionAllPojo";
+import {maToDetail} from "../../model/detailPojo";
+
 export default {
   name: "scriptShop",
   components: {
@@ -146,6 +154,14 @@ export default {
   },
   methods: {
     /**
+     *打开商品详情页
+     */
+    goToMaDetail (missonAll) {
+     let detail =  maToDetail(missonAll);
+     this.$store.state.goodDetail = detail
+      this.$router.push("goodDetail")
+    },
+    /**
      * 购买脚本
      */
     sendBuy(jsMa) {
@@ -163,7 +179,7 @@ export default {
                 });
               }
             });
-          
+
         })
         .catch(() => {});
     },
