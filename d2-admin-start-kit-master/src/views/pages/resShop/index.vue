@@ -27,7 +27,7 @@
               <!-- 第一行是标题  用两块的第一块表示名称-->
               <el-row :getter="60" style="margin-bottom: 26px">
                 <el-col :span="12">
-                <span style="font-size: 16px; font-weight: 600">{{
+                <span @click="goToDetail(item)" style="font-size: 16px; font-weight: 600">{{
                     item.missionAllName
                   }}</span>
                 </el-col>
@@ -128,6 +128,8 @@ import leidatu2 from "../../echart-comment/leidatu2";
 import leidatu3 from "../../echart-comment/leidatu3";
 import { buyMh, getSalesMh } from "../../netWork/apiMethod";
 import { newMah } from "../../model/missionHistoryPojo";
+import {mhToDetail} from "../../model/detailPojo";
+
 export default {
   name: "resShop",
   components: {
@@ -147,6 +149,12 @@ export default {
     this.getOriginData();
   },
   methods: {
+
+    goToDetail (item) {
+      let detail = mhToDetail(item);
+      this.$store.state.goodDetail = detail
+      this.$router.push("goodDetail")
+    },
     /**
      * 购买脚本
      */
