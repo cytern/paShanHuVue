@@ -34,7 +34,7 @@ export const menuAside = supplementPath([
         title: '我的',
         icon: 'window-restore',
         children: [
-          { path: '/studentConf', title: '我的信息',icon: 'user-o' },
+          { path: '/myInfo', title: '我的信息',icon: 'user-o' },
           { path: '/myScript', title: '我的脚本',icon: 'podcast' },
           { path: '/myReason', title: '我的结果',icon: 'ravelry' },
         ]
@@ -48,11 +48,11 @@ export const menuAside = supplementPath([
       { path: '/goodDetail', title: '商品详情',icon: 'podcast' },
         ]
       },
-     
-     
-    
+
+
+
       // { path: '/notice', title: '开发帮助',icon: 'ravelry' },
 
-  
-  
+
+
 ])

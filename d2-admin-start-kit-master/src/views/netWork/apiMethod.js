@@ -6,6 +6,24 @@ import {Notification} from 'element-ui'
 
 
 /**
+ * 更新用户信息
+ * @param userVo
+ * @returns {*}
+ */
+export function updateUserDetail (userVo) {
+  let url = apiBook.customer.updateUserDetail
+  return axiosPostJson(url,userVo)
+}
+
+/**
+ * 获取用户信息
+ * @returns {*}
+ */
+export function getUserData () {
+  let url = apiBook.customer.getUserInfo
+  return axiosPostJson(url)
+}
+/**
  * 获取作品的用户信息
  * @param id
  * @param type

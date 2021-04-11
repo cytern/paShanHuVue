@@ -3,7 +3,7 @@
     <template slot="header">
       <el-button disabled type="text">商品详情</el-button>
     </template>
-    <el-card>
+    <el-card class="border_image">
       <el-row :gutter="20">
         <!-- 这一格为图标 -->
         <el-col :span="7">

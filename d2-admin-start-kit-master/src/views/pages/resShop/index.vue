@@ -197,6 +197,10 @@ export default {
 };
 </script>
 <style>
+.border_image {
+  border: 40px solid transparent;
+  border-image: url(../../../../public/userFor/border.png) 450 450 round ;
+}
 .cardBackground2 {
   background: url("../../../../public/userFor/cardBackground4.png");
 }

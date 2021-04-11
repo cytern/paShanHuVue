@@ -26,7 +26,7 @@ export default {
     buyMh: baseUrl + "server/customer/buyMh",
     getDetailComment:baseUrl + "server/customer/getGoodDetailComment",
     getDetailUser: baseUrl + "server/customer/getGoodDetailUsaer",
-
+    updateUserDetail: baseUrl + "server/customer/updateUserInfo"
 
 
   },

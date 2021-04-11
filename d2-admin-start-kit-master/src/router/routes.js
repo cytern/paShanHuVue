@@ -23,10 +23,10 @@ const frameIn = [
       },
       // 演示页面
       {
-        path: 'studentConf',
-        name: 'studentConf',
+        path: 'myInfo',
+        name: 'myInfo',
         meta: {
-          title: '详细信息',
+          title: '个人信息',
           auth: true
         },
         component: _import('pages/studentConf')

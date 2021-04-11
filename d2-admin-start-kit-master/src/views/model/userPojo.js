@@ -230,3 +230,26 @@ export  function JsoupUserDetail () {
   }
   return userDetail;
 }
+
+export function JsoupUserAssets () {
+  let temp = {
+    userAssetsId: null,
+    userId: null,
+    cornNum: null,
+    goldNum: null,
+    serialVersionUID: null
+  }
+  return temp
+}
+
+export function UserVo () {
+  let userVo = {
+    jsoupUser:new jsoupUser(),
+    jsoupUserDetail: new JsoupUserDetail(),
+    jsoupUserAssets: new JsoupUserAssets(),
+    jsoupUserOrderList: [],
+    missionAllDataList: []
+
+  }
+  return userVo
+}
