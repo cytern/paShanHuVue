@@ -40,7 +40,7 @@
                 <span>评分:&nbsp;&nbsp;</span
                 >
               <el-rate
-                :value="tempGoodDetail.rate == null ? 0 : item.saleRate"
+                :value="tempGoodDetail.rate == null ? 0 : tempGoodDetail.rate"
                 disabled
                 style="display: inline-block"
                 text-color="#ff9900"
@@ -312,6 +312,9 @@ export default {
           }
         }
       )
+      console.log("打印参数")
+      console.log(this.tempGoodDetail)
+      console.log(this.tempUserDetail)
     },
     /**
      * 获取评价列表
@@ -324,6 +327,10 @@ export default {
          }
        }
      )
+      console.log("打印参数")
+      console.log(this.tempGoodDetail)
+      console.log(this.tempUserDetail)
+
     },
     reflashPage(currentPage) {
       this.index = currentPage;

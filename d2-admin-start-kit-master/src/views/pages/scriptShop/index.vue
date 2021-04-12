@@ -156,8 +156,8 @@ export default {
     /**
      *打开商品详情页
      */
-    goToMaDetail (missonAll) {
-     let detail =  maToDetail(missonAll);
+    goToMaDetail (item) {
+     let detail =  maToDetail(item);
      this.$store.state.goodDetail = detail
       this.$router.push("goodDetail")
     },

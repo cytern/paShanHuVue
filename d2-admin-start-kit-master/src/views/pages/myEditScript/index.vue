@@ -580,7 +580,7 @@ export default {
           this.selectIndex = index;
         })
         .catch(() => {
-         
+
         });
     },
 
@@ -591,7 +591,7 @@ export default {
         this.missionAllDataId = this.$store.state.maId;
         this.getScript();
       } else {
-       this.missionData = newMission();
+       this.missionData = new newMission();
       }
        pushMissionData(this.missionData);
             this.getIndex();
