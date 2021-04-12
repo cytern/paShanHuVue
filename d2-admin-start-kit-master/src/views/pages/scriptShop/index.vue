@@ -90,7 +90,7 @@
               <el-col :span="24">
                 <span>标签:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)"
-                  ><el-tag v-for="(tp, adex) in item.tips" :key="adex">{{
+                  ><el-tag  v-for="(tp, adex) in item.tips" :key="adex">{{
                     tp
                   }}</el-tag></span
                 >
@@ -132,6 +132,7 @@ import leidatu3 from "../../echart-comment/leidatu3";
 import { getSalesMa, buyMa } from "../../netWork/apiMethod";
 import { newJsoupMissionAll } from "../../model/missionAllPojo";
 import {maToDetail} from "../../model/detailPojo";
+import {formateMaData} from "../../model/missionAllPojo";
 
 export default {
   name: "scriptShop",
@@ -177,6 +178,7 @@ export default {
                   type: "success",
                   message: res.msg,
                 });
+                this.getOriginData()
               }
             });
 
@@ -191,6 +193,9 @@ export default {
       getSalesMa(this.pageSize, this.index).then((res) => {
         this.missionDatas = res.maList;
         this.pageNum = res.pageNum;
+        for (let i = 0; i < this.missionDatas.length; i++) {
+          this.missionDatas[i] = formateMaData(this.missionDatas[i])
+        }
       });
     },
     getOriginData() {

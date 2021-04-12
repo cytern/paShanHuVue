@@ -129,6 +129,7 @@ import leidatu3 from "../../echart-comment/leidatu3";
 import { buyMh, getSalesMh } from "../../netWork/apiMethod";
 import { newMah } from "../../model/missionHistoryPojo";
 import {mhToDetail} from "../../model/detailPojo";
+import {formateMhData} from "../../model/missionHistoryPojo";
 
 export default {
   name: "resShop",
@@ -171,6 +172,7 @@ export default {
                 type: "success",
                 message: res.msg,
               });
+              this.getOriginData()
             }
           });
         })
@@ -195,6 +197,9 @@ export default {
     getMyHistory() {
       getSalesMh(this.pageSize, this.index).then((res) => {
         (this.missionHistorys = res.mhList), (this.pageNum = res.pageNum);
+        for (let i = 0; i < this.missionHistorys.length; i++) {
+          this.missionHistorys[i] = formateMhData(this.missionHistorys[i])
+        }
       });
     },
 
