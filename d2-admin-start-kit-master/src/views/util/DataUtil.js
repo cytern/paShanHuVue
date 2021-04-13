@@ -1,21 +1,20 @@
-import missionDataPojo from "../model/missionAllPojo"
+import {MissionAllData} from "../model/missionAllPojo"
 import store from "@/store/index"
-import {newMissionAll} from "../model/missionAllPojo"
 
 /**
  * 通过字段list action list action list  合成 actionVo 的方法
- * @param {*} missionData 
+ * @param {*} missionData
  */
 export function changeList(missionData) {
     //拿到 一个missionAll的数据
     let mdList = missionData.missionDataList
-    
+
     for (let index = 0; index < mdList.length; index++) {
         //拿到一个mission的数据
         const mission = mdList[index];
         //数据化actionVo 以action 列表为基准
         let actionVos = []
-    
+
         for (let aindex = 0; aindex < mission.actionList.length; aindex++) {
             const action = mission.actionList[aindex];
             let actionVo = {
@@ -30,7 +29,7 @@ export function changeList(missionData) {
 }
 /**
  * 通过 actionVo 分解出 pragram action order 的方法
- * @param {} missionData 
+ * @param {} missionData
  */
 export function changeVo(missionData) {
 
@@ -56,7 +55,7 @@ export function pushMissionData(missionData){
   let datas =  store.state.missionDatas
   let tempIndex = null;
   if(datas == null){
-      datas = [new newMissionAll]
+      datas = [new MissionAllData()]
   }
    for (let index = 0; index < datas.length; index++) {
        const element = datas[index];
@@ -76,7 +75,7 @@ export function pushMissionData(missionData){
 
 /**
  * 删除一个maId 对应的对象
- * @param {maId} maId 
+ * @param {maId} maId
  */
 export function deleteMissionData(maId){
     let datas =  store.state.missionDatas
@@ -134,7 +133,7 @@ export function getIndexOfMissionData (missionAllDatas) {
 function reflashMissionData() {
   let missionDatas = store.state.missionDatas;
   if(missionDatas == null || missionDatas == []) {
-      missionDatas = new missionDataPojo;   
+      missionDatas = new MissionAllData();
   }
   window.localStorage.setItem('missionData', JSON.stringify(missionDatas))
 }
@@ -142,7 +141,7 @@ function reflashMissionData() {
 
 /**
  * 比较方法
- * @param {比较属性} property 
+ * @param {比较属性} property
  */
 function compare(property1,property2){
     return function(a,b){

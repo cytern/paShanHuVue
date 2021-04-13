@@ -152,7 +152,7 @@ export function sendJsoupMission(maId){
 }
 /**
  * 保存任务
- * @param {参数} missionAllData
+ * @param {{missionAllHistory: JsoupMissionAllHistory, jsoupMissionAll: JsoupMissionAll, isOwner: null, missionDataList: [MissionData], orders: [JsoupMissionOrder], isSuccess: null}} missionAllData
  */
 export function saveOneMissionAll(missionAllData){
     let url = apiBook.customer.saveOneScript

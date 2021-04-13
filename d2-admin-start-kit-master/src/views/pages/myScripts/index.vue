@@ -119,7 +119,7 @@ import {
   sendJsoupMission,
   setMissionAllState,
 } from "../../netWork/apiMethod";
-import { newMissionAll, newJsoupMissionAll } from "../../model/missionAllPojo";
+import { JsoupMissionAll, MissionAllData} from "../../model/missionAllPojo";
 export default {
   name: "studentCharts",
   components: {
@@ -129,12 +129,12 @@ export default {
   },
   data() {
     return {
-      missionDatas: [new newMissionAll()],
+      missionDatas: [new MissionAllData()],
       pageSize: 10,
       index: 1,
       pageNum: 0,
       shopDia: false,
-      tempMa: new newJsoupMissionAll(),
+      tempMa: new JsoupMissionAll(),
     };
   },
   mounted() {
@@ -153,7 +153,7 @@ export default {
         .catch((_) => {});
     },
     closeDia() {
-      this.tempMa = newJsoupMissionAll();
+      this.tempMa = JsoupMissionAll();
       this.shopDia = false;
     },
     /**
@@ -211,7 +211,7 @@ export default {
           .then(() => {
             setMissionAllState(jsoupMissionAll).then((res) => {
               if (res.code == "success") {
-                this.tempMa = newJsoupMissionAll();
+                this.tempMa = JsoupMissionAll();
                 this.shopDia = false;
                 this.getMyScript();
               }

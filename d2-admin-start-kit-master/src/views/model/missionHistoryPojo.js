@@ -10,13 +10,13 @@ export default {
     missionAllName: null,
     missionAllDis: null
   };
-  export function newMah() {
+  export function JsoupMissionAllHistory() {
     let mah = {
       missionAllHistoryId: null,
       missionAllId: null,
       missionState: null,
       missionResultUrl: null,
-      userId: null, 
+      userId: null,
       missionFailReason: null,
       sentTime: null,
       finishTime: null,

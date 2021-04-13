@@ -130,7 +130,7 @@ import leidatu from "../../echart-comment/leidatu";
 import leidatu2 from "../../echart-comment/leidatu2";
 import leidatu3 from "../../echart-comment/leidatu3";
 import { getSalesMa, buyMa } from "../../netWork/apiMethod";
-import { newJsoupMissionAll } from "../../model/missionAllPojo";
+import { JsoupMissionAll } from "../../model/missionAllPojo";
 import {maToDetail} from "../../model/detailPojo";
 import {formateMaData} from "../../model/missionAllPojo";
 
@@ -143,7 +143,7 @@ export default {
   },
   data() {
     return {
-      missionDatas: [new newJsoupMissionAll()],
+      missionDatas: [new JsoupMissionAll()],
       pageSize: 10,
       index: 1,
       pageNum: 0,

@@ -24,7 +24,7 @@
             <!-- 此card 定义一个任务清单 如果进行复制等操作 就会使用这个card的操作 -->
             <el-card
               class="box-card"
-              v-for="(itemAcc, index) in this.missionData.missionDataList"
+              v-for="(itemAcc, index) in missionData.missionDataList"
               :key="index"
               style="background: #e8e8ff; margin-bottom: 100px"
             >
@@ -258,17 +258,14 @@ import leidatu2 from "../../echart-comment/leidatu2";
 import leidatu3 from "../../echart-comment/leidatu3";
 import pargramDialog from "../../dialog-comment/pragramDialog";
 import { getOneScript, saveOneMissionAll } from "../../netWork/apiMethod";
-import missionAllData from "../../model/missionAllPojo";
+import {ActionVo, JsoupPragram, MissionAllData, MissionData} from "../../model/missionAllPojo";
 import {
   pushMissionData,
   deleteMissionData,
   getIndexOfMissionData,
 } from "../../util/DataUtil";
-import Page from "../../system/login/page.vue";
-import PragramDialog from "../../dialog-comment/pragramDialog.vue";
-import actionDoType from "../../model/actionDoType";
-import actionSeleType from "../../model/actionSelectType";
-import { newMission, newMissionAll } from "../../model/missionAllPojo";
+import {ActionDoType} from "../../model/actionDoType";
+import {ActionSelectType} from "../../model/actionSelectType";
 export default {
   name: "studentConf",
   components: {
@@ -293,19 +290,18 @@ export default {
         programContent: null,
       },
       missionAllDataId: 0,
-      missionData: null,
-      missionDatas: [],
+      missionData: new MissionAllData(),
+      missionDatas: [new MissionAllData()],
       tempIndex: null,
       tempPindex: null,
       selectIndex: null,
-      actionDoTypes: actionDoType,
-      actionSelectTypes: actionSeleType,
+      actionDoTypes: new ActionDoType(),
+      actionSelectTypes: new ActionSelectType(),
       aIndex: null,
       datalist:null
     };
   },
   mounted() {
-    this.missionDatas = this.$store.state.missionDatas;
     this.getOriginData();
   },
   methods: {
@@ -317,7 +313,7 @@ export default {
         if(res.code == "success"){
             getOneScript(res.maId).then((res) => {
           if (res.code == "error" || res.missionData == null) {
-            this.missionData = missionDatas[0];
+            this.missionData = this.missionDatas[0];
           } else {
             this.missionData = res.missionData;
             pushMissionData(this.missionData);
@@ -331,7 +327,7 @@ export default {
      * 增加一个全新的脚本集合
      */
     addNewMissionAll() {
-      this.missionDatas.push(newMissionAll());
+      this.missionDatas.push(new MissionAllData());
     },
     /**
      * 下降一个mission
@@ -403,7 +399,7 @@ export default {
      * 增加一个全新的mission
      */
     addLineMission(missionDataList, index) {
-      let tempMission = newMission();
+      let tempMission = MissionData();
 
       // 创造假的 mission id 最小负数
 
@@ -441,7 +437,7 @@ export default {
         actionVos[aindex + 1].actionOrder.rank =
           actionVos[aindex].actionOrder.rank;
         actionVos[aindex].actionOrder.rank = tempRank;
-        pushMissionData(this.missionData);
+        // pushMissionData(this.missionData);
         this.getIndex();
       }
     },
@@ -492,41 +488,7 @@ export default {
      * 增加一个actionVo
      */
     addLineAction(actionVos, aindex) {
-      let tempActionVo = {
-        jsoupAction: {
-          actionId: null,
-          actionEleType: null,
-          actionDoType: null,
-          actionUrl: null,
-          missionId: null,
-          actionEleValue: null,
-          actionPreId: null,
-          actionAfterId: null,
-          actionName: null,
-          actionPragramId: null,
-          actionElePragramId: null,
-        },
-        actionOrder: {
-          actionOrderId: null,
-          actionId: null,
-          missionId: null,
-          missionAllId: null,
-          rank: null,
-        },
-        jsoupPragram: {
-          pragramId: null,
-          missionId: null,
-          actionId: null,
-          pragramType: null,
-          pragramAccuracy: null,
-          isRamdom: null,
-          upNum: null,
-          downNum: null,
-          pragramValue: null,
-          missionAllId: null,
-          programContent: null,
-        },
-      };
+      let tempActionVo = new ActionVo()
       //设置合适的action rank
       tempActionVo.actionOrder.rank = actionVos[aindex].actionOrder.rank + 1;
       //给剩余actionVos 的 rank 依次+ 1
@@ -591,7 +553,7 @@ export default {
         this.missionAllDataId = this.$store.state.maId;
         this.getScript();
       } else {
-       this.missionData = new newMission();
+       this.missionData = new MissionAllData();
       }
        pushMissionData(this.missionData);
             this.getIndex();
@@ -600,7 +562,7 @@ export default {
     getScript() {
       getOneScript(this.missionAllDataId).then((res) => {
         if (res.code == "error" || res.missionData == null) {
-          this.missionData = newMission();
+          this.missionData = MissionData();
         } else {
           this.missionData = res.missionData;
         }
@@ -628,19 +590,7 @@ export default {
     addPragram(index) {
       let datas = this.missionData;
       let pragrams = datas.missionDataList[index].jsoupPragrams;
-      pragrams.push({
-        pragramId: null,
-        missionId: null,
-        actionId: null,
-        pragramType: null,
-        pragramAccuracy: null,
-        isRamdom: null,
-        upNum: null,
-        downNum: null,
-        pragramValue: null,
-        missionAllId: null,
-        programContent: null,
-      });
+      pragrams.push(new JsoupPragram());
       datas.missionDataList[index].jsoupPragrams = pragrams;
       this.missionData = datas;
       pushMissionData(this.missionData);

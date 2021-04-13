@@ -1,26 +1,29 @@
-export default [
+export function ActionSelectType () {
+  let ast =  [
     {
-        name:"id",
-        value:"id"
+      name:"id",
+      value:"id"
     },
     {
-        name:"name",
-        value:"name"
+      name:"name",
+      value:"name"
     },
     {
-        name:"tagName",
-        value:"tagName"
+      name:"tagName",
+      value:"tagName"
     },
     {
-        name:"className",
-        value:"className"
+      name:"className",
+      value:"className"
     },
     {
-        name:"xpath",
-        value:"xpath"
+      name:"xpath",
+      value:"xpath"
     },
     {
-        name:"css",
-        value:"css"
+      name:"css",
+      value:"css"
     }
-]
+  ]
+  return ast
+}

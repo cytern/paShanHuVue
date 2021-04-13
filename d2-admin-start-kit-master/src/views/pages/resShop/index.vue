@@ -127,7 +127,7 @@ import leidatu from "../../echart-comment/leidatu";
 import leidatu2 from "../../echart-comment/leidatu2";
 import leidatu3 from "../../echart-comment/leidatu3";
 import { buyMh, getSalesMh } from "../../netWork/apiMethod";
-import { newMah } from "../../model/missionHistoryPojo";
+import { JsoupMissionAllHistory } from "../../model/missionHistoryPojo";
 import {mhToDetail} from "../../model/detailPojo";
 import {formateMhData} from "../../model/missionHistoryPojo";
 
@@ -140,7 +140,7 @@ export default {
   },
   data() {
     return {
-      missionHistorys: [new newMah()],
+      missionHistorys: [new JsoupMissionAllHistory()],
       pageSize: 10,
       index: 1,
       pageNum: 0,

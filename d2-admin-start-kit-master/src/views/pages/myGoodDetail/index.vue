@@ -312,9 +312,6 @@ export default {
           }
         }
       )
-      console.log("打印参数")
-      console.log(this.tempGoodDetail)
-      console.log(this.tempUserDetail)
     },
     /**
      * 获取评价列表
@@ -327,9 +324,6 @@ export default {
          }
        }
      )
-      console.log("打印参数")
-      console.log(this.tempGoodDetail)
-      console.log(this.tempUserDetail)
 
     },
     reflashPage(currentPage) {
