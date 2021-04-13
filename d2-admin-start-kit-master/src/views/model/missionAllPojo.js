@@ -61,7 +61,7 @@ export function JsoupMissionOrder() {
     moMissionId: null,
     moMissionAllId: null,
     moAddTime: null,
-    moRank: null,
+    moRank: 1,
     serialVersionUID: null
   }
   return jmo
@@ -105,7 +105,7 @@ export function JsoupActionOrder() {
     actionId: null,
     missionId: null,
     missionAllId: null,
-    rank: null,
+    rank: 1,
     serialVersionUID: null
   }
   return jo

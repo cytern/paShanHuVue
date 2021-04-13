@@ -20,6 +20,26 @@
                   >{{ item.jsoupMissionAll.maName }}</el-button
                 >
               </template>
+<!--              -->
+              <el-divider><i class="el-icon-star-on"></i></el-divider>
+
+              <el-card>
+                <el-row :gutter="20">
+<!--                  一行三栏-->
+                  <el-form>
+                  <el-col :span="8">
+                    <el-form-item label="脚本名称:">
+                    <el-input style="width: 50%" v-model="missionData.jsoupMissionAll.maName"></el-input>
+                    </el-form-item>
+                  </el-col>
+                    <el-col :span="16">
+                      <el-form-item label="标签（以;号分割）:">
+                        <el-input style="width: 50%" v-model="missionData.jsoupMissionAll.tips"></el-input>
+                      </el-form-item>
+                    </el-col>
+                  </el-form>
+                </el-row>
+              </el-card>
             </div>
             <!-- 此card 定义一个任务清单 如果进行复制等操作 就会使用这个card的操作 -->
             <el-card
