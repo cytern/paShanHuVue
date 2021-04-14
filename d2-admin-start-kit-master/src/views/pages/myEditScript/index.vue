@@ -33,12 +33,17 @@
                     </el-form-item>
                   </el-col>
                     <el-col :span="16">
-                      <el-form-item label="标签（以;号分割）:">
-                        <el-input style="width: 50%" v-model="missionData.jsoupMissionAll.tips"></el-input>
-                      </el-form-item>
+                      <el-form-item label="标签:">
+<!--                        此组件主要展示tips 的标签-->
+                        <tips-show-comment style="display: inline-block" ref="tipsShowComment" @func="backTipsData"></tips-show-comment>
+                          <el-input  style="width: 20%;display: inline-block" v-model="tempTips"></el-input>
+                        <el-button style="margin-left: 5px" @click="addNewTip(missionData.jsoupMissionAll.tips)" type="success">添加</el-button>
+                           </el-form-item>
                     </el-col>
                   </el-form>
                 </el-row>
+<!--                第二行填写 脚本描述 按照内容 分段填写-->
+
               </el-card>
             </div>
             <!-- 此card 定义一个任务清单 如果进行复制等操作 就会使用这个card的操作 -->
@@ -286,6 +291,7 @@ import {
 } from "../../util/DataUtil";
 import {ActionDoType} from "../../model/actionDoType";
 import {ActionSelectType} from "../../model/actionSelectType";
+import tipsShowComment from "../../dialog-comment/tipsShowComment";
 export default {
   name: "studentConf",
   components: {
@@ -293,22 +299,13 @@ export default {
     leidatu2,
     leidatu3,
     pargramDialog,
+    tipsShowComment
   },
   data() {
     return {
-      tempJsoupPragram: {
-        pragramId: null,
-        missionId: null,
-        actionId: null,
-        pragramType: null,
-        pragramAccuracy: null,
-        isRamdom: null,
-        upNum: null,
-        downNum: null,
-        pragramValue: null,
-        missionAllId: null,
-        programContent: null,
-      },
+      tempDesWorkWeb: null,
+      tempTips: null,
+      tempJsoupPragram:new JsoupPragram(),
       missionAllDataId: 0,
       missionData: new MissionAllData(),
       missionDatas: [new MissionAllData()],
@@ -325,6 +322,22 @@ export default {
     this.getOriginData();
   },
   methods: {
+    backTipsData(tips) {
+      this.missionData.jsoupMissionAll.tips = tips
+    },
+    addNewTip(tips) {
+      if (tips == null) {
+        tips = this.tempTips
+      }else {
+        tips = tips + ";" + this.tempTips
+      }
+      this.missionData.jsoupMissionAll.tips = tips
+      this.tempTips = null
+      this.initTipsMethod()
+    },
+    initTipsMethod () {
+      this.$refs.tipsShowComment.initData(this.missionData.jsoupMissionAll)
+    },
     /**
      * 联网保存脚本
      */
@@ -577,6 +590,7 @@ export default {
       }
        pushMissionData(this.missionData);
             this.getIndex();
+     this.initTipsMethod()
     },
     //获取脚本
     getScript() {

@@ -132,7 +132,7 @@ export function JsoupAction() {
 export function formateMaData(ma) {
   let tips = ma.tips
   let arry = []
-  arry = tips.split(";");
+  arry = tips.   split(";");
   ma.tips = arry
   return ma;
 }

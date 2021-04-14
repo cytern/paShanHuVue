@@ -125,12 +125,7 @@
         >
       </el-row>
       <!-- 这一行为描述性内容 -->
-      {{tempGoodDetail.des}}
-      <el-row>
-        <el-col
-        ><p class="color: rgba(34, 28, 28, 0.555)">&nbsp;&nbsp;{{ tempGoodDetail.des }}</p></el-col
-        >
-      </el-row>
+      <div v-html="tempGoodDetail.des"></div>
 
       <!-- 作者信息 -->
       <el-divider><i class="el-icon-loading"></i></el-divider>

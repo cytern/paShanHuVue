@@ -106,6 +106,7 @@
 <script>
 import accRule from "../model/rules";
 import praType from "../model/pragramTypes";
+import {ActionVo} from "../model/missionAllPojo";
 export default {
   name: "dialogComment",
   mounted() {},
@@ -113,41 +114,7 @@ export default {
   data() {
     return {
       rules: accRule,
-      actionVo: {
-        jsoupAction: {
-              actionId: null,
-              actionEleType: null,
-              actionDoType: null,
-              actionUrl: null,
-              missionId: null,
-              actionEleValue: null,
-              actionPreId: null,
-              actionAfterId: null,
-              actionName: null,
-              actionPragramId: null,
-              actionElePragramId: null
-            },
-            actionOrder: {
-              actionOrderId: null,
-              actionId: null,
-              missionId: null,
-              missionAllId: null,
-              rank: null
-            },
-            jsoupPragram: {
-              pragramId: null,
-              missionId: null,
-              actionId: null,
-              pragramType: null,
-              pragramAccuracy: null,
-              isRamdom: null,
-              upNum: null,
-              downNum: null,
-              pragramValue: null,
-              missionAllId: null,
-              programContent: null
-            }
-      },
+      actionVo: new ActionVo(),
       actionList: [],
       pragramTypes: praType,
       dialogVisible: false,
@@ -169,7 +136,7 @@ export default {
      outPutData() {
          this.$emit('func',this.actionVo.jsoupPragram)
          this.dialogVisible = false
-     },     
+     },
       /**
        * 坚定数据是否符合大小依赖
        */
