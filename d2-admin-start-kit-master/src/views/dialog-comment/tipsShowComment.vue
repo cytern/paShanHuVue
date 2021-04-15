@@ -14,6 +14,9 @@ export default {
   },
   methods: {
     initData(jsoupMissionAll) {
+      if (jsoupMissionAll.tips == null) {
+        return
+      }
       this.tipsProp = jsoupMissionAll.tips.split(";");
     },
     removeTip (item) {

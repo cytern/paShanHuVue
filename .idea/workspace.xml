@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="84defb8f-3548-49d1-aa90-9df766068b41" name="Default Changelist" comment="bug 开发脚本rank显示错误">
-      <change afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/dialog-comment/desComment.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/dialog-comment/tipsShowComment.vue" afterDir="false" />
+    <list default="true" id="84defb8f-3548-49d1-aa90-9df766068b41" name="Default Changelist" comment="bug 脚本详情显示错误">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/dialog-comment/pragramDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/dialog-comment/pragramDialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/model/missionAllPojo.js" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/model/missionAllPojo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/dialog-comment/desComment.vue" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/dialog-comment/desComment.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/dialog-comment/tipsShowComment.vue" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/dialog-comment/tipsShowComment.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/pages/myEditScript/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/pages/myEditScript/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/pages/myGoodDetail/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/pages/myGoodDetail/index.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +112,7 @@
       <workItem from="1618144284550" duration="8150000" />
       <workItem from="1618228559762" duration="19232000" />
       <workItem from="1618363160616" duration="10550000" />
-      <workItem from="1618403756747" duration="2107000" />
+      <workItem from="1618403756747" duration="9456000" />
     </task>
     <task id="LOCAL-00001" summary="需求 云服务器部署">
       <created>1618020378426</created>
@@ -173,7 +170,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618325390748</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="bug 脚本详情显示错误">
+      <created>1618410552710</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1618410552710</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -200,6 +204,7 @@
     <MESSAGE value="bug 标签无法展示" />
     <MESSAGE value="bug 开发脚本页面无法正确显示的问题" />
     <MESSAGE value="bug 开发脚本rank显示错误" />
-    <option name="LAST_COMMIT_MESSAGE" value="bug 开发脚本rank显示错误" />
+    <MESSAGE value="bug 脚本详情显示错误" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug 脚本详情显示错误" />
   </component>
 </project>

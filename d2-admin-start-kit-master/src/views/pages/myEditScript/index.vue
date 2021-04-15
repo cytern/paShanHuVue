@@ -11,7 +11,7 @@
           <el-card class="box-card" style="background: #f1fafa">
             <!-- 模板定义 第一卡片为脚本信息介绍卡片 -->
             <div slot="header" class="clearfix">
-              <template v-for="(item, mindex) in missionDatas">
+              <template v-for="(item, mindex) in missionDataList">
                 <el-button
                   :key="mindex"
                   type="primary"
@@ -43,7 +43,16 @@
                   </el-form>
                 </el-row>
 <!--                第二行填写 脚本描述 按照内容 分段填写-->
-
+                 <el-divider></el-divider>
+                 <el-row :gutter="20">
+<!--                   一整行-->
+                   <el-col :span="4">
+                     <el-button type="primary" @click="showDesComment()">编辑详情</el-button>
+                   </el-col>
+                   <el-col :span="20">
+                     <div v-html="missionData.jsoupMissionAll.maTip"></div>
+                   </el-col>
+                 </el-row>
               </el-card>
             </div>
             <!-- 此card 定义一个任务清单 如果进行复制等操作 就会使用这个card的操作 -->
@@ -274,6 +283,7 @@
     </el-row>
 
     <pargramDialog ref="pragramdialog" @func="getResultData"></pargramDialog>
+    <des-comment ref="desComment" @func="getDesData"></des-comment>
   </d2-container>
 </template>
 
@@ -292,9 +302,11 @@ import {
 import {ActionDoType} from "../../model/actionDoType";
 import {ActionSelectType} from "../../model/actionSelectType";
 import tipsShowComment from "../../dialog-comment/tipsShowComment";
+import DesComment from "../../dialog-comment/desComment";
 export default {
   name: "studentConf",
   components: {
+    DesComment,
     leidatu,
     leidatu2,
     leidatu3,
@@ -305,12 +317,12 @@ export default {
     return {
       tempDesWorkWeb: null,
       tempTips: null,
-      tempJsoupPragram:new JsoupPragram(),
+      tempJsoupParam:new JsoupPragram(),
       missionAllDataId: 0,
       missionData: new MissionAllData(),
-      missionDatas: [new MissionAllData()],
+      missionDataList: [new MissionAllData()],
       tempIndex: null,
-      tempPindex: null,
+      tempPIndex: null,
       selectIndex: null,
       actionDoTypes: new ActionDoType(),
       actionSelectTypes: new ActionSelectType(),
@@ -322,6 +334,13 @@ export default {
     this.getOriginData();
   },
   methods: {
+    showDesComment() {
+      this.$refs.desComment.initDesData(this.missionData.jsoupMissionAll.maTip)
+    },
+    getDesData(des) {
+      this.missionData.jsoupMissionAll.maTip = des
+    },
+
     backTipsData(tips) {
       this.missionData.jsoupMissionAll.tips = tips
     },
@@ -346,7 +365,7 @@ export default {
         if(res.code == "success"){
             getOneScript(res.maId).then((res) => {
           if (res.code == "error" || res.missionData == null) {
-            this.missionData = this.missionDatas[0];
+            this.missionData = this.missionDataList[0];
           } else {
             this.missionData = res.missionData;
             pushMissionData(this.missionData);
@@ -360,7 +379,7 @@ export default {
      * 增加一个全新的脚本集合
      */
     addNewMissionAll() {
-      this.missionDatas.push(new MissionAllData());
+      this.missionDataList.push(new MissionAllData());
     },
     /**
      * 下降一个mission
@@ -571,7 +590,7 @@ export default {
         type: "warning",
       })
         .then(() => {
-          this.missionData = this.missionDatas[index];
+          this.missionData = this.missionDataList[index];
           this.selectIndex = index;
         })
         .catch(() => {
@@ -615,10 +634,10 @@ export default {
 
     //删除  datas
     deleteMissionDatasHow(index) {
-      let datas = this.missionDatas;
+      let datas = this.missionDataList;
       deleteMissionData(datas[index].jsoupMissionAll.maId);
-      this.missionDatas = this.$store.state.missionDatas;
-      this.missionData = this.missionDatas[0];
+      this.missionDataList = this.$store.state.missionDatas;
+      this.missionData = this.missionDataList[0];
     },
     //增加参数
     addPragram(index) {
