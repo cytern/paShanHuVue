@@ -38,9 +38,9 @@
             </el-row>
             <!-- 第二行是第一对字段 -->
             <el-row :getter="60" style="margin-bottom: 16px">
-              <el-col :span="12">
-                <span >用途:&nbsp;&nbsp;</span
-                ><span  class="idlike" style="color: rgba(34, 28, 28, 0.555)">{{
+              <el-col :span="12" class="inlineDes">
+                <span  >用途:&nbsp;&nbsp;</span
+                ><span  class="idlike" style="color: rgba(34, 28, 28, 0.555);">{{
                   item.maTip
                 }}</span>
               </el-col>
@@ -205,12 +205,15 @@ export default {
 };
 </script>
 <style>
+.inlineDes {
+  text-overflow:ellipsis;
+  overflow:hidden;
+  white-space: nowrap;
+}
 .idlike {
 
-    width:100%;  /*根据个人需要自定义宽度*/
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+    width:60%;  /*根据个人需要自定义宽度*/
+
 }
 .divCard1 {
   margin-top: 10px;

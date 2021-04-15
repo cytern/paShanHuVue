@@ -34,7 +34,7 @@
                 <el-col :span="12"></el-col>
               </el-row>
               <!-- 第二行是第一对字段 -->
-              <el-row :getter="60" style="margin-bottom: 16px">
+              <el-row :getter="60" style="margin-bottom: 16px" class="inlineDes">
                 <el-col :span="12">
                 <span >用途:&nbsp;&nbsp;</span
                 ><span  class="idlike" style="color: rgba(34, 28, 28, 0.555)">{{
@@ -234,13 +234,7 @@ export default {
 
 
 } */
-.idlike {
 
-    width:100%;  /*根据个人需要自定义宽度*/
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
 .divCard1 {
   margin-top: 10px;
   background-color: rgba(0, 255, 250, 0.26);
