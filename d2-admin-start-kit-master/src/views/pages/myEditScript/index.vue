@@ -1,8 +1,9 @@
+<script src="../../netWork/apiBook.js"></script>
 <template>
   <d2-container>
     <template slot="header">
-      <el-button type="text" disabled>开发脚本</el-button>
-      <el-button @click="saveScript" type="success">保存</el-button>
+      <el-button disabled type="text">开发脚本</el-button>
+      <el-button type="success" @click="saveScript">保存</el-button>
       <el-button @click="addNewMissionAll">新建</el-button>
     </template>
     <el-row>
@@ -14,68 +15,77 @@
               <template v-for="(item, mindex) in missionDataList">
                 <el-button
                   :key="mindex"
-                  type="primary"
                   plain
+                  type="primary"
                   @click="selectMission(mindex)"
-                  >{{ item.jsoupMissionAll.maName }}</el-button
+                >{{ item.jsoupMissionAll.maName }}
+                </el-button
                 >
               </template>
-<!--              -->
+              <!--              -->
               <el-divider><i class="el-icon-star-on"></i></el-divider>
 
               <el-card>
                 <el-row :gutter="20">
-<!--                  一行三栏-->
+                  <!--                  一行三栏-->
                   <el-form>
-                  <el-col :span="8">
-                    <el-form-item label="脚本名称:">
-                    <el-input style="width: 50%" v-model="missionData.jsoupMissionAll.maName"></el-input>
-                    </el-form-item>
-                  </el-col>
+                    <el-col :span="8">
+                      <el-form-item label="脚本名称:">
+                        <el-input v-model="missionData.jsoupMissionAll.maName" style="width: 50%"></el-input>
+                      </el-form-item>
+                    </el-col>
                     <el-col :span="16">
                       <el-form-item label="标签:">
-<!--                        此组件主要展示tips 的标签-->
-                        <tips-show-comment style="display: inline-block" ref="tipsShowComment" @func="backTipsData"></tips-show-comment>
-                          <el-input  style="width: 20%;display: inline-block" v-model="tempTips"></el-input>
-                        <el-button style="margin-left: 5px" @click="addNewTip(missionData.jsoupMissionAll.tips)" type="success">添加</el-button>
-                           </el-form-item>
+                        <!--                        此组件主要展示tips 的标签-->
+                        <tips-show-comment ref="tipsShowComment" style="display: inline-block"
+                                           @func="backTipsData"></tips-show-comment>
+                        <el-input v-model="tempTips" style="width: 20%;display: inline-block"></el-input>
+                        <el-button style="margin-left: 5px" type="success"
+                                   @click="addNewTip(missionData.jsoupMissionAll.tips)">添加
+                        </el-button>
+                      </el-form-item>
                     </el-col>
                   </el-form>
                 </el-row>
-<!--                第二行填写 脚本描述 按照内容 分段填写-->
-                 <el-divider></el-divider>
-                 <el-row :gutter="20">
-<!--                   一整行-->
-                   <el-col :span="4">
-                     <el-button type="primary" @click="showDesComment()">编辑详情</el-button>
-                   </el-col>
-                   <el-col :span="20">
-                     <div v-html="missionData.jsoupMissionAll.maTip"></div>
-                   </el-col>
-                 </el-row>
+                <!--                第二行填写 脚本描述 按照内容 分段填写-->
+                <el-divider></el-divider>
+                <el-row :gutter="20">
+                  <!--                   一整行-->
+                  <el-col :span="4">
+                    <el-button type="primary" @click="showDesComment()">编辑详情</el-button>
+                  </el-col>
+                  <el-col :span="20">
+                    <div v-html="missionData.jsoupMissionAll.maTip"></div>
+                  </el-col>
+                </el-row>
               </el-card>
             </div>
             <!-- 此card 定义一个任务清单 如果进行复制等操作 就会使用这个card的操作 -->
             <el-card
-              class="box-card"
               v-for="(itemAcc, index) in missionData.missionDataList"
               :key="index"
+              class="box-card"
               style="background: #e8e8ff; margin-bottom: 100px"
             >
               <div slot="header" class="clearfix">
                 <!-- 此行  为爬虫一个回单任务列表 -->
                 <el-row class="missionTag">
                   <el-col :span="1"
-                    ><el-tag type="info"
-                      >id: {{ itemAcc.jsoupMission.missionId }}</el-tag
-                    ></el-col
+                  >
+                    <el-tag type="info"
+                    >id: {{ itemAcc.jsoupMission.missionId }}
+                    </el-tag
+                    >
+                  </el-col
                   >
 
                   <!-- 次序 -->
                   <el-col :span="7">
-                    任务次序：<el-button type="primary" circle>{{
-                      itemAcc.jsoupMissionOrder.moRank
-                    }}</el-button>
+                    任务次序：
+                    <el-button circle type="primary">{{
+                        itemAcc.jsoupMissionOrder.moRank
+                      }}
+                    </el-button>
                   </el-col>
                   <!-- 回单任务 名 -->
                   <el-col :span="12">
@@ -87,9 +97,9 @@
                   <!-- 增加此行按钮 -->
                   <el-col :span="1">
                     <el-button
-                      type="warning"
-                      icon="el-icon-plus"
                       circle
+                      icon="el-icon-plus"
+                      type="warning"
                       @click="
                         addLineMission(missionData.missionDataList, index)
                       "
@@ -98,9 +108,9 @@
                   <!-- 删除此行按钮 -->
                   <el-col :span="1">
                     <el-button
-                      type="danger"
-                      icon="el-icon-minus"
                       circle
+                      icon="el-icon-minus"
+                      type="danger"
                       @click="
                         deleteLineMission(missionData.missionDataList, index)
                       "
@@ -109,9 +119,9 @@
                   <!-- 上移次序 -->
                   <el-col :span="1">
                     <el-button
-                      type="success"
-                      icon="el-icon-top"
                       circle
+                      icon="el-icon-top"
+                      type="success"
                       @click="
                         upChangeLineMission(missionData.missionDataList, index)
                       "
@@ -120,9 +130,9 @@
                   <!-- 下移次序 -->
                   <el-col :span="1">
                     <el-button
-                      type="success"
-                      icon="el-icon-bottom"
                       circle
+                      icon="el-icon-bottom"
+                      type="success"
                       @click="
                         downChangeLineMission(
                           missionData.missionDataList,
@@ -138,9 +148,9 @@
               <el-row>
                 <el-col>
                   <el-card
-                    class="box-card"
                     v-for="(itemAction, aindex) in itemAcc.actionVos"
                     :key="aindex"
+                    class="box-card"
                     style="background: #ddf3ff; margin-bottom: 20px"
                   >
                     <div slot="header" class="clearfix">
@@ -148,9 +158,11 @@
                       <el-row>
                         <!-- 次序 -->
                         <el-col :span="8">
-                          行动次序：<el-button type="primary" circle>{{
-                            itemAction.actionOrder.rank
-                          }}</el-button>
+                          行动次序：
+                          <el-button circle type="primary">{{
+                              itemAction.actionOrder.rank
+                            }}
+                          </el-button>
                         </el-col>
                         <!-- 回单任务 名 -->
                         <el-col :span="12">
@@ -162,27 +174,27 @@
                         <!-- 增加此行按钮 -->
                         <el-col :span="1">
                           <el-button
-                            type="warning"
-                            icon="el-icon-plus"
-                            @click="addLineAction(itemAcc.actionVos, aindex)"
                             circle
+                            icon="el-icon-plus"
+                            type="warning"
+                            @click="addLineAction(itemAcc.actionVos, aindex)"
                           ></el-button>
                         </el-col>
                         <!-- 删除此行按钮 -->
                         <el-col :span="1">
                           <el-button
-                            type="danger"
-                            icon="el-icon-minus"
-                            @click="deleteLineAction(itemAcc.actionVos, aindex)"
                             circle
+                            icon="el-icon-minus"
+                            type="danger"
+                            @click="deleteLineAction(itemAcc.actionVos, aindex)"
                           ></el-button>
                         </el-col>
                         <!-- 上移次序 -->
                         <el-col :span="1">
                           <el-button
-                            type="success"
-                            icon="el-icon-top"
                             circle
+                            icon="el-icon-top"
+                            type="success"
                             @click="
                               upChangeLineAction(itemAcc.actionVos, aindex)
                             "
@@ -191,9 +203,9 @@
                         <!-- 下移次序 -->
                         <el-col :span="1">
                           <el-button
-                            type="success"
-                            icon="el-icon-bottom"
                             circle
+                            icon="el-icon-bottom"
+                            type="success"
                             @click="
                               downChangeLineAction(itemAcc.actionVos, aindex)
                             "
@@ -210,8 +222,8 @@
                       <el-form-item label="id">
                         <el-input
                           v-model="itemAction.jsoupAction.actionId"
-                          placeholder="id"
                           disabled
+                          placeholder="id"
                         ></el-input>
                       </el-form-item>
                       <el-form-item label="选取类型">
@@ -268,7 +280,8 @@
                           <!-- 点击后触发事件 显示修改参数tag -->
                           <el-tag
                             @click="showPragramDetail(itemAction, aIndex)"
-                            >{{ itemAction.jsoupPragram.pragramValue }}</el-tag
+                          >{{ itemAction.jsoupPragram.pragramValue }}
+                          </el-tag
                           >
                         </el-form-item>
                       </template>
@@ -278,7 +291,8 @@
               </el-row>
             </el-card>
           </el-card>
-        </div></el-col
+        </div>
+      </el-col
       >
     </el-row>
 
@@ -292,17 +306,14 @@ import leidatu from "../../echart-comment/leidatu";
 import leidatu2 from "../../echart-comment/leidatu2";
 import leidatu3 from "../../echart-comment/leidatu3";
 import pargramDialog from "../../dialog-comment/pragramDialog";
-import { getOneScript, saveOneMissionAll } from "../../netWork/apiMethod";
+import {getOneScript, saveOneMissionAll} from "../../netWork/apiMethod";
 import {ActionVo, JsoupPragram, MissionAllData, MissionData} from "../../model/missionAllPojo";
-import {
-  pushMissionData,
-  deleteMissionData,
-  getIndexOfMissionData,
-} from "../../util/DataUtil";
+import {deleteMissionData, getIndexOfMissionData, pushMissionData,} from "../../util/DataUtil";
 import {ActionDoType} from "../../model/actionDoType";
 import {ActionSelectType} from "../../model/actionSelectType";
 import tipsShowComment from "../../dialog-comment/tipsShowComment";
 import DesComment from "../../dialog-comment/desComment";
+
 export default {
   name: "studentConf",
   components: {
@@ -317,7 +328,7 @@ export default {
     return {
       tempDesWorkWeb: null,
       tempTips: null,
-      tempJsoupParam:new JsoupPragram(),
+      tempJsoupParam: new JsoupPragram(),
       missionAllDataId: 0,
       missionData: new MissionAllData(),
       missionDataList: [new MissionAllData()],
@@ -327,7 +338,7 @@ export default {
       actionDoTypes: new ActionDoType(),
       actionSelectTypes: new ActionSelectType(),
       aIndex: null,
-      datalist:null
+      datalist: null
     };
   },
   mounted() {
@@ -347,14 +358,14 @@ export default {
     addNewTip(tips) {
       if (tips == null) {
         tips = this.tempTips
-      }else {
+      } else {
         tips = tips + ";" + this.tempTips
       }
       this.missionData.jsoupMissionAll.tips = tips
       this.tempTips = null
       this.initTipsMethod()
     },
-    initTipsMethod () {
+    initTipsMethod() {
       this.$refs.tipsShowComment.initData(this.missionData.jsoupMissionAll)
     },
     /**
@@ -362,16 +373,16 @@ export default {
      */
     saveScript() {
       saveOneMissionAll(this.missionData).then((res) => {
-        if(res.code == "success"){
-            getOneScript(res.maId).then((res) => {
-          if (res.code == "error" || res.missionData == null) {
-            this.missionData = this.missionDataList[0];
-          } else {
-            this.missionData = res.missionData;
-            pushMissionData(this.missionData);
-            this.getIndex();
-          }
-        });
+        if (res.code == "success") {
+          getOneScript(res.maId).then((res) => {
+            if (res.code == "error" || res.missionData == null) {
+              this.missionData = this.missionDataList[0];
+            } else {
+              this.missionData = res.missionData;
+              pushMissionData(this.missionData);
+              this.getIndex();
+            }
+          });
         }
       });
     },
@@ -605,11 +616,11 @@ export default {
         this.missionAllDataId = this.$store.state.maId;
         this.getScript();
       } else {
-       this.missionData = new MissionAllData();
+        this.missionData = new MissionAllData();
       }
-       pushMissionData(this.missionData);
-            this.getIndex();
-     this.initTipsMethod()
+      pushMissionData(this.missionData);
+      this.getIndex();
+      this.initTipsMethod()
     },
     //获取脚本
     getScript() {
@@ -657,47 +668,51 @@ export default {
 .missionTag {
   margin-bottom: 10px;
 }
+
 .actionTag {
   margin-bottom: 4px;
 }
+
 .divCard {
   margin-top: 10px;
   background-color: rgba(150, 255, 28, 0.26);
 }
+
 .conf {
   border: 5px solid;
   border-radius: 10%;
   border-image: linear-gradient(to right, #ff831c, #0ceebb) 20 20;
-  background: rgba(255, 255, 255, 0.3)
-    url("../../../../public/userFor/listBack.png");
+  background: rgba(255, 255, 255, 0.3) url("../../../../public/userFor/listBack.png");
 }
+
 .touxiang {
   height: 200px;
   width: 200px;
   border-radius: 50%;
   background: linear-gradient(to right, #ff478e, #2fff2e);
 }
+
 .confs {
   border: 5px solid;
   border-radius: 10%;
   border-image: linear-gradient(to left, #ff831c, #0ceebb) 20 20;
-  background: rgba(255, 255, 255, 0.3)
-    url("../../../../public/userFor/listBack.png");
+  background: rgba(255, 255, 255, 0.3) url("../../../../public/userFor/listBack.png");
 }
+
 .leidatu {
   border: 5px solid;
   border-radius: 10%;
   border-image: linear-gradient(to left, #ff831c, #0ceebb) 20 20;
-  background: rgba(255, 255, 255, 0.3)
-    url("../../../../public/userFor/leidabeijing1.png");
+  background: rgba(255, 255, 255, 0.3) url("../../../../public/userFor/leidabeijing1.png");
 }
+
 .xuexiaobeijing {
   border: 5px solid;
   border-radius: 10%;
   border-image: linear-gradient(to left, #ff831c, #0ceebb) 20 20;
-  background: rgba(255, 255, 255, 0.3)
-    url("../../../../public/userFor/xuexiaobeijing.png");
+  background: rgba(255, 255, 255, 0.3) url("../../../../public/userFor/xuexiaobeijing.png");
 }
+
 .conf-key {
   /*width: 300px;*/
   /*height: 200px;*/
@@ -725,6 +740,7 @@ export default {
   height: 25px;
   font-weight: 800;
 }
+
 .conf-value {
   background-image: -webkit-linear-gradient(
     left,
@@ -761,6 +777,7 @@ export default {
     background-position: 0% 0;
   }
 }
+
 @keyframes masked-animation1 {
   0% {
     background-position: -100% 0;

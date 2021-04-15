@@ -48,6 +48,12 @@
             @click="sendRun(scope.$index, scope.row)"
             >执行</el-button
           >
+          <el-button
+            size="mini"
+            style="background-color: #0ceebb"
+            @click="sendTimeTask(scope.$index, scope.row)"
+          >定时</el-button
+          >
           <template v-if="scope.row.isOwner == 1">
             <!-- 上架中的脚本不允许编辑 -->
             <el-button
@@ -107,6 +113,7 @@
         <el-button type="primary" @click="sendChange">确 定</el-button>
       </div>
     </el-dialog>
+    <time-corn-dialog ref="timeCornDialog" @func="backData"></time-corn-dialog>
   </d2-container>
 </template>
 
@@ -118,16 +125,20 @@ import {
   getAllScript,
   sendJsoupMission,
   setMissionAllState,
+  addTimeTaskMission,
 } from "../../netWork/apiMethod";
 import { JsoupMissionAll, MissionAllData} from "../../model/missionAllPojo";
+import {TimeTask} from "../../model/timeTaskVo";
+import TimeCornDialog from "../../dialog-comment/timeCornDialog";
 export default {
   name: "studentCharts",
   components: {
+    TimeCornDialog,
     leidatu,
     leidatu2,
     leidatu3,
   },
-  data() {
+  data: function () {
     return {
       missionDatas: [new MissionAllData()],
       pageSize: 10,
@@ -135,12 +146,31 @@ export default {
       pageNum: 0,
       shopDia: false,
       tempMa: new JsoupMissionAll(),
+      timeTask: new TimeTask(),
+      tempMaId: null,
     };
   },
   mounted() {
     this.getOriginData();
   },
   methods: {
+    sendTimeTask (index, row) {
+      this.tempMaId = row.jsoupMissionAll.maId
+      this.$refs.timeCornDialog.initTimeData(this.timeTask)
+},
+    backData ( timeTask) {
+      if (timeTask.times == null){
+          timeTask.times = -1
+      }
+      this.timeTask = timeTask
+      addTimeTaskMission(this.tempMaId,timeTask.times,timeTask.corn).then(
+        res => {
+          if (res.code == "success") {
+            this.$message.success(res.msg)
+          }
+        }
+      )
+    },
     reflashPage(currentPage) {
       this.index = currentPage;
       this.getMyScript();
@@ -178,7 +208,7 @@ export default {
       });
       sendJsoupMission(maId).then((res) => {
         if (res.code == "success") {
-          this.$message("执行完毕");
+          this.$router.push("myReason")
         }
       });
     },

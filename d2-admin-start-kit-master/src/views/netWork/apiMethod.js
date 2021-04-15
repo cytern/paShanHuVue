@@ -6,6 +6,22 @@ import {Notification} from 'element-ui'
 
 
 /**
+ * 添加定时任务
+ * @param maId
+ * @param times
+ * @param corn
+ * @returns {*}
+ */
+export function addTimeTaskMission (maId,times,corn) {
+  let param = {
+    maId: maId,
+    times: times,
+    corn: corn
+  }
+  let url = apiBook.customer.addTimeTaskMission + "/" + maId + "/" +corn + "/" + times
+  return axiosGet(url,param)
+}
+/**
  * 更新用户信息
  * @param userVo
  * @returns {*}

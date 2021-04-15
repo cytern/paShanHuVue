@@ -26,8 +26,19 @@ export default {
     buyMh: baseUrl + "server/customer/buyMh",
     getDetailComment:baseUrl + "server/customer/getGoodDetailComment",
     getDetailUser: baseUrl + "server/customer/getGoodDetailUsaer",
-    updateUserDetail: baseUrl + "server/customer/updateUserInfo"
-
+    updateUserDetail: baseUrl + "server/customer/updateUserInfo",
+    /**
+     * maId  corn times
+     */
+    addTimeTaskMission: baseUrl + "server/customer/addTimeTaskMission",
+    /**
+     * mhId corn times
+     */
+    updateTimeTaskMission: baseUrl + "/customer/updateTimeTaskMission",
+    /**
+     * mhId
+     */
+    deleteTimeTaskMission: baseUrl + "/customer/deleteTimeTaskMission"
 
   },
   other: {

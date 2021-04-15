@@ -8,6 +8,7 @@ import d2Admin from '@/plugin/d2admin'
 import store from '@/store/index'
 import echarts from 'echarts'
 import VCharts from 'v-charts'
+import vueCorn from 'vue-cron'
 
 // 菜单和路由设置
 import router from './router'
@@ -18,6 +19,7 @@ import { frameInRoutes } from '@/router/routes'
 Vue.use(d2Admin)
 Vue.use(echarts)
 Vue.use(VCharts)
+Vue.use(vueCorn)
 
 new Vue({
   router,
