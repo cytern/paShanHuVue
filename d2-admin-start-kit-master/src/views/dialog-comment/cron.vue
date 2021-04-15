@@ -19,9 +19,6 @@
       <el-tab-pane label="周" name="week">
         <week v-model="weekVal" lable="周"></week>
       </el-tab-pane>
-      <el-tab-pane label="年" name="year">
-        <year v-model="yearVal" lable="年"></year>
-      </el-tab-pane>
     </el-tabs>
     <!-- table -->
     <el-table
@@ -59,10 +56,6 @@
         label="周"
         width="70">
       </el-table-column>
-      <el-table-column
-        prop="yearVal"
-        label="年">
-      </el-table-column>
     </el-table>
   </div>
 </template>
@@ -73,7 +66,6 @@ import hour from './cron/hour'
 import day from './cron/day'
 import month from './cron/month'
 import week from './cron/week'
-import year from './cron/year'
 export default {
   name: "cron",
   props: {
@@ -91,7 +83,6 @@ export default {
       dVal: '',
       monthVal: '',
       weekVal: '',
-      yearVal: ''
     }
   },
   watch: {
@@ -108,7 +99,6 @@ export default {
         dVal: this.dVal,
         monthVal: this.monthVal,
         weekVal: this.weekVal,
-        yearVal: this.yearVal
       }]
     },
     value_ () {
@@ -121,7 +111,7 @@ export default {
       if (this.dVal !== '?' && this.weekVal !== '?') {
         this.$message.error('日期与星期必须有一个为“不指定”')
       }
-      let v = `${this.sVal} ${this.mVal} ${this.hVal} ${this.dVal} ${this.monthVal} ${this.weekVal} ${this.yearVal}`
+      let v = `${this.sVal} ${this.mVal} ${this.hVal} ${this.dVal} ${this.monthVal} ${this.weekVal}`
       if (v !== this.value) {
         this.$emit('input', v)
       }
@@ -140,14 +130,13 @@ export default {
       this.dVal = arrays[3]
       this.monthVal = arrays[4]
       this.weekVal = arrays[5]
-      this.yearVal = arrays[6]
     }
   },
   created () {
     this.updateVal()
   },
   components: {
-    SecondAndMinute, hour, day, month, week, year
+    SecondAndMinute, hour, day, month, week
   }
 }
 </script>

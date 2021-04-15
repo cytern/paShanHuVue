@@ -3,7 +3,9 @@
     <template slot="header">
       <el-button type="text" disabled>我的结果</el-button>
     </template>
-    <el-table :data="missionHistorys" border style="width: 100%">
+    <el-table :data="missionHistorys" border style="width: 100%"
+              :row-class-name="tableRowClassName"
+    >
       <el-table-column label="数据名称" width="180">
         <template slot-scope="scope">
           <i class="el-icon-cpu"></i>
@@ -26,10 +28,15 @@
         </template>
       </el-table-column>
       <el-table-column label="结束时间" width="180">
-        <template slot-scope="scope">
+        <template v-if="scope.row.missionState==='5'" slot-scope="scope">
+          <span style="margin-left: 10px">
+            剩余次数:{{scope.row.timeNum <0 ?'无限循环':scope.row.timeNum}}
+          </span>
+        </template>
+        <template v-else slot-scope="scope">
           <span style="margin-left: 10px">{{
-            scope.row.finishTime == null ? "未完成" : scope.row.finishTime
-          }}</span>
+              scope.row.finishTime == null ? "未完成" : scope.row.finishTime
+            }}</span>
         </template>
       </el-table-column>
       <el-table-column label="目前状态" width="180">
@@ -69,6 +76,9 @@
                 <el-button size="mini" type="danger">执行失败</el-button>
               </el-tooltip>
             </template>
+            <template v-if="scope.row.missionState == '5'">
+              定时任务生效中
+            </template>
           </span>
         </template>
       </el-table-column>
@@ -90,8 +100,7 @@
             >市场化</el-button
           >
           </template>
-
-          <!-- TODO 将来拥有执行队列 可以设计取消按钮 -->
+<!--          等待状态允许取消-->
           <template v-if="scope.row.missionState == '1'">
             <el-button
               size="mini"
@@ -100,6 +109,21 @@
               >取消</el-button
             >
           </template>
+<!--          定时任务状态允许修改-->
+          <template v-if="scope.row.missionState == '5'">
+            <el-button
+              size="mini"
+              type="primary"
+              @click="updateTimeMission(scope.$index, scope.row)"
+            >修改</el-button
+            >
+            <el-button
+              size="mini"
+              type="warning"
+              @click="deleteTimeMission(scope.$index, scope.row)"
+            >取消</el-button
+            >
+        </template>
         </template>
       </el-table-column>
     </el-table>
@@ -166,6 +190,21 @@ export default {
     this.getOriginData();
   },
   methods: {
+    updateTimeMission (index,row) {
+
+    },
+    deleteTimeMission (index,row) {
+
+    },
+
+    tableRowClassName ({row, rowIndex}) {
+      if (row.missionState === "5") {
+        return 'success-row';
+      } else {
+        return '';
+      }
+
+    },
     sendShop(ma) {
       this.tempHs = ma;
       this.shopDia = true;

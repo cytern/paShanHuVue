@@ -4,6 +4,26 @@ import {userPojo,jsoupUser} from "@/views/model/userPojo"
 import store from '@/store/index'
 import {Notification} from 'element-ui'
 
+export function deleteTimeTask (mhId) {
+  let url = apiBook.customer.deleteTimeTaskMission + "/" +mhId
+  return axiosGet(url)
+}
+/**
+ * 修改定时任务
+ * @param mhId
+ * @param times
+ * @param corn
+ * @returns {*}
+ */
+export function updateTimeTask (mhId,times,corn) {
+  let param = {
+    id: mhId,
+    times: times,
+    corn: corn
+  }
+  let url = apiBook.customer.updateTimeTaskMission
+  return axiosPostJson(url,param)
+}
 
 /**
  * 添加定时任务
@@ -14,12 +34,12 @@ import {Notification} from 'element-ui'
  */
 export function addTimeTaskMission (maId,times,corn) {
   let param = {
-    maId: maId,
+    id: maId,
     times: times,
     corn: corn
   }
-  let url = apiBook.customer.addTimeTaskMission + "/" + maId + "/" +corn + "/" + times
-  return axiosGet(url,param)
+  let url = apiBook.customer.addTimeTaskMission
+  return axiosPostJson(url,param)
 }
 /**
  * 更新用户信息

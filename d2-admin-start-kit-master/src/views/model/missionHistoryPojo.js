@@ -29,7 +29,10 @@ export default {
       tips: null,
       userName: null,
       isAoto: null,
-      hsUrl: null
+      hsUrl: null,
+      isTimeTask: null,
+      timeNum: null,
+      timeCorn: null
     }
     return mah;
   }
