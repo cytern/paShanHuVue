@@ -63,6 +63,13 @@
               @click="sendEdit(scope.$index, scope.row)"
               >编辑</el-button
             >
+            <el-button
+              v-if="scope.row.jsoupMissionAll.maState != 2"
+              size="mini"
+              type="success"
+              @click="sendCopy(scope.$index, scope.row)"
+            >复制</el-button
+            >
             <!-- 市场化操作 -->
             <el-button
               size="mini"
@@ -185,6 +192,13 @@ export default {
     closeDia() {
       this.tempMa = JsoupMissionAll();
       this.shopDia = false;
+    },
+    sendCopy(index,item) {
+      let id = item.jsoupMissionAll.maId
+      this.$store.state.isCopy = 1
+      this.$router.push({
+        path: '/myEditScript'
+      })
     },
     /**
      * 修改脚本

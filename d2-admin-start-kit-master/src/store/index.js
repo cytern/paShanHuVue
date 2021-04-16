@@ -19,6 +19,7 @@ export default new Vuex.Store({
     missionDatas: [],
     maId: null,
     userVo: null,
+    isCopy:0,
     goodDetail: new goodDetail()
   },
   getters: {

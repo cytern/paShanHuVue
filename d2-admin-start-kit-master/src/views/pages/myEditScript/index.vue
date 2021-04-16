@@ -615,12 +615,29 @@ export default {
         //赋值 如果是跳转时带着id参数
         this.missionAllDataId = this.$store.state.maId;
         this.getScript();
+        //如果是复制过来的 则初始化参数
+        if (this.$store.state.isCopy === 1) {
+          this.copyMissionData(this.missionData)
+          this.$store.state.isCopy = 0
+        }
       } else {
         this.missionData = new MissionAllData();
       }
       pushMissionData(this.missionData);
       this.getIndex();
       this.initTipsMethod()
+    //
+    },
+    copyMissionData (missionData) {
+      missionData.jsoupMissionAll.maId = -1
+      for (let i = 0; i < missionData.missionDataList.length; i++) {
+        missionData.missionDataList[i].jsoupMission.missionId = -1
+        for (let j = 0; j < missionData.missionDataList[i].actionVos.length; j++) {
+          missionData.missionDataList[i].actionVos[j].jsoupAction.actionId = -1
+          missionData.missionDataList[i].actionVos[j].jsoupPragrams.pragramId  = -1
+        }
+      }
+
     },
     //获取脚本
     getScript() {
