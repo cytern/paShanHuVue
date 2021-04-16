@@ -17,7 +17,7 @@
           <el-popover trigger="hover" placement="top">
             <p>用途: {{ scope.row.missionAllDis }}</p>
             <div slot="reference" class="name-wrapper">
-              <el-tag size="medium">{{ scope.row.missionAllDis }}</el-tag>
+              <el-tag size="medium" class="inlineDes">{{ scope.row.missionAllDis }}</el-tag>
             </div>
           </el-popover>
         </template>
