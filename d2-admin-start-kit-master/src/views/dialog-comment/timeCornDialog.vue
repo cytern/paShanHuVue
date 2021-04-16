@@ -12,9 +12,16 @@
          </el-select>
        </el-form-item>
        <el-form-item v-if="eachType == 2" label="循环次数">
-         <el-input v-model="timeTask.times"></el-input>
+         <el-input style="width: 30%" v-model="timeTask.times"></el-input>
        </el-form-item>
+       <el-form-item label="快速选择周期" >
+         <el-select v-model="timeTask.corn">
+           <el-option v-for="(item ,index) in quickSelect" :key="index" :value="item.value" :label="item.name"></el-option>
+         </el-select>
+       </el-form-item>
+       <el-form-item label="定时任务选择盘">
        <cron v-model="timeTask.corn"></cron>
+       </el-form-item>
      </el-form>
     <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
@@ -26,6 +33,7 @@
 <script>
 import {TimeTask} from "../model/timeTaskVo";
 import cron from "./cron";
+import {CronSelectType} from "../model/cronSelectType";
 export default {
   name: "timeCornDialog",
   components: {
@@ -36,6 +44,7 @@ export default {
        timeTask: new TimeTask(),
        eachType: null,
       dialogVisible: false,
+      quickSelect:new CronSelectType()
     }
   },
   methods: {
