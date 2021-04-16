@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="84defb8f-3548-49d1-aa90-9df766068b41" name="Default Changelist" comment="需求 添加定时任务">
+    <list default="true" id="84defb8f-3548-49d1-aa90-9df766068b41" name="Default Changelist" comment="bug 定时任务 不能包含年">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/dialog-comment/cron.vue" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/dialog-comment/cron.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/model/missionHistoryPojo.js" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/model/missionHistoryPojo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/netWork/apiBook.js" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/netWork/apiBook.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/netWork/apiMethod.js" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/netWork/apiMethod.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/pages/myReason/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/pages/myReason/index.vue" afterDir="false" />
     </list>
@@ -75,17 +74,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="serve" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/d2-admin-start-kit-master/package.json" />
       <command value="run" />
@@ -127,7 +115,8 @@
       <workItem from="1618228559762" duration="19232000" />
       <workItem from="1618363160616" duration="10550000" />
       <workItem from="1618403756747" duration="17137000" />
-      <workItem from="1618490529608" duration="6610000" />
+      <workItem from="1618490529608" duration="7025000" />
+      <workItem from="1618536317940" duration="2466000" />
     </task>
     <task id="LOCAL-00001" summary="需求 云服务器部署">
       <created>1618020378426</created>
@@ -213,7 +202,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618497339739</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="bug 定时任务 不能包含年">
+      <created>1618499481308</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1618499481308</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,6 +240,7 @@
     <MESSAGE value="需求 编辑脚本页面输入详情 且详情统一格式" />
     <MESSAGE value="bug 脚本详情显示bug" />
     <MESSAGE value="需求 添加定时任务" />
-    <option name="LAST_COMMIT_MESSAGE" value="需求 添加定时任务" />
+    <MESSAGE value="bug 定时任务 不能包含年" />
+    <option name="LAST_COMMIT_MESSAGE" value="bug 定时任务 不能包含年" />
   </component>
 </project>

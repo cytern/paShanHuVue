@@ -4,6 +4,11 @@ import {userPojo,jsoupUser} from "@/views/model/userPojo"
 import store from '@/store/index'
 import {Notification} from 'element-ui'
 
+/**
+ * 删除定时任务
+ * @param mhId
+ * @returns {*}
+ */
 export function deleteTimeTask (mhId) {
   let url = apiBook.customer.deleteTimeTaskMission + "/" +mhId
   return axiosGet(url)

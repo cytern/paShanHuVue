@@ -102,12 +102,14 @@
           </template>
 <!--          等待状态允许取消-->
           <template v-if="scope.row.missionState == '1'">
-            <el-button
-              size="mini"
-              type="warning"
-              @click="handleDelete(scope.$index, scope.row)"
+
+              <el-button
+                slot="reference"
+                size="mini"
+                type="warning"
+                @click="deleteTimeMission(scope.$index, scope.row)"
               >取消</el-button
-            >
+              >
           </template>
 <!--          定时任务状态允许修改-->
           <template v-if="scope.row.missionState == '5'">
@@ -118,10 +120,11 @@
             >修改</el-button
             >
             <el-button
+              slot="reference"
               size="mini"
-              type="warning"
+              type="danger"
               @click="deleteTimeMission(scope.$index, scope.row)"
-            >取消</el-button
+            >删除</el-button
             >
         </template>
         </template>
@@ -160,6 +163,7 @@
         <el-button type="primary" @click="sendChange">确 定</el-button>
       </div>
     </el-dialog>
+    <time-corn-dialog ref="timeCornDialog" @func="backData"></time-corn-dialog>
   </d2-container>
 </template>
 
@@ -167,11 +171,21 @@
 import leidatu from "../../echart-comment/leidatu";
 import leidatu2 from "../../echart-comment/leidatu2";
 import leidatu3 from "../../echart-comment/leidatu3";
-import { getMyMissionHistorys, downloadExcel,setMhState } from "../../netWork/apiMethod";
+import {
+  getMyMissionHistorys,
+  downloadExcel,
+  setMhState,
+  deleteTimeTask,
+  updateTimeTask,
+  addTimeTaskMission
+} from "../../netWork/apiMethod";
 import { JsoupMissionAllHistory } from "../../model/missionHistoryPojo";
+import {TimeTask} from "../../model/timeTaskVo";
+import TimeCornDialog from "../../dialog-comment/timeCornDialog";
 export default {
   name: "studentCharts",
   components: {
+    TimeCornDialog,
     leidatu,
     leidatu2,
     leidatu3,
@@ -184,16 +198,50 @@ export default {
       pageNum: 0,
       tempHs: new JsoupMissionAllHistory(),
       shopDia: false,
+      timeTask:new TimeTask(),
+      tempMhId: null,
     };
   },
   mounted() {
     this.getOriginData();
   },
   methods: {
+    backData ( timeTask) {
+      if (timeTask.times == null){
+        timeTask.times = -1
+      }
+      this.timeTask.times = -1
+      updateTimeTask(this.tempMaId,this.timeTask.times,this.timeTask.corn).then(
+        res => {
+          if (res.code == "success") {
+            this.$message.success(res.msg)
+          }
+        }
+      )
+      this.getOriginData()
+    },
     updateTimeMission (index,row) {
-
+      let timeTask = new TimeTask()
+      timeTask.corn = row.timeCorn
+      timeTask.times = row.timeNum
+      this.timeTask = timeTask
+     this.tempMhId = row.missionAllHistoryId
+      this.$refs.timeCornDialog.initTimeData(this.timeTask)
     },
     deleteTimeMission (index,row) {
+      this.$alert('您将删除此次任务?', '是否确认', {
+        confirmButtonText: '确定',
+        callback: action => {
+          deleteTimeTask(row.missionAllHistoryId).then(
+            res => {
+              if (res.code == "success") {
+                this.$message.success("删除成功")
+              }
+            }
+          )
+          this.getOriginData()
+        }
+      });
 
     },
 

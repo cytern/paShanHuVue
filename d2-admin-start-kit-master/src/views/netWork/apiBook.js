@@ -34,11 +34,11 @@ export default {
     /**
      * mhId corn times
      */
-    updateTimeTaskMission: baseUrl + "/customer/updateTimeTaskMission",
+    updateTimeTaskMission: baseUrl + "server/customer/updateTimeTaskMission",
     /**
      * mhId
      */
-    deleteTimeTaskMission: baseUrl + "/customer/deleteTimeTaskMission"
+    deleteTimeTaskMission: baseUrl + "server/customer/deleteTimeTaskMission"
 
   },
   other: {
