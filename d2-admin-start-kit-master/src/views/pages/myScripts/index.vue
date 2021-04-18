@@ -24,14 +24,6 @@
           </el-popover>
         </template>
       </el-table-column>
-      <el-table-column label="起始地址" width="360">
-        <template slot-scope="scope">
-          <i class="el-icon-position"></i>
-          <span style="margin-left: 10px">{{
-            scope.row.jsoupMissionAll.malStartUrl
-          }}</span>
-        </template>
-      </el-table-column>
       <el-table-column label="结果集名称" width="250">
         <template slot-scope="scope">
           <i class="el-icon-chat-line-square"></i>
@@ -64,7 +56,6 @@
               >编辑</el-button
             >
             <el-button
-              v-if="scope.row.jsoupMissionAll.maState != 2"
               size="mini"
               type="success"
               @click="sendCopy(scope.$index, scope.row)"
