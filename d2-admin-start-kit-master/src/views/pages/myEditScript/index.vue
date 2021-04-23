@@ -383,6 +383,7 @@ export default {
               this.getIndex();
             }
           });
+          this.$message.success("保存成功");
         }
       });
     },
@@ -616,7 +617,7 @@ export default {
         this.missionAllDataId = this.$store.state.maId;
         this.getScript();
         //如果是复制过来的 则初始化参数
-        if (this.$store.state.isCopy === 1) {
+        if (this.$store.state.isCopy == 1) {
           this.copyMissionData(this.missionData)
           this.$store.state.isCopy = 0
         }
