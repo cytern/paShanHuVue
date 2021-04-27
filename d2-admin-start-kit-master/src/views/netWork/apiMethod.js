@@ -4,6 +4,17 @@ import {userPojo,jsoupUser} from "@/views/model/userPojo"
 import store from '@/store/index'
 import {Notification} from 'element-ui'
 
+
+/**
+ * 获取商品列表
+ * @param index 页码
+ * @param pageSize 页面容量
+ * @param type 类型 1脚本 2数据
+ */
+export function getGoodList(index,pageSize,type,searchData) {
+   let url = apiBook.customer.getGoodList + "/" + pageSize + "/" + index + "/" + type
+   return axiosPostJson(url,searchData)
+}
 /**
  * 删除定时任务
  * @param mhId

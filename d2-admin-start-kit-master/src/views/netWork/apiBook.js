@@ -38,7 +38,11 @@ export default {
     /**
      * mhId
      */
-    deleteTimeTaskMission: baseUrl + "server/customer/deleteTimeTaskMission"
+    deleteTimeTaskMission: baseUrl + "server/customer/deleteTimeTaskMission",
+    /**
+     * 获取商品列表
+     */
+    getGoodList: baseUrl + "server/customer/getGoodsList"
 
   },
   other: {

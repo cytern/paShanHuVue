@@ -2,9 +2,10 @@
   <d2-container>
     <template slot="header">
       <el-button type="text" disabled>脚本市场</el-button>
+      <search-comment ref="searchComment" @func="backSearch"></search-comment>
     </template>
      <!-- 卡片式改写 -->
-       <template v-for="(item, index) in missionDatas">
+       <template v-for="(item, index) in goodList">
       <el-card
         :class="index%4===0?'box-card cardBackground1':
                   index%3===0?'box-card cardBackground2':
@@ -27,9 +28,9 @@
             <!-- 第一行是标题  用两块的第一块表示名称-->
             <el-row :getter="60" style="margin-bottom: 26px">
               <el-col :span="12">
-                <el-button type="text" @click="goToMaDetail(item)">
+                <el-button type="text" @click="goToMaDetail(item.id)">
                    <span style="font-size: 16px; font-weight: 600">{{
-                       item.maName
+                       item.goodName
                      }}</span>
                 </el-button>
 
@@ -41,13 +42,13 @@
               <el-col :span="12" class="inlineDes">
                 <span  >用途:&nbsp;&nbsp;</span
                 ><span  class="idlike" style="color: rgba(34, 28, 28, 0.555);">{{
-                  item.maTip
+                  item.des
                 }}</span>
               </el-col>
               <el-col :span="12">
                 <span>类型:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)">{{
-                  item.isAuto == "1" ? "官方" : "自制"
+                  item.type == 1 ? "脚本" : "数据"
                 }}</span>
               </el-col>
             </el-row>
@@ -56,7 +57,7 @@
               <el-col :span="12">
                 <span>评分:&nbsp;&nbsp;</span
                 ><el-rate
-                  :value="item.saleRate == null ? 0 : item.maRate"
+                  :value="item.rate == null ? 0 : item.rate"
                   disabled
                   text-color="#ff9900"
                   style="display: inline-block"
@@ -66,7 +67,7 @@
               <el-col :span="12">
                 <span>创建者:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)">{{
-                  item.userName
+                  item.createUser
                 }}</span>
               </el-col>
             </el-row>
@@ -75,13 +76,13 @@
               <el-col :span="12">
                 <span>销量:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)">{{
-                  item.maSaleNum
+                  item.saleNum
                 }}</span>
               </el-col>
               <el-col :span="12">
                 <span>上架时间:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)">{{
-                  item.createTime
+                  item.sendTime
                 }}</span>
               </el-col>
             </el-row>
@@ -98,14 +99,13 @@
             </el-row>
             <el-row :getter="60" style="margin-bottom: 16px">
               <el-col :span="24">
-                <el-button v-if="item.userId==0"
+                <el-button v-if="item.have == 0 || item.have == null"
                   type="success"
                   style="width: 100%"
                   @click="sendBuy(item)"
-                  >购买 ( {{item.maPrice}}代币 )</el-button
+                  >购买 ( {{item.price}}代币 )</el-button
                 >
-                <el-button style="width: 100%" v-else-if="item.userId==2" disabled type="warning">已在库中</el-button>
-                <el-button style="width: 100%" v-else-if="item.userId==1" disabled type="warning">我提供的</el-button>
+                <el-button style="width: 100%" v-else disabled type="warning">已在库中</el-button>
               </el-col>
             </el-row>
           </el-col>
@@ -129,10 +129,13 @@
 import leidatu from "../../echart-comment/leidatu";
 import leidatu2 from "../../echart-comment/leidatu2";
 import leidatu3 from "../../echart-comment/leidatu3";
-import { getSalesMa, buyMa } from "../../netWork/apiMethod";
+import SearchComment from "../../dialog-comment/SearchComment";
+import { getSalesMa, buyMa,getGoodList } from "../../netWork/apiMethod";
 import { JsoupMissionAll } from "../../model/missionAllPojo";
 import {maToDetail} from "../../model/detailPojo";
 import {formateMaData} from "../../model/missionAllPojo";
+import {GoodList} from "../../model/goodList";
+import {SearchGoodVo} from "../../model/searchGoodVo";
 
 export default {
   name: "scriptShop",
@@ -140,10 +143,12 @@ export default {
     leidatu,
     leidatu2,
     leidatu3,
+    SearchComment
   },
   data() {
     return {
-      missionDatas: [new JsoupMissionAll()],
+      goodList: new GoodList(),
+      searchVo: new SearchGoodVo(),
       pageSize: 10,
       index: 1,
       pageNum: 0,
@@ -154,6 +159,9 @@ export default {
     this.getOriginData();
   },
   methods: {
+    backSearch (searchData) {
+      this.searchVo = searchData
+    },
     /**
      *打开商品详情页
      */
@@ -172,7 +180,7 @@ export default {
         type: "warning",
       })
         .then(() => {
-            buyMa(jsMa.maId).then((res) => {
+            buyMa(jsMa.id).then((res) => {
               if (res.code == "success") {
                 this.$message({
                   type: "success",
@@ -190,13 +198,17 @@ export default {
      * 获取我的脚本
      */
     getMyScript() {
-      getSalesMa(this.pageSize, this.index).then((res) => {
-        this.missionDatas = res.maList;
-        this.pageNum = res.pageNum;
-        for (let i = 0; i < this.missionDatas.length; i++) {
-          this.missionDatas[i] = formateMaData(this.missionDatas[i])
-        }
-      });
+       getGoodList(this.index,this.pageSize,1,this.searchVo).then(
+         res => {
+           if (res.code == "success") {
+             let list =res.list
+             for (let i = 0; i < list.length; i++) {
+               list[i].tips  = formateMaData(list[i].tips)
+             }
+             this.goodList = list
+           }
+         }
+       )
     },
     getOriginData() {
       this.getMyScript();
