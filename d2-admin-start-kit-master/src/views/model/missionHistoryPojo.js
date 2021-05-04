@@ -38,6 +38,12 @@ export default {
   }
 
   export function formateMhData(mh) {
+    if (mh == null) {
+      return null;
+    }
+    if (mh.tips == null) {
+      return null;
+    }
     let tips = mh.tips
     let arry = new Array()
     arry = tips.split(";");

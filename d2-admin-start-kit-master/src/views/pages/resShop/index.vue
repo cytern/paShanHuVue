@@ -2,9 +2,10 @@
   <d2-container>
     <template slot="header">
       <el-button type="text" disabled>结果集市场</el-button>
+      <search-comment ref="searchComment" @func="backSearch" @after="getOriginData"> </search-comment>
     </template>
     <!-- 新式改写卡片 仿照3dm样式 -->
-    <template v-for="(item, index) in missionHistorys">
+    <template v-for="(item, index) in goodList">
         <el-card
           :class="index%4===0?'box-card cardBackground1':
                   index%3===0?'box-card cardBackground2':
@@ -28,7 +29,7 @@
               <el-row :getter="60" style="margin-bottom: 26px">
                 <el-col :span="12">
                 <span @click="goToDetail(item)" style="font-size: 16px; font-weight: 600">{{
-                    item.missionAllName
+                    item.goodName
                   }}</span>
                 </el-col>
                 <el-col :span="12"></el-col>
@@ -38,13 +39,13 @@
                 <el-col :span="12">
                 <span >用途:&nbsp;&nbsp;</span
                 ><span  class="idlike" style="color: rgba(34, 28, 28, 0.555)">{{
-                    item.missionAllDis
+                    item.des
                   }}</span>
                 </el-col>
                 <el-col :span="12">
                 <span>类型:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)">{{
-                    item.isAoto == "1" ? "官方" : "自制"
+                    item.type == "1" ? "脚本" : "数据"
                   }}</span>
                 </el-col>
               </el-row>
@@ -53,7 +54,7 @@
                 <el-col :span="12">
                 <span>评分:&nbsp;&nbsp;</span
                 ><el-rate
-                  :value="item.saleRate == null ? 0 : item.saleRate"
+                  :value="item.rate == null ? 0 : item.rate"
                   disabled
                   text-color="#ff9900"
                   style="display: inline-block"
@@ -63,7 +64,7 @@
                 <el-col :span="12">
                 <span>创建者:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)">{{
-                    item.userName
+                    item.createUser
                   }}</span>
                 </el-col>
               </el-row>
@@ -72,13 +73,13 @@
                 <el-col :span="12">
                 <span>销量:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)">{{
-                    item.saleNum
+                    item.saleNum == null ? 0 : item.saleNum
                   }}</span>
                 </el-col>
                 <el-col :span="12">
                 <span>上架时间:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)">{{
-                    item.finishTime
+                    item.sendTime
                   }}</span>
                 </el-col>
               </el-row>
@@ -96,14 +97,13 @@
               <el-row :getter="60" style="margin-bottom: 16px">
                 <el-col :span="24">
                   <el-button
-                    v-if="item.userId==0"
+                    v-if="item.have == 0 || item.have == null"
                     type="success"
                     style="width: 100%"
                     @click="sendBuy(item)"
-                  >购买 ( {{item.salePrice}}代币 )</el-button
+                  >购买 ( {{item.price}}代币 )</el-button
                   >
-                  <el-button style="width: 100%" v-else-if="item.userId==2" disabled type="warning">已在库中</el-button>
-                  <el-button style="width: 100%" v-else-if="item.userId==1" disabled type="warning">我提供的</el-button>
+                  <el-button style="width: 100%" v-else disabled type="warning">已在库中</el-button>
                 </el-col>
               </el-row>
             </el-col>
@@ -126,10 +126,13 @@
 import leidatu from "../../echart-comment/leidatu";
 import leidatu2 from "../../echart-comment/leidatu2";
 import leidatu3 from "../../echart-comment/leidatu3";
-import { buyMh, getSalesMh } from "../../netWork/apiMethod";
+import SearchComment from "../../dialog-comment/SearchComment";
+import {buyMh, getSalesMh, getGoodList, downloadExcel} from "../../netWork/apiMethod";
 import { JsoupMissionAllHistory } from "../../model/missionHistoryPojo";
 import {mhToDetail} from "../../model/detailPojo";
 import {formateMhData} from "../../model/missionHistoryPojo";
+import {SearchGoodVo} from "../../model/searchGoodVo";
+import {GoodList} from "../../model/goodList";
 
 export default {
   name: "resShop",
@@ -137,6 +140,7 @@ export default {
     leidatu,
     leidatu2,
     leidatu3,
+    SearchComment
   },
   data() {
     return {
@@ -144,12 +148,17 @@ export default {
       pageSize: 10,
       index: 1,
       pageNum: 0,
+      searchData: new SearchGoodVo(),
+      goodList: [new GoodList()]
     };
   },
   mounted() {
     this.getOriginData();
   },
   methods: {
+    backSearch (searchData) {
+      this.searchData = searchData
+    },
 
     goToDetail (item) {
       let detail = mhToDetail(item);
@@ -195,12 +204,18 @@ export default {
       this.getMyHistory();
     },
     getMyHistory() {
-      getSalesMh(this.pageSize, this.index).then((res) => {
-        (this.missionHistorys = res.mhList), (this.pageNum = res.pageNum);
-        for (let i = 0; i < this.missionHistorys.length; i++) {
-          this.missionHistorys[i] = formateMhData(this.missionHistorys[i])
+      getGoodList(this.index,this.pageSize,2,this.searchData).then(
+        res => {
+          if (res.code = "success") {
+            let tempList = res.list
+            for (let i = 0; i < tempList.length; i++) {
+              tempList[i].tips = formateMhData(tempList.tips)
+            }
+            this.goodList = tempList
+          }
+
         }
-      });
+      )
     },
 
     getOriginData() {

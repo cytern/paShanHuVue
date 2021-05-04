@@ -130,10 +130,16 @@ export function JsoupAction() {
 }
 
 export function formateMaData(ma) {
+  if (ma == null) {
+    return null;
+  }
+  if (ma.tips == null) {
+    return null;
+  }
   let tips = ma.tips
-  let arry = []
-  arry = tips.   split(";");
-  ma.tips = arry
+  let array = []
+  array = tips.split(";");
+  ma.tips = array
   return ma;
 }
 

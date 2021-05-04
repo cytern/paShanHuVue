@@ -39,6 +39,16 @@ export default {
       searchVo:new SearchGoodVo()
     }
   },
+  watch: {
+    searchVo : {
+      handler(newSearch,oldSearch) {
+           this.searchVo = newSearch
+           this.sendData()
+        this.$emit('after')
+      },
+      deep: true
+    }
+  },
   methods: {
       initSearchData(searchData) {
         this.searchVo = searchData
@@ -57,6 +67,9 @@ export default {
            this.searchVo.sortByRate = 1
          }
      },
+    changeData () {
+
+    },
     sendData () {
       this.$emit('func',this.searchVo)
     }

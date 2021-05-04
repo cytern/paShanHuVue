@@ -2,7 +2,7 @@
   <d2-container>
     <template slot="header">
       <el-button type="text" disabled>脚本市场</el-button>
-      <search-comment ref="searchComment" @func="backSearch"></search-comment>
+      <search-comment ref="searchComment" @func="backSearch" @after="getOriginData"> </search-comment>
     </template>
      <!-- 卡片式改写 -->
        <template v-for="(item, index) in goodList">
@@ -147,7 +147,7 @@ export default {
   },
   data() {
     return {
-      goodList: new GoodList(),
+      goodList: [new GoodList()],
       searchVo: new SearchGoodVo(),
       pageSize: 10,
       index: 1,
