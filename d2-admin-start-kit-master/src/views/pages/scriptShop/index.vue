@@ -28,7 +28,7 @@
             <!-- 第一行是标题  用两块的第一块表示名称-->
             <el-row :getter="60" style="margin-bottom: 26px">
               <el-col :span="12">
-                <el-button type="text" @click="goToMaDetail(item.id)">
+                <el-button type="text" @click="goToMaDetail(item)">
                    <span style="font-size: 16px; font-weight: 600">{{
                        item.goodName
                      }}</span>
@@ -115,13 +115,7 @@
 
 
     <!-- 分页组件 目前是简单分页 -->
-    <el-pagination
-      background
-      layout="prev, pager, next"
-      :total="pageNum"
-      :current-page="index"
-    >
-    </el-pagination>
+   <page-comment @func="changeIndex" ref="pageComment"></page-comment>
   </d2-container>
 </template>
 
@@ -136,6 +130,7 @@ import {maToDetail} from "../../model/detailPojo";
 import {formateMaData} from "../../model/missionAllPojo";
 import {GoodList} from "../../model/goodList";
 import {SearchGoodVo} from "../../model/searchGoodVo";
+import PageComment from "../../dialog-comment/PageComment";
 
 export default {
   name: "scriptShop",
@@ -143,7 +138,8 @@ export default {
     leidatu,
     leidatu2,
     leidatu3,
-    SearchComment
+    SearchComment,
+    PageComment
   },
   data() {
     return {
@@ -159,6 +155,11 @@ export default {
     this.getOriginData();
   },
   methods: {
+    changeIndex(index,pageSize) {
+      this.index = index
+        this.pageSize = pageSize
+      this.getOriginData()
+    },
     backSearch (searchData) {
       this.searchVo = searchData
     },
@@ -166,8 +167,7 @@ export default {
      *打开商品详情页
      */
     goToMaDetail (item) {
-     let detail =  maToDetail(item);
-     this.$store.state.goodDetail = detail
+      this.$store.state.goodDetail = item
       this.$router.push("goodDetail")
     },
     /**
@@ -193,6 +193,7 @@ export default {
         })
         .catch(() => {});
     },
+
 
     /**
      * 获取我的脚本

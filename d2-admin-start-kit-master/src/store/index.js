@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import { userPojo } from "../views/model/userPojo";
 import {goodDetail,maToDetail,mhToDetail} from "../views/model/detailPojo"
 import d2admin from './modules/d2admin'
+import {GoodList} from "../views/model/goodList";
 
 Vue.use(Vuex)
 
@@ -20,7 +21,7 @@ export default new Vuex.Store({
     maId: null,
     userVo: null,
     isCopy:0,
-    goodDetail: new goodDetail()
+    goodDetail: new GoodList()
   },
   getters: {
     getCode (state) {

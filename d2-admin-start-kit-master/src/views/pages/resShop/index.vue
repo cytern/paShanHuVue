@@ -161,8 +161,7 @@ export default {
     },
 
     goToDetail (item) {
-      let detail = mhToDetail(item);
-      this.$store.state.goodDetail = detail
+      this.$store.state.goodDetail = item
       this.$router.push("goodDetail")
     },
     /**

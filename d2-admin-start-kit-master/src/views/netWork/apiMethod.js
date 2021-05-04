@@ -98,7 +98,7 @@ export function getDetailComment (pageSize,index,id,type) {
 }
 /**
  * 购买一个结果集
- * @param {结果集id}} mhId
+ * @param  mhId
  * @returns 提示消息
  */
 export function buyMh (mhId) {

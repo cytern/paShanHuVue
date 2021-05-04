@@ -14,7 +14,7 @@
           <el-row :getter="60" style="margin-bottom: 26px">
             <el-col :span="12">
                 <span style="font-size: 16px; font-weight: 600">{{
-                    tempGoodDetail.name
+                    tempGoodDetail.goodName
                   }}</span>
             </el-col>
             <el-col :span="12"></el-col>
@@ -30,7 +30,7 @@
             <el-col :span="12">
                 <span>类型:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)">{{
-                tempGoodDetail.isAuto == "1" ? "官方" : "自制"
+                tempGoodDetail.have == "0" ? "未拥有" : "已经拥有"
               }}</span>
             </el-col>
           </el-row>
@@ -50,7 +50,7 @@
             <el-col :span="12">
                 <span>创建者:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)">{{
-                tempGoodDetail.userName
+                tempGoodDetail.createUser
               }}</span>
             </el-col>
           </el-row>
@@ -59,13 +59,13 @@
             <el-col :span="12">
                 <span>销量:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)">{{
-                tempGoodDetail.saleNum
+                tempGoodDetail.saleNum == null ? 0 : tempGoodDetail.saleNum
               }}</span>
             </el-col>
             <el-col :span="12">
                 <span>上架时间:&nbsp;&nbsp;</span
                 ><span style="color: rgba(34, 28, 28, 0.555)">{{
-                tempGoodDetail.time
+                tempGoodDetail.sendTime
               }}</span>
             </el-col>
           </el-row>
@@ -83,7 +83,7 @@
           <el-row :getter="60" style="margin-bottom: 16px">
             <el-col :span="24">
               <el-button
-                v-if="tempGoodDetail.userId == 0"
+                v-if="tempGoodDetail.have == 0"
                 style="width: 50%"
                 type="success"
                 @click="sendBuy(tempGoodDetail)"
@@ -91,19 +91,11 @@
               </el-button
               >
               <el-button
-                v-else-if="tempGoodDetail.userId == 2"
+                v-else
                 disabled
                 style="width: 50%"
                 type="warning"
               >已在库中
-              </el-button
-              >
-              <el-button
-                v-else-if="tempGoodDetail.userId == 1"
-                disabled
-                style="width: 50%"
-                type="warning"
-              >我提供的
               </el-button
               >
             </el-col>
@@ -204,70 +196,7 @@
       </el-row>
 <!--      评价 需要循环评价列表  底部打分割线-->
 
-     <template name="评价例子模型" style="margin-top: 10px" v-for="(item,index) in comments">
-<!--       划分左右两块-->
-       <div v-if="item.commentDes !=null && item.userId != null">
-       <el-row style="margin-bottom: 10px" :key="index">
-<!--         左边块为头像等部分 暂时如此设计-->
-         <el-col :span="4"
-         >
-           <i class="el-icon-user"></i>
-         </el-col
-         >
-<!--         右边块为主要设计-->
-         <el-col :span="20"
-         >
-<!--          再细分 第一行应该包含评价人信息 评价人等级以及 评价人昵称-->
-           <el-row :gutter="30">
-<!--             评价人昵称-->
-             <el-col :span="6">
-               <span style="color: #13a19d;font-size:19px">{{ item.userNickName }}</span>
-             </el-col>
-<!--             评价人等级-->
-             <el-col :span="11">
-               <el-tag>lv:{{item.lever}}</el-tag>
-             </el-col>
-<!--             末尾处是评价时间-->
-             <el-col :span="7">
-               {{item.sentTime}}
-             </el-col>
-           </el-row>
-<!--           第二行应该包括评价内容-->
-           <el-row style="margin-top: 15px">
-             <el-col>
-               <span style="font-weight: 600;font-size: 20px">{{item.commentDes}}</span>
-             </el-col>
-           </el-row>
-<!--      第三行 签名-->
-           <el-row style="margin-top: 30px">
-             <el-col :span="18" style="font-size: 12px;color: rgb(69,31,2)">
-               <span>{{item.userDes}}</span>
-             </el-col>
-<!--             点赞-->
-             <el-col :span="3">
-               <i class="fa fa-thumbs-up" aria-hidden="true">{{item.upNum}}</i>
-             </el-col>
-<!--             点踩-->
-             <el-col :span="3">
-               <i class="fa fa-thumbs-down" aria-hidden="true">{{item.downNum}}</i>
-             </el-col>
-           </el-row>
-         </el-col
-         >
-       </el-row>
-       </div>
-       <el-divider><i class="el-icon-mobile-phone"></i></el-divider>
-     </template>
-
-
-       <el-pagination
-        background
-        layout="prev, pager, next"
-        :total="pageNum"
-        :current-page="index"
-        @current-change="reflashPage"
-      >
-      </el-pagination>
+    <CommentDialog></CommentDialog>
 </el-card>
   </d2-container>
 </template>
@@ -275,15 +204,19 @@
 <script>
 import {buyMa, buyMh,getDetailComment,getDetailUser} from "../../netWork/apiMethod";
 import {goodDetail} from "../../model/detailPojo";
-import {CommentVo} from  "../../model/commentPojo";
+import {CommentVo} from "../../model/CommentVo";
 import {JsoupUserDetail} from "../../model/userPojo";
+import {GoodList} from "../../model/goodList";
+import CommentDialog from "../../dialog-comment/CommentDialog";
 
 export default {
   name: "myGoodDetail",
-  components: {},
+  components: {
+    CommentDialog
+  },
   data() {
     return {
-      tempGoodDetail: new goodDetail(),
+      tempGoodDetail: new GoodList(),
       comments: [new CommentVo()],
       index: 1,
       pageNum: 0,
@@ -300,7 +233,7 @@ export default {
   },
   methods: {
     getUserInfo () {
-      getDetailUser(this.tempGoodDetail.id,this.tempGoodDetail.type).then(
+      getDetailUser(this.tempGoodDetail.ownerId,this.tempGoodDetail.type).then(
         res => {
           if (res.code === "success"){
             this.tempUserDetail =  res.userDetail
