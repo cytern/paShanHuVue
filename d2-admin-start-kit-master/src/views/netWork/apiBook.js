@@ -1,7 +1,7 @@
 
 const linuxUrl = "http://62.234.29.109:2060/"
 const windowsUrl = "http://localhost:2060/"
-const baseUrl = windowsUrl
+const baseUrl = linuxUrl
 export default {
   everyOne:{
     login:  baseUrl + "server/everyone/login",
@@ -60,7 +60,10 @@ export default {
      * 获取文章标题列表
      */
     getArticleList: baseUrl + "server/customer/getArticleList",
-
+    /**
+     * 发送文章
+     */
+    sendArticle: baseUrl + "server/customer/sendArticle",
 
   },
   other: {

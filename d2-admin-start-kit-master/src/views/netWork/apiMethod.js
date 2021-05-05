@@ -5,6 +5,10 @@ import store from '@/store/index'
 import {Notification} from 'element-ui'
 
 
+export function sendArticle(article) {
+  let url = apiBook.customer.sendArticle
+  return axiosPostJson(url,article)
+}
 /**
  * 获取文章列表
  * @param pageSize
