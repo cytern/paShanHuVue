@@ -1,7 +1,7 @@
 
 const linuxUrl = "http://62.234.29.109:2060/"
 const windowsUrl = "http://localhost:2060/"
-const baseUrl = linuxUrl
+const baseUrl = windowsUrl
 export default {
   everyOne:{
     login:  baseUrl + "server/everyone/login",
@@ -42,7 +42,25 @@ export default {
     /**
      * 获取商品列表
      */
-    getGoodList: baseUrl + "server/customer/getGoodsList"
+    getGoodList: baseUrl + "server/customer/getGoodsList",
+
+    /**
+     * 发送评价
+     */
+    sendComment: baseUrl + "server/customer/sendComment",
+    /**
+     * 发送举报
+     */
+    sendComplaint: baseUrl + "server/customer/sendComplaint",
+    /**
+     * 获取订单列表
+     */
+    getGoodsOrder: baseUrl + "server/customer/getGoodsOrder",
+    /**
+     * 获取文章标题列表
+     */
+    getArticleList: baseUrl + "server/customer/getArticleList",
+
 
   },
   other: {

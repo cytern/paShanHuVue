@@ -6,6 +6,43 @@ import {Notification} from 'element-ui'
 
 
 /**
+ * 获取文章列表
+ * @param pageSize
+ * @param index
+ * @returns {*}
+ */
+export function getArticleList(pageSize,index) {
+  let url = apiBook.customer.getArticleList + "/" +index + "/" + pageSize
+  return axiosPostJson(url)
+}
+/**
+ * 获取订单列表
+ * @returns {*}
+ */
+export function getGoodOrders () {
+  let url = apiBook.customer.getGoodsOrder
+  return axiosPostJson(url)
+}
+/**
+ * 发送举报
+ * @param complaint
+ */
+export function sendComplaint(complaint){
+  let url = apiBook.customer.sendComplaint
+  return axiosPostJson(url,complaint)
+}
+/**
+ * 发送评价
+ * @param type
+ * @param connectId
+ * @param commentRequest
+ * @returns {*}
+ */
+export function sendComment(type,connectId,commentRequest){
+  let url = apiBook.customer.sendComment + "/" + type +"/" + connectId
+  return axiosPostJson(url,commentRequest)
+}
+/**
  * 获取商品列表
  * @param index 页码
  * @param pageSize 页面容量

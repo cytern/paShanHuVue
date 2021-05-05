@@ -5,8 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84defb8f-3548-49d1-aa90-9df766068b41" name="Default Changelist" comment="feature: ping jia fen li">
+      <change afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/SendComplaintComponent.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/dialog-comment/ListComment.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/dialog-comment/SendCommentComponent.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/model/ComplaintVo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/model/listDemo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/pages/myOrder/index.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/menu/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/menu/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/router/routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/router/routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/netWork/apiBook.js" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/netWork/apiBook.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/netWork/apiMethod.js" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/netWork/apiMethod.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/pages/studentCharts/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/pages/studentCharts/index.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,8 +32,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package.json" />
-        <option value="JavaScript File" />
         <option value="Vue Single File Component" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -52,7 +64,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/d2-admin-start-kit-master/public/userFor" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/d2-admin-start-kit-master/src/views" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -66,6 +78,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\projects\jsProject\allWeb\-xuekejianWebSite-master\d2-admin-start-kit-master\src\views" />
       <recent name="E:\projects\jsProject\allWeb\-xuekejianWebSite-master\d2-admin-start-kit-master\public\userFor" />
       <recent name="E:\projects\jsProject\allWeb\-xuekejianWebSite-master\d2-admin-start-kit-master\public" />
       <recent name="E:\javawebproject\学可见学生端\d2-admin-start-kit-master\public\userFor" />
@@ -75,6 +88,17 @@
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="serve" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/d2-admin-start-kit-master/package.json" />
       <command value="run" />
@@ -130,7 +154,7 @@
       <workItem from="1619958998523" duration="605000" />
       <workItem from="1620097834871" duration="11572000" />
       <workItem from="1620117460662" duration="1275000" />
-      <workItem from="1620181442086" duration="234000" />
+      <workItem from="1620181442086" duration="17474000" />
     </task>
     <task id="LOCAL-00001" summary="需求 云服务器部署">
       <created>1618020378426</created>
@@ -286,7 +310,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620122165946</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="feature: ping jia fen li">
+      <created>1620181687375</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1620181687375</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

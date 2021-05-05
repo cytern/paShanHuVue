@@ -95,10 +95,19 @@ const frameIn = [
         component: _import('pages/resShop')
       },
       {
-        path: 'studentCharts',
-        name: 'studentCharts',
+        path: 'myOrder',
+        name: 'myOrder',
         meta: {
-          title: '成绩监控',
+          title: '我的订单',
+          auth: true
+        },
+        component: _import('pages/myOrder')
+      },
+      {
+        path: 'editCourse',
+        name: 'editCourse',
+        meta: {
+          title: '编写教程',
           auth: true
         },
         component: _import('pages/studentCharts')

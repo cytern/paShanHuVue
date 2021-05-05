@@ -1,13 +1,9 @@
 <template>
   <d2-container>
     <template slot="header">
-      <el-button type="text" disabled>成绩监控</el-button>
-      <el-button @click="changeDataToGrade" style="margin-left: 50px" type="primary">{{notice}}</el-button>
-      <el-tooltip class="item" effect="dark" content="考试成绩取最近六场考试成绩，如果不足六场，则以所拥有的考试次数为数据" placement="bottom-start">
-      <i class="fa fa-question-circle" aria-hidden="true" style="margin-left: 30px"></i>
-      </el-tooltip>
+      <el-button type="text" disabled>编写教程</el-button>
     </template>
- 
+    <vue-ueditor-wrap v-model="text"/>
 
   </d2-container>
 </template>
@@ -25,12 +21,13 @@ export default {
     leidatu3
   },
   data () {
-    return{ }
+    return{
+      text: null,
+    }
 
 
   },
   mounted() {
-    this.getOriginData()
   },
   methods: { }
 
