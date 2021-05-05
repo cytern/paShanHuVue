@@ -1,7 +1,7 @@
 
 const linuxUrl = "http://62.234.29.109:2060/"
 const windowsUrl = "http://localhost:2060/"
-const baseUrl = windowsUrl
+const baseUrl = linuxUrl
 export default {
   everyOne:{
     login:  baseUrl + "server/everyone/login",

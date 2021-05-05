@@ -4,20 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84defb8f-3548-49d1-aa90-9df766068b41" name="Default Changelist" comment="feature: 增加商品的条件查询 按钮">
-      <change afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/dialog-comment/CommentDialog.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/dialog-comment/PageComment.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/model/CommentVo.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/util/PageUtil.js" afterDir="false" />
+    <list default="true" id="84defb8f-3548-49d1-aa90-9df766068b41" name="Default Changelist" comment="feature: ping jia fen li">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/store/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/dialog-comment/timeCornDialog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/dialog-comment/timeCornDialog.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/model/commentPojo.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/netWork/apiBook.js" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/netWork/apiBook.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/netWork/apiMethod.js" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/netWork/apiMethod.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/pages/myGoodDetail/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/pages/myGoodDetail/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/pages/resShop/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/pages/resShop/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/pages/scriptShop/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/pages/scriptShop/index.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +129,8 @@
       <workItem from="1619955336895" duration="1373000" />
       <workItem from="1619958998523" duration="605000" />
       <workItem from="1620097834871" duration="11572000" />
-      <workItem from="1620117460662" duration="621000" />
+      <workItem from="1620117460662" duration="1275000" />
+      <workItem from="1620181442086" duration="234000" />
     </task>
     <task id="LOCAL-00001" summary="需求 云服务器部署">
       <created>1618020378426</created>
@@ -289,7 +279,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620111762791</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="feature: ping jia fen li">
+      <created>1620122165946</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1620122165946</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -328,7 +325,8 @@
     <MESSAGE value="需求 修复保存没有提示的bug" />
     <MESSAGE value="feature: 修改获取商品列表接口" />
     <MESSAGE value="feature: 增加商品的条件查询 按钮" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature: 增加商品的条件查询 按钮" />
+    <MESSAGE value="feature: ping jia fen li" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature: ping jia fen li" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
