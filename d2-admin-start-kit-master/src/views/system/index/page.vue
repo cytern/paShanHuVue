@@ -1,25 +1,60 @@
 <template>
   <d2-container class="page">
-
+       <template slot="header">
+         <el-button @click="showUser">
+           用户管理
+         </el-button>
+         <el-button @click="showScript">
+           脚本管理
+         </el-button>
+         <el-button @click="showData">
+           数据管理
+         </el-button>
+         <el-button @click="showComplaint">
+           投诉管理
+         </el-button>
+       </template>
+        <user-manage-dialog ref="uDia"></user-manage-dialog>
+       <DataManageDialog ref="dDia"></DataManageDialog>
+    <ComplaintManageDialog ref="avvDia"></ComplaintManageDialog>
+    <ScriptManageDialog ref="sDia"></ScriptManageDialog>
   </d2-container>
 </template>
 
 <script>
-import D2Badge from './components/d2-badge'
-import D2Help from './components/d2-help'
-import D2PageCover from './components/d2-page-cover'
-import {
-  getUserInfo
-} from "../../netWork/apiMethod";
+import UserManageDialog from "@/views/dialog-comment/manageDialog/UserManageDialog";
+import ScriptManageDialog from "@/views/dialog-comment/manageDialog/ScriptManageDialog";
+import DataManageDialog from "@/views/dialog-comment/manageDialog/DataManageDialog";
+import ComplaintManageDialog from "@/views/dialog-comment/manageDialog/ComplaintManageDialog";
 export default {
   components: {
-    D2Badge,
-    D2Help,
-    D2PageCover
+      UserManageDialog,
+    ScriptManageDialog,
+    DataManageDialog,
+    ComplaintManageDialog
+  },
+  data() {
+    return {
+
+    }
   },
    mounted() {
 
   },
+  methods: {
+    showUser() {
+      this.$refs.uDia.initData()
+    },
+    showScript() {
+      this.$refs.sDia.initData()
+    },
+    showData() {
+      this.$refs.dDia.initData()
+    },
+    showComplaint() {
+      this.$refs.avvDia.initData()
+    }
+  }
 
 }
 </script>

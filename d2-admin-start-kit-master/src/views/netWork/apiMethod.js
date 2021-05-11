@@ -7,6 +7,16 @@ import {TaskAddVo} from "@/views/model/TaskAddVo";
 
 
 /**
+ * 管理工厂 获取对应的参数
+ * @param index
+ * @param pageSize
+ * @param typeUrl
+ */
+export function managerMethod (index, pageSize, typeUrl, data) {
+  let url = apiBook.manager.switchManagerUrl(index,pageSize,typeUrl)
+  return axiosPostJson(url,data)
+}
+/**
  * 更新某个参数
  * @param jsoup
  * @returns {*}

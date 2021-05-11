@@ -2,21 +2,21 @@
   <el-dialog
     title="请确认参数"
     :visible.sync="dialogVisible"
-    width=" 70%"
+    width="100%"
     :before-close="handleClose">
     <el-table :data="params"
               style="width: 100%">
       <el-table-column label="参数id"
-      width="30" prop="pragramId">
+      width="100" prop="pragramId">
       </el-table-column>
       <el-table-column label="任务id"
-                       width="30" prop="missionId">
+                       width="100" prop="missionId">
       </el-table-column>
       <el-table-column label="行动id"
-                       width="30" prop="actionId">
+                       width="100" prop="actionId">
       </el-table-column>
       <el-table-column
-      label="参数类型" width="40" prop="pragramType">
+      label="参数类型" width="100" prop="pragramType">
       </el-table-column>
       <el-table-column
         label="参数别名" width="180" prop="programContent">
@@ -49,7 +49,7 @@ import {getAllParameters, updateParameters} from "../netWork/apiMethod";
 import pragramDialog from "./pragramDialog";
 
 export default {
-  name: "desComment",
+  name: "EditParameterDialog",
   components: {
     pragramDialog
   },

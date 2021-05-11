@@ -8,8 +8,6 @@ export default {
     register: baseUrl + "server/everyone/register",
     forgetPassword: baseUrl + "server/everyone/forgetPassword",
     resetPassword: baseUrl + "server/everyone/resetPassword"
-
-
   },
   customer: {
     getMyScript : baseUrl + "server/customer/getMyOrders",
@@ -69,9 +67,18 @@ export default {
      */
     getAllParams: baseUrl + "server/customer/getAllParameters",
     /**
-     * 更新一个参数
+     * 更新一个参数  并不使用
      */
-    updateOneParams: baseUrl + "server/updateOneParameter"
+    updateOneParams: baseUrl + "server/customer/updateOneParameter"
+  },
+  manager: {
+    /**
+     * 获取查询管理工厂
+     */
+     switchManagerUrl: function (index, pageSize, typeUrl) {
+       let url = baseUrl + "server/manager/" + typeUrl + "/" +index + "/" + pageSize
+      return url;
+     },
   },
   other: {
     downloadExcel: baseUrl + "server/other/downloadFile"
