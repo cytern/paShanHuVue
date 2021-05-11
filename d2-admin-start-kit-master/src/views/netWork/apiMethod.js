@@ -5,6 +5,29 @@ import store from '@/store/index'
 import {Notification} from 'element-ui'
 
 
+/**
+ * 更新某个参数
+ * @param jsoup
+ * @returns {*}
+ */
+export function updateParameters (jsoup) {
+  let url = apiBook.customer.updateOneParams
+  return axiosPostJson(url,jsoup)
+}
+/**
+ * 获取参数列表
+ * @param maId
+ * @returns {*}
+ */
+export function getAllParameters(maId) {
+  let url = apiBook.customer.getAllParams  + "/" + maId
+  return axiosPostJson(url)
+}
+/**
+ * 发布文章
+ * @param article
+ * @returns {*}
+ */
 export function sendArticle(article) {
   let url = apiBook.customer.sendArticle
   return axiosPostJson(url,article)

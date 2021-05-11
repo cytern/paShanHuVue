@@ -79,7 +79,11 @@ export function JsoupPragram() {
     downNum: null,
     pragramValue: null,
     missionAllId: null,
-    programContent: null,
+    programContent: "未命名参数",
+    mhId: null,
+    deep: null,
+    fatherId: null,
+    needAdd: null,
     serialVersionUID: null
   }
   return jp

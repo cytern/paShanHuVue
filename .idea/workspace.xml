@@ -5,14 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84defb8f-3548-49d1-aa90-9df766068b41" name="Default Changelist" comment="feature: 发布文章帖子">
-      <change afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/model/ArticleVo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/dialog-comment/EditParameterDialog.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/model/missionAllPojo.js" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/model/missionAllPojo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/netWork/apiBook.js" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/netWork/apiBook.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/netWork/apiMethod.js" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/netWork/apiMethod.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/pages/studentCharts/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/d2-admin-start-kit-master/src/views/pages/studentCharts/index.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +23,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="package.json" />
-        <option value="Vue Single File Component" />
         <option value="JavaScript File" />
+        <option value="Vue Single File Component" />
       </list>
     </option>
   </component>
@@ -85,15 +82,13 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -154,7 +149,9 @@
       <workItem from="1620097834871" duration="11572000" />
       <workItem from="1620117460662" duration="1275000" />
       <workItem from="1620181442086" duration="18304000" />
-      <workItem from="1620218173782" duration="4838000" />
+      <workItem from="1620218173782" duration="6506000" />
+      <workItem from="1620653094671" duration="1208000" />
+      <workItem from="1620695863015" duration="3034000" />
     </task>
     <task id="LOCAL-00001" summary="需求 云服务器部署">
       <created>1618020378426</created>
@@ -324,7 +321,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620214126691</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="feature: 发布文章帖子">
+      <created>1620225022515</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1620225022515</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

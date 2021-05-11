@@ -64,7 +64,14 @@ export default {
      * 发送文章
      */
     sendArticle: baseUrl + "server/customer/sendArticle",
-
+    /**
+     * 获取全部的参数
+     */
+    getAllParams: baseUrl + "server/customer/getAllParameters",
+    /**
+     * 更新一个参数
+     */
+    updateOneParams: baseUrl + "server/updateOneParameter"
   },
   other: {
     downloadExcel: baseUrl + "server/other/downloadFile"
