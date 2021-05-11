@@ -3,6 +3,7 @@ import {axiosGet, axiosPost, axiosPostJson} from "@/views/netWork/axiosAll";
 import {userPojo,jsoupUser} from "@/views/model/userPojo"
 import store from '@/store/index'
 import {Notification} from 'element-ui'
+import {TaskAddVo} from "@/views/model/TaskAddVo";
 
 
 /**
@@ -112,14 +113,14 @@ export function updateTimeTask (mhId,times,corn) {
  * @param corn
  * @returns {*}
  */
-export function addTimeTaskMission (maId,times,corn) {
-  let param = {
-    id: maId,
-    times: times,
-    corn: corn
-  }
+export function addTimeTaskMission (maId,times,corn,params) {
+  let time = new TaskAddVo();
+  time.timeTaskVo.id = maId;
+  time.timeTaskVo.times = times,
+    time.timeTaskVo.corn = corn
+  time.pragrams = params
   let url = apiBook.customer.addTimeTaskMission
-  return axiosPostJson(url,param)
+  return axiosPostJson(url,time)
 }
 /**
  * 更新用户信息
@@ -262,9 +263,9 @@ export function downloadExcel(hisId){
  * @param {总任务id} maId
  * @returns
  */
-export function sendJsoupMission(maId){
-    let url = apiBook.customer.sendExcutor
-    return axiosPostJson(url+"/"+maId)
+export function sendJsoupMission(maId,timeTaskRequest){
+    let url = apiBook.customer.sendExcutor +"/"+maId
+    return axiosPostJson(url,timeTaskRequest)
 }
 /**
  * 保存任务

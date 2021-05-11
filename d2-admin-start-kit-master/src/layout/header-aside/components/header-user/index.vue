@@ -1,6 +1,6 @@
 <template>
   <el-dropdown size="small" class="d2-mr">
-    <span class="btn-text">{{userVo != null? `你好 ${userVo.jsoupUserDetail.userNickName}` : '未登录'}}</span>
+    <span class="btn-text">{{userVo != null? `你好 ${userVo.jsoupUserDetail.userNickName}` : '您好'}}</span>
     <el-dropdown-menu slot="dropdown">
       <el-dropdown-item @click.native="logOff">
         <d2-icon name="power-off" class="d2-mr-5"/>
@@ -24,9 +24,9 @@ export default {
       userVo: this.$store.state.userVo,
     }
   },
-  afterMounted() {
-   this.userVo = this.$store.state.userVo
-  },
+ mounted() {
+    this.initData()
+ },
   methods: {
     ...mapActions('d2admin/account', [
       'logout'
@@ -36,10 +36,11 @@ export default {
      */
     logOff () {
       this.$store.state.userVo = null
+      this.userVo = null
       this.logout({
         confirm: true
       })
-    }
+    },
   }
 }
 </script>

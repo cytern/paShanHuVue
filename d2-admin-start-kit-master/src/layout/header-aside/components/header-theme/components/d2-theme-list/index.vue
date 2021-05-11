@@ -31,6 +31,9 @@ export default {
       'activeName'
     ])
   },
+  mounted() {
+    this.handleSelectTheme("star")
+  },
   methods: {
     ...mapActions('d2admin/theme', [
       'set'

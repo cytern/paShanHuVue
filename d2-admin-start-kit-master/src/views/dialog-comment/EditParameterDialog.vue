@@ -27,17 +27,24 @@
       <el-table-column
         label="参数值" width="180" prop="pragramValue">
       </el-table-column>
+      <el-table-column label="操作" width="200">
+        <template slot-scope="scope">
+          <el-button
+            size="mini"
+            @click="handleEdit(scope.row)">编辑</el-button>
+        </template>
+      </el-table-column>
     </el-table>
     <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
     <el-button type="primary" @click="outPutData">确 定</el-button>
   </span>
+    <pragram-dialog ref="paramsDialog" @func="backParams"></pragram-dialog>
   </el-dialog>
-  <pragram-dialog ref="paramsDialog" @func="backParams"></pragram-dialog>
 </template>
 
 <script>
-import {JsoupPragram} from "../model/missionAllPojo";
+import {ActionVo, JsoupPragram} from "../model/missionAllPojo";
 import {getAllParameters, updateParameters} from "../netWork/apiMethod";
 import pragramDialog from "./pragramDialog";
 
@@ -64,6 +71,12 @@ export default {
         }
       }
     },
+    //启动编辑脚本页面
+    handleEdit (jsoup) {
+      let actionVo = new ActionVo();
+      actionVo.jsoupPragram = jsoup
+      this.$refs.paramsDialog.initData(actionVo)
+    },
     getScriptParameters () {
       getAllParameters(this.maId).then(
         res => {
@@ -84,6 +97,7 @@ export default {
         return
       }
       this.maId = data
+      this.dialogVisible = true
       this.getScriptParameters()
     },
 

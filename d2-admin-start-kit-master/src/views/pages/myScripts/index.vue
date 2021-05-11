@@ -111,6 +111,7 @@
         <el-button type="primary" @click="sendChange">确 定</el-button>
       </div>
     </el-dialog>
+    <EditParameterDialog ref="editParameter" @func="backParameters"></EditParameterDialog>
     <time-corn-dialog ref="timeCornDialog" @func="backData"></time-corn-dialog>
   </d2-container>
 </template>
@@ -119,15 +120,17 @@
 import leidatu from "../../echart-comment/leidatu";
 import leidatu2 from "../../echart-comment/leidatu2";
 import leidatu3 from "../../echart-comment/leidatu3";
+import EditParameterDialog from "@/views/dialog-comment/EditParameterDialog";
 import {
   getAllScript,
   sendJsoupMission,
   setMissionAllState,
   addTimeTaskMission,
 } from "../../netWork/apiMethod";
-import { JsoupMissionAll, MissionAllData} from "../../model/missionAllPojo";
+import {JsoupMissionAll, JsoupPragram, MissionAllData} from "../../model/missionAllPojo";
 import {TimeTask} from "../../model/timeTaskVo";
 import TimeCornDialog from "../../dialog-comment/timeCornDialog";
+import {TaskAddVo} from "@/views/model/TaskAddVo";
 export default {
   name: "studentCharts",
   components: {
@@ -135,6 +138,8 @@ export default {
     leidatu,
     leidatu2,
     leidatu3,
+    EditParameterDialog
+
   },
   data: function () {
     return {
@@ -146,6 +151,8 @@ export default {
       tempMa: new JsoupMissionAll(),
       timeTask: new TimeTask(),
       tempMaId: null,
+      params: [new JsoupPragram()],
+      sendType: null,
     };
   },
   mounted() {
@@ -156,18 +163,43 @@ export default {
       this.tempMaId = row.jsoupMissionAll.maId
       this.$refs.timeCornDialog.initTimeData(this.timeTask)
 },
+    /**
+     * 返回参数
+     */
+    backParameters(params) {
+      this.params = params
+      if (this.sendType == "run") {
+        let timeVo = new TaskAddVo();
+        timeVo.pragrams = this.params
+        sendJsoupMission(this.tempMaId,timeVo).then((res) => {
+          if (res.code == "success") {
+            this.$notify({
+              title: "提示",
+              message: "发送执行成功，请耐心等待",
+              duration: 0,
+            });
+            this.$router.push("myReason")
+          }
+        });
+      }else if (this.sendType == "timeTask") {
+        addTimeTaskMission(this.tempMaId,this.timeTask.times,this.timeTask.corn,this.params).then(
+          res => {
+            if (res.code == "success") {
+              this.$message.success(res.msg)
+            }
+          }
+        )
+      }
+
+    },
     backData ( timeTask) {
       if (timeTask.times == null){
           timeTask.times = -1
       }
+      let maId = this.tempMaId;
+      this.sendType = "timeTask"
+      this.$refs.editParameter.initDesData(maId)
       this.timeTask = timeTask
-      addTimeTaskMission(this.tempMaId,timeTask.times,timeTask.corn).then(
-        res => {
-          if (res.code == "success") {
-            this.$message.success(res.msg)
-          }
-        }
-      )
     },
     reflashPage(currentPage) {
       this.index = currentPage;
@@ -206,16 +238,9 @@ export default {
      */
     sendRun(index, item) {
       let maId = item.jsoupMissionAll.maId;
-      this.$notify({
-        title: "提示",
-        message: "发送执行成功，请耐心等待",
-        duration: 0,
-      });
-      sendJsoupMission(maId).then((res) => {
-        if (res.code == "success") {
-          this.$router.push("myReason")
-        }
-      });
+      this.sendType = "run"
+      this.tempMaId = maId
+      this.$refs.editParameter.initDesData(maId)
     },
 
     sendShop(ma) {
