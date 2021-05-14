@@ -6,11 +6,11 @@
     </template>
      <!-- 卡片式改写 -->
        <template v-for="(item, index) in goodList">
+<!--         :class="index%4===0?'box-card cardBackground1':-->
+<!--         index%3===0?'box-card cardBackground2':-->
+<!--         index%2===0?'box-card cardBackground3':-->
+<!--         'box-card cardBackground4'"-->
       <el-card
-        :class="index%4===0?'box-card cardBackground1':
-                  index%3===0?'box-card cardBackground2':
-                  index%2===0?'box-card cardBackground3':
-                   'box-card cardBackground4'"
         :key="index"
         style="
           width: 45%;

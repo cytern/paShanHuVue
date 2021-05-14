@@ -5,12 +5,12 @@
       <search-comment ref="searchComment" @func="backSearch" @after="getOriginData"> </search-comment>
     </template>
     <!-- 新式改写卡片 仿照3dm样式 -->
+    <!--          :class="index%4===0?'box-card cardBackground1':-->
+    <!--                  index%3===0?'box-card cardBackground2':-->
+    <!--                  index%2===0?'box-card cardBackground3':-->
+    <!--                   'box-card cardBackground4'"-->
     <template v-for="(item, index) in goodList">
         <el-card
-          :class="index%4===0?'box-card cardBackground1':
-                  index%3===0?'box-card cardBackground2':
-                  index%2===0?'box-card cardBackground3':
-                   'box-card cardBackground4'"
           :key="index"
           style="
           width: 45%;
