@@ -219,6 +219,7 @@ export default {
     sendCopy(index,item) {
       let id = item.jsoupMissionAll.maId
       this.$store.state.isCopy = 1
+      this.$store.state.maId = id
       this.$router.push({
         path: '/myEditScript'
       })

@@ -615,12 +615,8 @@ export default {
       if (this.$store.state.maId) {
         //赋值 如果是跳转时带着id参数
         this.missionAllDataId = this.$store.state.maId;
-        this.getScript();
+       this.getScript();
         //如果是复制过来的 则初始化参数
-        if (this.$store.state.isCopy == 1) {
-          this.copyMissionData(this.missionData)
-          this.$store.state.isCopy = 0
-        }
       } else {
         this.missionData = new MissionAllData();
       }
@@ -629,24 +625,35 @@ export default {
       this.initTipsMethod()
     //
     },
-    copyMissionData (missionData) {
-      missionData.jsoupMissionAll.maId = -1
+    copyMissionData (maData) {
+      let missionData = maData
+      missionData.jsoupMissionAll.maId = -1n
       for (let i = 0; i < missionData.missionDataList.length; i++) {
         missionData.missionDataList[i].jsoupMission.missionId = -1
         for (let j = 0; j < missionData.missionDataList[i].actionVos.length; j++) {
           missionData.missionDataList[i].actionVos[j].jsoupAction.actionId = -1
-          missionData.missionDataList[i].actionVos[j].jsoupPragrams.pragramId  = -1
-        }
+          if ( missionData.missionDataList[i].actionVos[j].jsoupPragram && missionData.missionDataList[i].actionVos[j].jsoupPragram!=null) {
+            missionData.missionDataList[i].actionVos[j].jsoupPragram.pragramId  = -1
+          }
+          }
       }
+      this.missionData = missionData
 
     },
     //获取脚本
     getScript() {
-      getOneScript(this.missionAllDataId).then((res) => {
+       getOneScript(this.missionAllDataId).then((res) => {
         if (res.code == "error" || res.missionData == null) {
           this.missionData = MissionData();
         } else {
           this.missionData = res.missionData;
+          if (this.$store.state.isCopy === 1) {
+            console.log("进入重定义")
+            this.copyMissionData(this.missionData)
+            this.$store.state.isCopy = 0
+          }
+          this.getIndex();
+          this.initTipsMethod()
         }
       });
     },
