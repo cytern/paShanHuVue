@@ -101,7 +101,7 @@ export default {
         )
     },
     getOriginData() {
-       managerMethod(this.index,this.pageSize,ManagerType.updateComplaint,null).then (
+       managerMethod(this.index,this.pageSize,ManagerType.getComplaint,null).then (
          res => {
            if (res.code == "success") {
              this.list = res.list

@@ -207,6 +207,7 @@ export function jsoupUser () {
         password: null,
         createTime: null,
         userToken: null,
+       userType: null,
         serialVersionUID: null
     }
     return user;

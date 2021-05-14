@@ -69,7 +69,16 @@ export default {
     /**
      * 更新一个参数  并不使用
      */
-    updateOneParams: baseUrl + "server/customer/updateOneParameter"
+    updateOneParams: baseUrl + "server/customer/updateOneParameter",
+
+    /**
+     * 获取一个人的历史信息
+     */
+    getOneHistory:baseUrl + "server/customer/index/getHistory",
+    /**
+     * 获取一个人的执行器
+     */
+    getOneExecutor: baseUrl  + "server/customer/index/getExecutor"
   },
   manager: {
     /**

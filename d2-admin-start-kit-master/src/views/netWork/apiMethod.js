@@ -7,6 +7,22 @@ import {TaskAddVo} from "@/views/model/TaskAddVo";
 
 
 /**
+ * 获取一个人的执行器
+ * @returns {*}
+ */
+export function getOnesExecutor() {
+  let url  = apiBook.customer.getOneExecutor
+  return axiosPostJson(url)
+}
+/**
+ * 获取一个人的历史
+ * @returns {*}
+ */
+export function getOneHistory() {
+  let url = apiBook.customer.getOneHistory
+  return axiosPostJson(url)
+}
+/**
  * 管理工厂 获取对应的参数
  * @param index
  * @param pageSize
@@ -49,9 +65,9 @@ export function sendArticle(article) {
  * @param index
  * @returns {*}
  */
-export function getArticleList(pageSize,index) {
+export function getArticleList(pageSize,index,searchVo) {
   let url = apiBook.customer.getArticleList + "/" +index + "/" + pageSize
-  return axiosPostJson(url)
+  return axiosPostJson(url,searchVo)
 }
 /**
  * 获取订单列表

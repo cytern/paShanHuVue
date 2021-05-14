@@ -19,7 +19,7 @@
   import leidatu2 from "../../echart-comment/leidatu2";
   import leidatu3 from "../../echart-comment/leidatu3";
   import {sendArticle} from "../../netWork/apiMethod";
-  import {ArticleVo} from "../../model/ArticleVo";
+  import {JsoupArticle} from "../../model/ArticleSearchVo";
 export default {
   name: 'studentCharts',
   components:{
@@ -29,7 +29,7 @@ export default {
   },
   data () {
     return{
-     article:new ArticleVo()
+     article:new JsoupArticle()
     }
 
 
@@ -42,7 +42,7 @@ export default {
         res => {
           if (res.code == "success") {
             this.$message.success("发布成功")
-            this.article = new ArticleVo()
+            this.article = new JsoupArticle()
           }
         }
       )

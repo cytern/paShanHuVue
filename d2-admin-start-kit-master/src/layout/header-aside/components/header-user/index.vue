@@ -25,7 +25,6 @@ export default {
     }
   },
  mounted() {
-    this.initData()
  },
   methods: {
     ...mapActions('d2admin/account', [
