@@ -74,6 +74,48 @@
         </el-form-item>
       </el-form>
     </el-card>
+    <el-divider></el-divider>
+    <el-card style="margin-top: 30px">
+      <div slot="header">
+        <el-button disabled type="text">我的执行器</el-button>
+        <el-button type="primary" @click="addNewExecutor">添加新的执行器</el-button>
+      </div>
+      <el-table :data="executorList">
+        <el-table-column
+          prop="id"
+          label="id"
+          width="50">
+        </el-table-column>
+        <el-table-column
+          prop="excutorCode"
+          label="标志值"
+          width="160">
+        </el-table-column>
+        <el-table-column
+          prop="liveUpdateTime"
+          label="上次更新时间"
+          width="160">
+        </el-table-column>
+        <el-table-column
+          prop="createTime"
+          label="创建时间"
+          width="160">
+        </el-table-column>
+        <el-table-column
+          prop="excutorTimes"
+          label="执行次数"
+          width="50">
+        </el-table-column>
+        <el-table-column
+          label="状态"
+          width="50">
+          <template slot-scope="scope">
+            <el-tag v-if="scope.row.status == 0">离线</el-tag>
+            <el-tag v-if="scope.row.status == 1">存活</el-tag>
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-card>
   </d2-container>
 </template>
 
@@ -81,8 +123,9 @@
 import leidatu from "../../echart-comment/leidatu";
 import leidatu2 from "../../echart-comment/leidatu2";
 import leidatu3 from "../../echart-comment/leidatu3";
-import {getUserData,updateUserDetail} from "../../netWork/apiMethod";
+import {addNewExecutor, getOnesExecutor, getUserData, updateUserDetail} from "../../netWork/apiMethod";
 import {UserVo} from "../../model/userPojo";
+import {JsoupExecutorVo} from "../../model/JsoupExecutorVo";
 
 export default {
   name: 'studentConf',
@@ -93,19 +136,53 @@ export default {
   },
   data() {
     return {
-      userInfo: new UserVo()
+      userInfo: new UserVo(),
+      executorList:  [new JsoupExecutorVo()]
     }
 
   },
   mounted() {
-    this.getUserData()
+    this.getOriginData()
   },
   methods: {
+    addNewExecutor() {
+      addNewExecutor().then(
+        res=> {
+          if (res.code == "success") {
+            let excutor = res.data
+            this.$alert(excutor.excutorToken, 'token仅会出现一次，请妥善保存', {
+              confirmButtonText: '确定',
+              callback: action => {
+                this.$message({
+                  type: 'info',
+                  message: `添加成功`
+                });
+              }})
+            this.getOriginData()
+          }
+        }
+      )
+    },
+    getOriginData() {
+      this.getUserData()
+      this.getMyExecutor()
+    },
+    getMyExecutor() {
+      getOnesExecutor().then(
+        res => {
+          if (res.code == "success") {
+            this.executorList = res.list
+          }
+        }
+      )
+    },
+
     upDateUserInfo () {
       updateUserDetail(this.userInfo).then(
         res => {
           if (res.code == "success") {
             this.$message.success("修改成功");
+            this.getOriginData();
           }
         }
       )

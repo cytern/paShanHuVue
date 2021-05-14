@@ -37,7 +37,7 @@
           我的订单
         </el-card>
         </div>
-        <div v-else-if="userVo.jsoupUser.userType== '1001'">
+        <div v-else-if="userVo.jsoupUser.userType== '1001'" @click="goToManager">
           <el-card style="width: 100%" class="card-button">
             管理端入口
           </el-card>
@@ -125,8 +125,9 @@
     <el-divider></el-divider>
 <!--帖子的列表-->
     <el-row :gutter="40">
-      <el-col :span="24" v-for="(item , index) in articleList">
-        <el-card style="width: 100%;margin-bottom: 50px;">
+      <el-col :span="24" v-for="(item , index) in articleList" :key="index">
+        <div @click="goToArticleDetail(item)">
+        <el-card style="width: 100%;margin-bottom: 10px;">
           <el-row :gutter="20">
             <el-col :span="20">
              <span>{{ item.title}}</span>
@@ -136,6 +137,7 @@
             </el-col>
           </el-row>
         </el-card>
+        </div>
       </el-col>
     </el-row>
     <el-pagination
@@ -185,6 +187,14 @@ export default {
     this.getOriginData()
   },
   methods: {
+
+    goToArticleDetail(item) {
+      this.$store.state.articleId = item.id
+      this.$router.push("/articleDetail")
+    },
+    goToManager() {
+      this.$router.push("/managerPage")
+    },
     reflashPage(currentPage) {
       this.aIndex = currentPage;
       this.getOriginData();

@@ -32,6 +32,24 @@ const frameIn = [
         component: _import('pages/studentConf')
       },
       {
+        path: 'managerPage',
+        name: 'managerPage',
+        meta: {
+          title: '管理端',
+          auth: true
+        },
+        component: _import('pages/managerPage')
+      },
+      {
+        path: 'articleDetail',
+        name: 'articleDetail',
+        meta: {
+          title: '文章详情',
+          auth: true
+        },
+        component: _import('pages/articleDetail')
+      },
+      {
         path: 'leidatu',
         name: 'leidatu',
         meta: {

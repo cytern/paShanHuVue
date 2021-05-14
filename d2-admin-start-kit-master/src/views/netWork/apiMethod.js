@@ -7,6 +7,39 @@ import {TaskAddVo} from "@/views/model/TaskAddVo";
 
 
 /**
+ * 获取详细文章
+ * @param id
+ * @returns {*}
+ */
+export function getArticleDetail(id) {
+  let url = apiBook.customer.getArticleDetail + "/" + id
+  return axiosPostJson(url)
+}
+/**
+ * 获取全部的待执行任务
+ * @returns {*}
+ */
+export function getAllWaitToDoTask() {
+  let url = apiBook.manager.getAllWaitToDo
+  return axiosPostJson(url)
+}
+/**
+ * 获取全部的脚本执行器
+ */
+export function getEveryOneExecutor() {
+   let url  =apiBook.manager.getAllExecutors + "/" + "1" + "/" + "1000"
+  return axiosPostJson(url)
+}
+/**
+ * 添加一个新的执行器
+ * @returns {*}
+ */
+export function addNewExecutor() {
+  let url = apiBook.customer.addExecutor
+  return axiosPostJson(url)
+}
+
+/**
  * 获取一个人的执行器
  * @returns {*}
  */

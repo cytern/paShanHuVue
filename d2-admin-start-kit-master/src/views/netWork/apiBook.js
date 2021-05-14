@@ -78,16 +78,41 @@ export default {
     /**
      * 获取一个人的执行器
      */
-    getOneExecutor: baseUrl  + "server/customer/index/getExecutor"
+    getOneExecutor: baseUrl  + "server/customer/index/getExecutor",
+    /**
+     * 添加一个新的执行器
+     */
+    addExecutor:baseUrl + "server/customer/addNewExecutor",
+
+    /**
+     * 获取文章详情
+     */
+    getArticleDetail: baseUrl + "server/customer/getArticleDetail",
+
+
   },
   manager: {
     /**
      * 获取查询管理工厂
      */
      switchManagerUrl: function (index, pageSize, typeUrl) {
-       let url = baseUrl + "server/manager/" + typeUrl + "/" +index + "/" + pageSize
-      return url;
+       if (typeUrl.indexOf("update")>=0) {
+         let url = baseUrl + "server/manager/" + typeUrl
+        return  url;
+       }else {
+         let url = baseUrl + "server/manager/" + typeUrl + "/" +index + "/" + pageSize
+         return url;
+       }
+
      },
+    /**
+     * 获取全部执行器
+     */
+    getAllExecutors: baseUrl + "server/manager/getAllExecutors",
+    /**
+     * 获取全部待执行任务
+     */
+    getAllWaitToDo: baseUrl + "server/manager/getAllWaitToDo"
   },
   other: {
     downloadExcel: baseUrl + "server/other/downloadFile"

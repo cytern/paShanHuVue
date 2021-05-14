@@ -21,7 +21,8 @@ export default new Vuex.Store({
     maId: null,
     userVo: null,
     isCopy:0,
-    goodDetail: new GoodList()
+    goodDetail: new GoodList(),
+    articleId: null,
   },
   getters: {
     getCode (state) {
