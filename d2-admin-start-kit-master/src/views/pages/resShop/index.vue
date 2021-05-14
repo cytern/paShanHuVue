@@ -174,7 +174,7 @@ export default {
         type: "warning",
       })
         .then(() => {
-          buyMh(jsMh.missionAllHistoryId).then((res) => {
+          buyMh(jsMh.id).then((res) => {
             if (res.code == "success") {
               this.$message({
                 type: "success",
