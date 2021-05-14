@@ -1,17 +1,8 @@
 <template>
   <d2-container class="page">
        <template slot="header">
-         <el-button @click="showUser">
-           用户管理
-         </el-button>
-         <el-button @click="showScript">
-           脚本管理
-         </el-button>
-         <el-button @click="showData">
-           数据管理
-         </el-button>
-         <el-button @click="showComplaint">
-           投诉管理
+         <el-button disabled type="text">
+           首页
          </el-button>
        </template>
 <!--    首先是三个大标签 分别是脚本数量  数据数量  自身等级 -->
@@ -190,6 +181,10 @@ export default {
 
     goToArticleDetail(item) {
       this.$store.state.articleId = item.id
+      this.$store.state.goodDetail.ownerId = item.userId
+      this.$store.state.goodDetail.type = 3
+      this.$store.state.goodDetail.id = item.id
+
       this.$router.push("/articleDetail")
     },
     goToManager() {

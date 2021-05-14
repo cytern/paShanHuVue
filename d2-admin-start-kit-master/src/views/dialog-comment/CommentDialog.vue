@@ -76,7 +76,7 @@ export default {
       tempGoodDetail: new GoodList(),
       index: 1,
       pageSize:10,
-      commentList: [new CommentVo()],
+      commentList: [],
       pageNum: 10
     }
   },

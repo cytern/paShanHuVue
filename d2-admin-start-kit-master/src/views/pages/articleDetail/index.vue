@@ -33,24 +33,56 @@
       </div>
       <div v-html="articleVo.jsoupArticle.body"></div>
     </el-card>
+    <el-divider></el-divider>
+    <el-card>
+      <div slot="header">
+        <el-button type="text" disabled>评价列表</el-button>
+      </div>
+      <comment-dialog></comment-dialog>
+       <div style="margin-bottom: 10px">
+         <el-button type="primary" @click="sendComments">发送评论</el-button>
+       </div>
+    </el-card>
+    <send-comment-component ref="sendComment"></send-comment-component>
   </d2-container>
 </template>
 
 <script>
-import {getArticleDetail} from "../../netWork/apiMethod";
+import {getArticleDetail, getDetailComment} from "../../netWork/apiMethod";
 import {ArticleVo} from "../../model/ArticleSearchVo";
+import CommentDialog from "../../dialog-comment/CommentDialog";
+import SendCommentComponent from "../../dialog-comment/SendCommentComponent";
 
 export default {
   name: 'index',
+  components:{
+    CommentDialog,
+    SendCommentComponent
+  },
   data () {
     return{
-      articleVo: new ArticleVo()
+      articleVo: new ArticleVo(),
+      comments: [],
+
     }
   },
   mounted() {
     this.getOriginData()
   },
   methods: {
+    sendComments () {
+      this.$refs.sendComment.initData(this.articleVo.jsoupArticle.id,3)
+    },
+    getCommentList () {
+      getDetailComment(10,this.index,this.$store.state.articleId,3).then(
+        res => {
+          if (res.code == "success") {
+            this.comments = res.list
+          }
+        }
+      )
+
+    },
     getOriginData() {
        getArticleDetail(this.$store.state.articleId).then(
          res => {
