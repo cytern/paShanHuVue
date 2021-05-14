@@ -34,7 +34,6 @@
 import {TimeTask} from "../model/timeTaskVo";
 import cron from "./cron";
 import {CronSelectType} from "../model/cronSelectType";
-import {DEFAULT_CRON_EXPRESSION} from "vue-cron-generator/src/constant/filed";
 export default {
   name: "timeCornDialog",
   components: {
@@ -57,7 +56,7 @@ export default {
       this.timeTask.corn = cron
     },
     reset(cron) {
-      this.timeTask.corn = DEFAULT_CRON_EXPRESSION
+
     },
     initTimeData (timeTask) {
       this.timeTask = timeTask

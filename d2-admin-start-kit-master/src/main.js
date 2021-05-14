@@ -8,7 +8,6 @@ import d2Admin from '@/plugin/d2admin'
 import store from '@/store/index'
 import echarts from 'echarts'
 import VCharts from 'v-charts'
-import vueCorn from 'vue-cron'
 import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
@@ -24,7 +23,6 @@ import { frameInRoutes } from '@/router/routes'
 Vue.use(d2Admin)
 Vue.use(echarts)
 Vue.use(VCharts)
-Vue.use(vueCorn)
 Vue.use(VueQuillEditor);
 
 new Vue({
