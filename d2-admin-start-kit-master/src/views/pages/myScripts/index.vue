@@ -125,7 +125,7 @@ import {
   getAllScript,
   sendJsoupMission,
   setMissionAllState,
-  addTimeTaskMission,
+  addTimeTaskMission, copyNewMission,
 } from "../../netWork/apiMethod";
 import {JsoupMissionAll, JsoupPragram, MissionAllData} from "../../model/missionAllPojo";
 import {TimeTask} from "../../model/timeTaskVo";
@@ -218,11 +218,14 @@ export default {
     },
     sendCopy(index,item) {
       let id = item.jsoupMissionAll.maId
-      this.$store.state.isCopy = 1
-      this.$store.state.maId = id
-      this.$router.push({
-        path: '/myEditScript'
-      })
+       copyNewMission(id).then(
+         res=> {
+           if (res.code == "success") {
+             this.$message.success("复制成功")
+             this.getOriginData()
+           }
+         }
+       )
     },
     /**
      * 修改脚本

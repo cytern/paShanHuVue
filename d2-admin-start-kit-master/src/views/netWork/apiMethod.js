@@ -7,6 +7,15 @@ import {TaskAddVo} from "@/views/model/TaskAddVo";
 
 
 /**
+ * 复制脚本
+ * @param id
+ * @returns {Promise | Promise<unknown>}
+ */
+export function copyNewMission(id) {
+  let url = apiBook.customer.copyNewMission + "/" + id
+  return axiosPostJson(url)
+}
+/**
  * 获取详细文章
  * @param id
  * @returns {*}
