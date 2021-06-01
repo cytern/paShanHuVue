@@ -89,6 +89,11 @@ export default {
      */
     getArticleDetail: baseUrl + "server/customer/getArticleDetail",
 
+    /**
+     * 复制脚本
+     */
+    copyNewMission: baseUrl + "server/customer/copyNewMission"
+
 
   },
   manager: {
