@@ -28,6 +28,10 @@ export function ActionDoType () {
       name:"切换窗口",
       value:"switch",
     },
+    {
+      name:"下拉框",
+      value:"select",
+    },
   ]
   return adt
 }

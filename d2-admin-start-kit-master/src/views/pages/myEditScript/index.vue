@@ -267,7 +267,8 @@
                         v-if="
                           itemAction.jsoupAction.actionDoType == 'input' ||
                           itemAction.jsoupAction.actionDoType == 'goto' ||
-                           itemAction.jsoupAction.actionDoType == 'output'
+                           itemAction.jsoupAction.actionDoType == 'output' ||
+                           itemAction.jsoupAction.actionDoType == 'select'
                         "
                       >
                         <el-form-item
